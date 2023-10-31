@@ -4,6 +4,11 @@ public class DiceSet {
     private Random rnd = new Random();
 
     public int roll(DiceType diceType) {
+    /**
+     * Rolls a dice.
+     * @param diceType number of faces on dice
+     * @return random int (1-faceCount)
+     */
         int myval = 0;
         switch(diceType) {
             case D4:
