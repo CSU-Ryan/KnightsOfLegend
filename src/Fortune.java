@@ -10,8 +10,13 @@ public class Fortune implements Attributes {
     }
 
     public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
+        this.name = name;
+        this.hpBonus = hpBonus;
         this.armor = armor;
+        this.hitModifier = hitModifier;
+        this.dtype = type;
     }
+
     @Override
     public int getArmor() {
         return armor;
