@@ -16,15 +16,49 @@ public class MOB implements Attributes {
     }
 
     @Override
-    public int getArmor() {
-        // TODO Auto-generated method stub
-        return armor;
+    public String toString() {
+        //TODO implement function
+        return "TODO";
+    }
+
+    public MOB copy() {
+        //TODO implement function
+        return this;
+    }
+
+    public String getName() {
+        //TODO implement function
+        return "TODO";
+    }
+
+    public int getHP() {
+        //TODO implement function
+        return -1;
     }
 
     @Override
     public int getMaxHP() {
         // TODO Auto-generated method stub
-        return 0;
+        return -1;
+    }
+
+    @Override
+    public int getArmor() {
+        // TODO Auto-generated method stub
+        return -1;
+    }
+
+    public int getDamage() {
+        //TODO implement function
+        return -1;
+    }
+
+    public void addDamage(int damage) {
+        //TODO implement function
+    }
+
+    public void resetDamage() {
+        //TODO implement function
     }
 
     @Override
@@ -42,6 +76,14 @@ public class MOB implements Attributes {
     public static void main(String[] args) {
         
         MOB mob = new MOB("unnamed", 10, 1, -1, DiceType.D20);
-        System.out.println("getArmor() for MOB: " + mob.getArmor());
+        System.out.println("toString(): " + mob);
+        System.out.println("copy(): " + mob.copy());
+        System.out.println("getName(): " + mob.getName());
+        System.out.println("getHP(): " + mob.getHP());
+        System.out.println("getMaxHP(): " + mob.getMaxHP());
+        System.out.println("getArmor(): " + mob.getArmor());
+        System.out.println("getDamage(): " + mob.getDamage());
+        System.out.println("getDamageDie(): " + mob.getDamageDie());
+        System.out.println("getHitModifier(): " + mob.getHitModifier());
     }
 }
