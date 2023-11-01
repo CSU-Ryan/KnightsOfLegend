@@ -1,5 +1,9 @@
 public class Fortune implements Attributes {
+    private String name;
+    private int hpBonus;
     private int armor;
+    private int hitModifier;
+    private DiceType dtype;
 
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
         this(name, hpBonus, armor, hitModifier, null);
