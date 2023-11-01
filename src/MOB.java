@@ -16,7 +16,7 @@ public class MOB implements Attributes {
     @Override
     public int getArmor() {
         // TODO Auto-generated method stub
-        return 0;
+        return armor;
     }
 
     @Override
@@ -40,5 +40,6 @@ public class MOB implements Attributes {
     public static void main(String[] args) {
         
         MOB mob = new MOB("unnamed", 10, 1, -1, DiceType.D20);
+        System.out.println("getArmor() for MOB: " + mob.getArmor());
     }
 }
