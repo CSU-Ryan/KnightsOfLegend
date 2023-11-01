@@ -1,4 +1,17 @@
 public class MOB implements Attributes {
+    private String name;
+    private int hpBonus;
+    private int armor;
+    private int hitModifier;
+    private DiceType dtype;
+
+    public MOB(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
+        this.name = name;
+        this.hpBonus = hpBonus;
+        this.armor = armor;
+        this.hitModifier = hitModifier;
+        this.dtype = type;
+    }
 
     @Override
     public int getArmor() {
@@ -26,5 +39,6 @@ public class MOB implements Attributes {
     
     public static void main(String[] args) {
         
+        MOB mob = new MOB("unnamed", 10, 1, -1, DiceType.D20);
     }
 }
