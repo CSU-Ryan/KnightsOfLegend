@@ -73,10 +73,11 @@ public class MOB implements Attributes {
 
     /**
      * Adds damage to the mobs overall damage.
-     * @param damage the int amount to add
+     * @param hit the int amount to add
      */
-    public void addDamage(int damage) {
-        this.damage += damage;
+    //TODO: this might be the cause of all your pain
+    public void addDamage(int hit) {
+        damage = Math.min(maxHP, damage + hit);
     }
 
     /**
