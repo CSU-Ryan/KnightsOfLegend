@@ -7,9 +7,9 @@ public class MOB implements Attributes {
     protected DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
 
 
-    public MOB(String name, int hp, int armor, int hitModifier, DiceType damageDie) {
+    public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
         this.name = name;
-        this.maxHP = hp;
+        this.maxHP = maxHP;
         this.armor = armor;
         this.hitModifier = hitModifier;
         this.damageDie = damageDie;
