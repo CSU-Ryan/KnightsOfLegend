@@ -33,6 +33,10 @@ public class MOB implements Attributes {
         return new MOB(name, maxHP, armor, hitModifier, damageDie);
     }
 
+    public MOB copy(String name) {
+        return new MOB(name, maxHP, armor, hitModifier, damageDie);
+    }
+
     /**
      * Returns the generic name of the MOB
      * @return the name of the MOB
