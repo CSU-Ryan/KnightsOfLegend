@@ -99,15 +99,31 @@ public class MOB implements Attributes {
     
     public static void main(String[] args) {
         
-        MOB mob = new MOB("unnamed", 10, 1, -1, DiceType.D20);
-        System.out.println("toString(): " + mob);
-        System.out.println("copy(): " + mob.copy());
-        System.out.println("getName(): " + mob.getName());
-        System.out.println("getHP(): " + mob.getHP());
-        System.out.println("getMaxHP(): " + mob.getMaxHP());
-        System.out.println("getArmor(): " + mob.getArmor());
-        System.out.println("getDamage(): " + mob.getDamage());
-        System.out.println("getDamageDie(): " + mob.getDamageDie());
-        System.out.println("getHitModifier(): " + mob.getHitModifier());
+        MOB mob1 = new MOB("mob1", 10, 1, -1, DiceType.D20);
+        MOB mob2 = mob1.copy("mob2");
+
+        System.out.println(mob1);
+        System.out.println("hitMod: " + mob1.getHitModifier());
+        System.out.println("MaxHP: " + mob1.getMaxHP());
+        System.out.println("Damage: " + mob1.getDamage());
+        System.out.println();
+
+        System.out.println("Damaging for 5HP:");
+        mob1.addDamage(5);
+        System.out.println(mob1);
+        System.out.println();
+
+        System.out.println("Damaging for 7HP:");
+        mob1.addDamage(7);
+        System.out.println(mob1);
+        System.out.println();
+
+        System.out.println("Earlier copy:");
+        System.out.println(mob2);
+        System.out.println();
+
+        System.out.println("Resetting mob1 damage");
+        mob1.resetDamage();
+        System.out.println(mob1);
     }
 }
