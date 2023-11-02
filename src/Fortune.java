@@ -17,6 +17,16 @@ public class Fortune implements Attributes {
         this.dtype = type;
     }
 
+    public String toString() {
+        //TODO: implement
+        return "";
+    }
+
+    public String getName() {
+        //TODO: implement
+        return "";
+    }
+
     @Override
     public int getArmor() {
         return armor;
