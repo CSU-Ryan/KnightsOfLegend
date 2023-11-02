@@ -16,14 +16,21 @@ public class MOB implements Attributes {
     }
 
     @Override
+    /**
+     * Builds a MOB Card for easy printing of the stats.
+     */
     public String toString() {
-        //TODO implement function
-        return "TODO";
+        return "+============================+\n" +
+                String.format("| %-27s|%n", getName()) +
+                "|                            |\n" +
+                String.format("|         Health: %-10d |%n", getHP())  +
+                String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie().toString(), getArmor()) +
+                "|                            |\n" +
+                "+============================+";
     }
 
     public MOB copy() {
-        //TODO implement function
-        return this;
+        return new MOB(name, maxHP, armor, hitModifier, damageDie);
     }
 
     /**
@@ -31,8 +38,7 @@ public class MOB implements Attributes {
      * @return the name of the MOB
      */
     public String getName() {
-        //TODO implement function
-        return "TODO";
+        return name;
     }
 
     /**
@@ -40,20 +46,17 @@ public class MOB implements Attributes {
      * @return current HP of the MOB
      */
     public int getHP() {
-        //TODO implement function
-        return -1;
+        return getMaxHP() - getDamage();
     }
 
     @Override
     public int getMaxHP() {
-        // TODO Auto-generated method stub
-        return -1;
+        return maxHP;
     }
 
     @Override
     public int getArmor() {
-        // TODO Auto-generated method stub
-        return -1;
+        return armor;
     }
 
     /**
@@ -61,8 +64,7 @@ public class MOB implements Attributes {
      * @return the amount of damage the MOB has taken
      */
     public int getDamage() {
-        //TODO implement function
-        return -1;
+        return damage;
     }
 
     /**
@@ -70,26 +72,24 @@ public class MOB implements Attributes {
      * @param damage the int amount to add
      */
     public void addDamage(int damage) {
-        //TODO implement function
+        this.damage += damage;
     }
 
     /**
      * Resets the damage taken to 0.
      */
     public void resetDamage() {
-        //TODO implement function
+        damage = 0;
     }
 
     @Override
     public DiceType getDamageDie() {
-        // TODO Auto-generated method stub
-        return null;
+        return damageDie;
     }
 
     @Override
     public int getHitModifier() {
-        // TODO Auto-generated method stub
-        return 0;
+        return hitModifier;
     }
     
     public static void main(String[] args) {
