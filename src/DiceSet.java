@@ -8,8 +8,7 @@ public class DiceSet {
      * @param diceType number of faces on dice
      * @return random int (1-faceCount)
      */
-    //TODO: this is static, might be the cause of all your problems
-    public static int roll(DiceType diceType) {
+    public int roll(DiceType diceType) {
         int myval = 0;
         switch(diceType) {
             case D4:
@@ -40,12 +39,14 @@ public class DiceSet {
     }
 
     public static void main(String[] args) {
-        System.out.println("TESTING DiceSet (D4): " + roll(DiceType.D4));
-        System.out.println("TESTING DiceSet (D6): " + roll(DiceType.D6));
-        System.out.println("TESTING DiceSet (D8): " + roll(DiceType.D8));
-        System.out.println("TESTING DiceSet (D10): " + roll(DiceType.D10));
-        System.out.println("TESTING DiceSet (D12): " + roll(DiceType.D12));
-        System.out.println("TESTING DiceSet (D20): " + roll(DiceType.D20));
+        DiceSet dice = new DiceSet();
+
+        System.out.println("TESTING DiceSet (D4): " + dice.roll(DiceType.D4));
+        System.out.println("TESTING DiceSet (D6): " + dice.roll(DiceType.D6));
+        System.out.println("TESTING DiceSet (D8): " + dice.roll(DiceType.D8));
+        System.out.println("TESTING DiceSet (D10): " + dice.roll(DiceType.D10));
+        System.out.println("TESTING DiceSet (D12): " + dice.roll(DiceType.D12));
+        System.out.println("TESTING DiceSet (D20): " + dice.roll(DiceType.D20));
     }
 
     
