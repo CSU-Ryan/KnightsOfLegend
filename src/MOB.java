@@ -26,11 +26,19 @@ public class MOB implements Attributes {
         return this;
     }
 
+    /**
+     * Returns the generic name of the MOB
+     * @return the name of the MOB
+     */
     public String getName() {
         //TODO implement function
         return "TODO";
     }
 
+    /**
+     * Returns current HP of the MOB.
+     * @return current HP of the MOB
+     */
     public int getHP() {
         //TODO implement function
         return -1;
@@ -48,15 +56,26 @@ public class MOB implements Attributes {
         return -1;
     }
 
+    /**
+     * Gets the amount of damage the MOB has taken.
+     * @return the amount of damage the MOB has taken
+     */
     public int getDamage() {
         //TODO implement function
         return -1;
     }
 
+    /**
+     * Adds damage to the mobs overall damage.
+     * @param damage the int amount to add
+     */
     public void addDamage(int damage) {
         //TODO implement function
     }
 
+    /**
+     * Resets the damage taken to 0.
+     */
     public void resetDamage() {
         //TODO implement function
     }
