@@ -9,33 +9,18 @@ public class DiceSet {
      * @return random int (1-faceCount)
      */
     public int roll(DiceType diceType) {
-        int myval = 0;
-        switch(diceType) {
-            case D4:
-                myval = rnd.nextInt(4) + 1;
-            break;
-            case D6:
-                myval = rnd.nextInt(6) + 1;
-            break;
-            case D8:
-                myval = rnd.nextInt(8) + 1;
-            break;
-            case D10:
-                myval = rnd.nextInt(10) + 1;
-            break;
-            case D12:
-                myval = rnd.nextInt(12) + 1;
-            break;
-            case D20:
-                myval = rnd.nextInt(20) + 1;
-            break;
-            default:
-                System.err.println("Dice.roll() called with no dtype.");
-                myval = 0;
-        }
-
-
-        return myval;
+        return switch (diceType) {
+            case D4 -> rnd.nextInt(4) + 1;
+            case D6 -> rnd.nextInt(6) + 1;
+            case D8 -> rnd.nextInt(8) + 1;
+            case D10 -> rnd.nextInt(10) + 1;
+            case D12 -> rnd.nextInt(12) + 1;
+            case D20 -> rnd.nextInt(20) + 1;
+            case NONE -> {
+                System.err.println("Dice.roll() called with NONE dtype.");
+                yield 0;
+            }
+        };
     }
 
     public static void main(String[] args) {
@@ -47,6 +32,7 @@ public class DiceSet {
         System.out.println("TESTING DiceSet (D10): " + dice.roll(DiceType.D10));
         System.out.println("TESTING DiceSet (D12): " + dice.roll(DiceType.D12));
         System.out.println("TESTING DiceSet (D20): " + dice.roll(DiceType.D20));
+        System.out.println("TESTING DiceSet (NONE): " + dice.roll(DiceType.NONE));
     }
 
     

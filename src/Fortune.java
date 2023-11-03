@@ -6,7 +6,7 @@ public class Fortune implements Attributes {
     private DiceType dtype;
 
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
-        this(name, hpBonus, armor, hitModifier, null);
+        this(name, hpBonus, armor, hitModifier, DiceType.NONE);
     }
 
     public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
