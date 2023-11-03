@@ -1,6 +1,6 @@
 public class Knight extends MOB {
     private Fortune activeFortune;
-    protected int id;
+    protected final int id;
     protected int xp;
 
 

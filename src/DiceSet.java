@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class DiceSet {
-    private static Random rnd = new Random();
+    private final static Random rnd = new Random();
 
     /**
      * Rolls a dice.

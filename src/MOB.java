@@ -1,10 +1,10 @@
 public class MOB implements Attributes {
     private final String name; // The name of the MOB.
-    protected int maxHP; // The maxHP of the MOB.
-    protected int armor; // The armor rating of the MOB.
+    protected final int maxHP; // The maxHP of the MOB.
+    protected final int armor; // The armor rating of the MOB.
     protected int damage; // The amount of damage the MOB has taken.
-    protected int hitModifier; // The hitModifier of the MOB.
-    protected DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
+    protected final int hitModifier; // The hitModifier of the MOB.
+    protected final DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
 
 
     public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
