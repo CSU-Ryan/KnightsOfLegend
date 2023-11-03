@@ -18,13 +18,22 @@ public class Fortune implements Attributes {
     }
 
     public String toString() {
-        //TODO: implement
-        return "";
+        return "+======================+\n" +
+                String.format("|%-22s|%n", getName()) +
+                String.format("|  HP Bonus: %+10d|%n", getMaxHP())  +
+                String.format("|  AC Bonus: %+10d|%n", getArmor()) +
+                String.format("| Hit Bonus: %+10d|%n", getHitModifier()) +
+                String.format("|Damage Die: %10s|%n", getDamageDie())  +
+                "+======================+";
     }
 
     public String getName() {
-        //TODO: implement
-        return "";
+        return name;
+    }
+
+    @Override
+    public int getMaxHP() {
+        return hpBonus;
     }
 
     @Override
@@ -33,26 +42,21 @@ public class Fortune implements Attributes {
     }
 
     @Override
-    public int getMaxHP() {
-        // TODO Auto-generated method stub
-        return 0;
+    public int getHitModifier() {
+        return hitModifier;
     }
 
     @Override
     public DiceType getDamageDie() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int getHitModifier() {
-        // TODO Auto-generated method stub
-        return 0;
+        return dtype;
     }
 
     public static void main(String[] args) {
-        Fortune ftn = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
-        System.out.println("TESTING Armor in fortune " + ftn.getArmor());
+        Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
+        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
+
+        System.out.println(merlinLuck);
+        System.out.println(horusCurse);
     }
     
 }
