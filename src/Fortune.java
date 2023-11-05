@@ -24,10 +24,10 @@ public class Fortune implements Attributes {
     public String toString() {
         return "+======================+\n" +
                 String.format("|%-22s|%n", getName()) +
-                String.format("|  HP Bonus: %+10d|%n", getMaxHP())  +
-                String.format("|  AC Bonus: %+10d|%n", getArmor()) +
-                String.format("| Hit Bonus: %+10d|%n", getHitModifier()) +
-                String.format("|Damage Die: %10s|%n", getDamageDie())  +
+                String.format("|HP Bonus: %+12d|%n", getMaxHP())  +
+                String.format("|AC Bonus: %+12d|%n", getArmor()) +
+                String.format("|Hit Bonus: %+11d|%n", getHitModifier()) +
+                String.format("|Damage Adj: %10s|%n", getDamageDie())  +
                 "+======================+";
     }
 
