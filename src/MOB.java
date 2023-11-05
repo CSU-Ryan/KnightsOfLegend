@@ -25,10 +25,10 @@ public class MOB implements Attributes {
         }
     }
 
-    @Override
     /**
      * Builds a MOB Card for easy printing of the stats.
      */
+    @Override
     public String toString() {
         return "+============================+\n" +
                 String.format("| %-27s|%n", getName()) +

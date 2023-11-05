@@ -6,7 +6,6 @@ public class Knight extends MOB {
 
     public Knight(int id, String name, int maxHP, int armor, int hitModifier, DiceType damageDie, int xp) {
         super(name, maxHP, armor, hitModifier, damageDie);
-        this.activeFortune = null;
         this.id = id;
         this.xp = xp;
         this.activeFortune = new Fortune();
