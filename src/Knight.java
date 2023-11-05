@@ -53,7 +53,9 @@ public class Knight extends MOB {
 
     @Override
     public DiceType getDamageDie() {
-        return super.getDamageDie();
+        DiceType fortuneDie = getActiveFortune().getDamageDie();
+
+        return (fortuneDie != DiceType.NONE) ? fortuneDie : super.getDamageDie();
     }
 
     @Override
@@ -71,8 +73,10 @@ public class Knight extends MOB {
 
     public static void main(String[] args) {
 
-        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
         Knight knight1 = new Knight(1, "knight1", 10, 1, -1, DiceType.D20, 0);
+
+        Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
+        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
 
         System.out.println("knight1 CSV: " + knight1.toCSV());
         System.out.println();
@@ -106,6 +110,13 @@ public class Knight extends MOB {
         System.out.println("Adding Curse of Horus:");
         System.out.println(horusCurse);
         knight1.setActiveFortune(horusCurse);
+        System.out.println(knight1);
+        System.out.println("Fortune: " + knight1.getActiveFortune().getName());
+        System.out.println();
+
+        System.out.println("Adding Merlin Luck:");
+        System.out.println(merlinLuck);
+        knight1.setActiveFortune(merlinLuck);
         System.out.println(knight1);
         System.out.println("Fortune: " + knight1.getActiveFortune().getName());
         System.out.println();
