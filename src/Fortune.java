@@ -5,6 +5,10 @@ public class Fortune implements Attributes {
     private final int hitModifier;
     private final DiceType dtype;
 
+    public Fortune() {
+        this("None", 0, 0, 0, DiceType.NONE);
+    }
+
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
         this(name, hpBonus, armor, hitModifier, DiceType.NONE);
     }

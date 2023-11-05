@@ -9,6 +9,7 @@ public class Knight extends MOB {
         this.activeFortune = null;
         this.id = id;
         this.xp = xp;
+        this.activeFortune = new Fortune();
     }
 
     @Override
@@ -42,12 +43,12 @@ public class Knight extends MOB {
 
     @Override
     public int getMaxHP() {
-        return super.getMaxHP();
+        return super.getMaxHP() + getActiveFortune().getMaxHP();
     }
 
     @Override
     public int getArmor() {
-        return super.getArmor();
+        return super.getArmor() + getActiveFortune().getArmor();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class Knight extends MOB {
 
     @Override
     public int getHitModifier() {
-        return super.getHitModifier();
+        return super.getHitModifier() + getActiveFortune().getHitModifier();
     }
 
     public void setActiveFortune(Fortune fortune) {
@@ -102,7 +103,6 @@ public class Knight extends MOB {
         System.out.println(knight1);
         System.out.println();
 
-        //TODO: Fortune does nothing rn?
         System.out.println("Adding Curse of Horus:");
         System.out.println(horusCurse);
         knight1.setActiveFortune(horusCurse);
