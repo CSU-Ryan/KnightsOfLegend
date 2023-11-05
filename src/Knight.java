@@ -70,9 +70,8 @@ public class Knight extends MOB {
 
     public static void main(String[] args) {
 
+        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
         Knight knight1 = new Knight(1, "knight1", 10, 1, -1, DiceType.D20, 0);
-        //TODO: implement fortune use
-        // knight1.setActiveFortune(Fortune());
 
         System.out.println("knight1 CSV: " + knight1.toCSV());
         System.out.println();
@@ -101,6 +100,15 @@ public class Knight extends MOB {
         System.out.println("Adding 37 XP:");
         knight1.addXP(37);
         System.out.println(knight1);
+        System.out.println();
+
+        //TODO: Fortune does nothing rn?
+        System.out.println("Adding Curse of Horus:");
+        System.out.println(horusCurse);
+        knight1.setActiveFortune(horusCurse);
+        System.out.println(knight1);
+        System.out.println("Fortune: " + knight1.getActiveFortune().getName());
+        System.out.println();
     }
     
 }
