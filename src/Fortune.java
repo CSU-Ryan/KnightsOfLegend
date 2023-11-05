@@ -18,7 +18,12 @@ public class Fortune implements Attributes {
         this.hpBonus = hpBonus;
         this.armor = armor;
         this.hitModifier = hitModifier;
-        this.dtype = type;
+        //TODO: Sh**ty zybooks
+        if (type == null) {
+            this.dtype = DiceType.NONE;
+        } else {
+            this.dtype = type;
+        }
     }
 
     public String toString() {
@@ -58,9 +63,14 @@ public class Fortune implements Attributes {
     public static void main(String[] args) {
         Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
         Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
+        //TODO:
+        // BS Zybooks
+        Fortune zybooksPlague = new Fortune("The plague of Zybooks", -9999, -9999, -9999, null);
 
         System.out.println(merlinLuck);
         System.out.println(horusCurse);
+        System.out.println(zybooksPlague);
+        System.out.println("damageDie = null: " + zybooksPlague.getDamageDie());
     }
     
 }
