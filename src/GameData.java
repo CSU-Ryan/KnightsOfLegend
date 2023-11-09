@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Random;
 
 public abstract class GameData {
@@ -20,17 +23,17 @@ public abstract class GameData {
     /**
      * @return List of knights.
      */
-    public ArrayList<Knight> getKnights() {
         //TODO: implement
         return new ArrayList<Knight>();
+    public List<Knight> getKnights() {
     }
 
     /**
      * @return List of active knights.
      */
-    public ArrayList<Knight> getActiveKnights() {
         //TODO: implement
         return new ArrayList<Knight>();
+    public List<Knight> getActiveKnights() {
     }
 
     /**
@@ -62,9 +65,9 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-    protected Knight findKnightName(String name, ArrayList<Knight> list) {
         //TODO: implement
         return activeKnights.get(0);
+    protected Optional<Knight> findKnightName(String name, ArrayList<Knight> list) {
     }
 
     /**
@@ -73,9 +76,9 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-    protected Knight findKnightID(int id, ArrayList<Knight> list) {
         //TODO: implement
         return activeKnights.get(0);
+    protected Optional<Knight> findKnightID(int id, ArrayList<Knight> list) {
     }
 
     /**
@@ -87,9 +90,9 @@ public abstract class GameData {
      * @return the knight from the list.
      */
     @Deprecated
-    protected Knight findKnight(String nameOrId, ArrayList<Knight> list) {
         //TODO: implement
         return activeKnights.get(0);
+    protected Knight findKnight(String nameOrId, ArrayList<Knight> list) throws NoSuchElementException {
     }
 
     /**
@@ -124,9 +127,9 @@ public abstract class GameData {
      * Gets a random list of monsters.
      * @return a list of MOBs.
      */
-    public ArrayList<MOB> getRandomMonsters() {
         //TODO: implement
         return monsters;
+    public List<MOB> getRandomMonsters() {
     }
 
     /**
@@ -134,9 +137,9 @@ public abstract class GameData {
      * @param size number of monsters to return.
      * @return a list of MOBs.
      */
-    public ArrayList<MOB> getRandomMonsters(int size) {
         //TODO: implement
         return monsters;
+    public List<MOB> getRandomMonsters(int encounterSize) {
     }
 
     /**
