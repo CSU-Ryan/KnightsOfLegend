@@ -5,35 +5,49 @@ import java.util.Optional;
 import java.util.Random;
 
 public abstract class GameData {
-    private final Random rnd = new Random();
+    private final Random RANDOM = new Random();
 
     protected ArrayList<Fortune> fortunes;
     protected ArrayList<Knight> knights;
 
-    private final int MAX_ACTIVE = 4;
+    private final int MAX_ACTIVE;
     protected ArrayList<Knight> activeKnights;
 
     protected ArrayList<MOB> monsters;
 
 
     public GameData() {
-        //TODO: implement
+        //TODO: still implement?
+        fortunes = new ArrayList<Fortune>();
+        knights = new ArrayList<Knight>();
+
+        MAX_ACTIVE = 4;
+        activeKnights = new ArrayList<Knight>();
+
+        monsters = new ArrayList<MOB>();
+    }
+
+    private Optional<Integer> parseInt(String str) {
+        try {
+            return Optional.of(Integer.parseInt(str));
+        }
+        catch (NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 
     /**
      * @return List of knights.
      */
-        //TODO: implement
-        return new ArrayList<Knight>();
     public List<Knight> getKnights() {
+        return knights;
     }
 
     /**
      * @return List of active knights.
      */
-        //TODO: implement
-        return new ArrayList<Knight>();
     public List<Knight> getActiveKnights() {
+        return activeKnights;
     }
 
     /**
@@ -43,9 +57,7 @@ public abstract class GameData {
      */
     @Deprecated
     public Knight getActive(String nameOrId) {
-        //TODO: implement
-        return activeKnights.get(0);
-
+        return findKnight(nameOrId, activeKnights);
     }
 
     /**
@@ -55,8 +67,7 @@ public abstract class GameData {
      */
     @Deprecated
     public Knight getKnight(String nameOrId) {
-        //TODO: implement
-        return activeKnights.get(0);
+        return findKnight(nameOrId, knights);
     }
 
     /**
@@ -65,9 +76,13 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-        //TODO: implement
-        return activeKnights.get(0);
     protected Optional<Knight> findKnightName(String name, ArrayList<Knight> list) {
+        for (Knight knight : list) {
+            if (knight.getName().equals(name)) {
+                return Optional.of(knight);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
@@ -76,9 +91,13 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-        //TODO: implement
-        return activeKnights.get(0);
     protected Optional<Knight> findKnightID(int id, ArrayList<Knight> list) {
+        for (Knight knight : list) {
+            if (knight.getId() == id) {
+                return Optional.of(knight);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
@@ -90,9 +109,20 @@ public abstract class GameData {
      * @return the knight from the list.
      */
     @Deprecated
-        //TODO: implement
-        return activeKnights.get(0);
     protected Knight findKnight(String nameOrId, ArrayList<Knight> list) throws NoSuchElementException {
+        Optional<Integer> search = parseInt(nameOrId);
+        Optional<Knight> result;
+
+        if (search.isPresent()) {
+            result = findKnightID(search.get(), list);
+        }
+        else {
+            result = findKnightName(nameOrId, list);
+        }
+        if (result.isPresent()) {
+            return result.get();
+        }
+        else throw new NoSuchElementException("Failed to find knight in list.");
     }
 
     /**
@@ -101,17 +131,21 @@ public abstract class GameData {
      * @return boolean whether party has space to add knight
      */
     public boolean setActive(Knight knight) {
-        //TODO: implement
+        if (activeKnights.size() < MAX_ACTIVE) {
+            activeKnights.add(knight);
+            return true;
+        }
         return false;
     }
 
     /**
-     * Removes knight from active party
+     * Removes knight from active party and resets the knight's health.
      * @param knight knight to remove
      */
     public void removeActive(Knight knight) {
         // Removes a knight from the activeKnights list **and** resets the damage on the knight! Remember, list.remove returns true if the remove was successful.
-        //TODO: implement
+        activeKnights.remove(knight);
+        knight.resetDamage();
     }
 
     /**
@@ -119,27 +153,46 @@ public abstract class GameData {
      * @return a Fortune.
      */
     public Fortune getRandomFortune() {
-        //TODO: implement
-        return fortunes.get(0);
+        int randomIndex = RANDOM.nextInt(fortunes.size());
+        return fortunes.get(randomIndex);
     }
 
     /**
      * Gets a random list of monsters.
+     *
      * @return a list of MOBs.
+     * @implNote may return an empty list.
      */
-        //TODO: implement
-        return monsters;
     public List<MOB> getRandomMonsters() {
+        int encounterSize = RANDOM.nextInt(activeKnights.size());
+
+        return getRandomMonsters(encounterSize);
     }
 
     /**
      * Gets a list with given size of random monsters.
-     * @param size number of monsters to return.
+     * @param encounterSize number of monsters to return.
      * @return a list of MOBs.
      */
-        //TODO: implement
-        return monsters;
     public List<MOB> getRandomMonsters(int encounterSize) {
+        ArrayList<MOB> encounter = new ArrayList<MOB>(encounterSize);
+
+        for (int i = 0; i < encounterSize; ++i) {
+            encounter.add(getRandomMonsterCopy());
+        }
+
+        return encounter;
+    }
+
+    /**
+     * Gets a random monster from monsters.
+     * Returns a copy of the monster.
+     *
+     * @return a random monster from monsters.
+     */
+    public MOB getRandomMonsterCopy() {
+        int randomMOBIndex = RANDOM.nextInt(monsters.size());
+        return monsters.get(randomMOBIndex).copy();
     }
 
     /**
