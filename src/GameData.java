@@ -166,7 +166,7 @@ public abstract class GameData {
      * @implNote may return an empty list.
      */
     public List<MOB> getRandomMonsters() {
-        int encounterSize = RANDOM.nextInt(activeKnights.size());
+        int encounterSize = RANDOM.nextInt(activeKnights.size() + 1);
 
         return getRandomMonsters(encounterSize);
     }
