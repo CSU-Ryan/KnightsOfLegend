@@ -17,7 +17,6 @@ public abstract class GameData {
 
 
     public GameData() {
-        //TODO: still implement?
         fortunes = new ArrayList<Fortune>();
         knights = new ArrayList<Knight>();
 
@@ -76,7 +75,7 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-    protected Optional<Knight> findKnightName(String name, ArrayList<Knight> list) {
+    protected Optional<Knight> findKnightName(String name, List<Knight> list) {
         for (Knight knight : list) {
             if (knight.getName().equals(name)) {
                 return Optional.of(knight);
@@ -91,7 +90,7 @@ public abstract class GameData {
      * @param list list of knights.
      * @return the knight from the list.
      */
-    protected Optional<Knight> findKnightID(int id, ArrayList<Knight> list) {
+    protected Optional<Knight> findKnightID(int id, List<Knight> list) {
         for (Knight knight : list) {
             if (knight.getId() == id) {
                 return Optional.of(knight);
@@ -109,7 +108,7 @@ public abstract class GameData {
      * @return the knight from the list.
      */
     @Deprecated
-    protected Knight findKnight(String nameOrId, ArrayList<Knight> list) throws NoSuchElementException {
+    protected Knight findKnight(String nameOrId, List<Knight> list) throws NoSuchElementException {
         Optional<Integer> search = parseInt(nameOrId);
         Optional<Knight> result;
 
