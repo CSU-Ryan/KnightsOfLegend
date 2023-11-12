@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class CSVGameData extends GameData {
@@ -8,16 +9,62 @@ public class CSVGameData extends GameData {
      * @param saveData A game data file containing knights.
      */
     public CSVGameData(String gamedata, String saveData) {
-        //TODO: Implement
+        super();
+        loadGameData(gamedata);
+        loadSaveData(saveData);
     }
 
     /**
-     * Loads knights from save file.
-     * @param saveData filename of save file.
+     * Creates a Knight object from CSV line.
+     * @param line CSV data for Knight.
+     * @return Knight object.
      */
-    public void loadSaveData(String saveData) {
-        //Starts a counter for the IDs, with each new knight being assigned an ID in order of which they are read from the file
-        //TODO: implement
+    private Knight parseKnight(int idCount, Scanner line) {
+        line.useDelimiter(",");
+
+        return new Knight(
+                idCount,
+                line.next().trim(),
+                line.nextInt(),
+                line.nextInt(),
+                line.nextInt(),
+                DiceType.typeOf(line.next().trim()),
+                line.nextInt()
+        );
+    }
+
+    /**
+     * Creates a MOB object from CSV line.
+     * @param line CSV data for MOB.
+     * @return MOB object.
+     */
+    private MOB parseMOB(Scanner line) {
+        line.useDelimiter(",");
+
+        return new MOB(
+                line.next().trim(),
+                line.nextInt(),
+                line.nextInt(),
+                line.nextInt(),
+                DiceType.typeOf(line.next().trim())
+        );
+    }
+
+    /**
+     * Creates a Fortune object from CSV line.
+     * @param line CSV data for Fortune.
+     * @return Fortune object.
+     */
+    private Fortune parseFortune(Scanner line) {
+        line.useDelimiter(",");
+
+        return new Fortune(
+                line.next().trim(),
+                line.nextInt(),
+                line.nextInt(),
+                line.nextInt(),
+                DiceType.typeOf(line.next().trim())
+        );
     }
 
     /**
@@ -25,16 +72,13 @@ public class CSVGameData extends GameData {
      * @return Scanner of file.
      */
     private Scanner readFile(String fileName) {
-        //TODO: implement
+        try {
+            return new Scanner(new File(fileName));
+        }
+        catch (FileNotFoundException e) {
+            System.err.println(e);
+        }
         return new Scanner("");
-    }
-
-    /**
-     * Loads Fortunes and MOBs.
-     * @param gamedata name of data file.
-     */
-    public void loadGameData(String gamedata) {
-        //TODO: implement
     }
 
     /**
@@ -42,7 +86,45 @@ public class CSVGameData extends GameData {
      * @param line Fortune/MOB data.
      */
     private void parseGameDataLine(Scanner line) {
-        //TODO: implement
+        line.useDelimiter(",");
+
+        String type = line.next();
+        if (type.equals("MOB")) {
+            monsters.add(parseMOB(line));
+        }
+        else if (type.equals("FORTUNE")) {
+            fortunes.add(parseFortune(line));
+        }
+        else {
+            System.err.println("Failed to parse line.");
+        }
+    }
+
+    /**
+     * Loads Fortunes and MOBs.
+     * @param gamedata name of data file.
+     */
+    public void loadGameData(String gamedata) {
+        Scanner file = readFile(gamedata);
+        Scanner line;
+        while (file.hasNext()) {
+            line = new Scanner(file.nextLine());
+            parseGameDataLine(line);
+        }
+    }
+
+    /**
+     * Loads knights from save file.
+     * @param saveData filename of save file.
+     */
+    public void loadSaveData(String saveData) {
+        int idCount = 0;
+        Scanner file = readFile(saveData);
+
+        while (file.hasNext()) {
+            ++idCount;
+            knights.add(parseKnight(idCount, new Scanner(file.nextLine())));
+        }
     }
 
     /**
@@ -51,6 +133,17 @@ public class CSVGameData extends GameData {
      */
     @Override
     public void save(String filename) {
-        //TODO: Implement
+        try (PrintWriter file = new PrintWriter(filename)) {
+            for (Knight knight : knights) {
+                file.println(knight.toCSV());
+            }
+            file.close();
+        }
+        catch (IOException e) {
+            System.out.println("ERROR: Failed to save game.");
+            System.err.println(e);
+        }
+    }
+
     }
 }
