@@ -145,5 +145,37 @@ public class CSVGameData extends GameData {
         }
     }
 
+    public static void main(String[] args) {
+        String gamedata = "GameData/test_gamedata.csv";
+        String savedata = "GameData/test_savedata.csv";
+        String saveFile = "GameData/test_savefile.csv";
+        Knight knight;
+
+        CSVGameData gameData = new CSVGameData(gamedata, savedata);
+
+        knight = gameData.findKnightID(3, gameData.getKnights()).get();
+        gameData.setActive(knight);
+
+        knight = gameData.findKnightName("Your Mother", gameData.getKnights()).get();
+        gameData.setActive(knight);
+
+        System.out.println(gameData.getKnights());
+        System.out.println();
+
+        System.out.println(gameData.getActiveKnights());
+        System.out.println();
+
+        System.out.println(gameData.getRandomFortune());
+        System.out.println();
+
+        System.out.println("active knights: " + gameData.getActiveKnights().size());
+        System.out.println(gameData.getRandomMonsters());
+        System.out.println();
+
+        for (Knight k : gameData.getActiveKnights()) {
+            k.addXP(10);
+        }
+
+        gameData.save(saveFile);
     }
 }
