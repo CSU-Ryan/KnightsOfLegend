@@ -121,7 +121,7 @@ public abstract class GameData {
         if (result.isPresent()) {
             return result.get();
         }
-        else throw new NoSuchElementException("Failed to find knight in list.");
+        else throw new NoSuchElementException("Knight `" + nameOrId + "' not found.");
     }
 
     /**
@@ -130,11 +130,14 @@ public abstract class GameData {
      * @return boolean whether party has space to add knight
      */
     public boolean setActive(Knight knight) {
-        if (activeKnights.size() < MAX_ACTIVE) {
-            activeKnights.add(knight);
-            return true;
+
+        if (findKnightID(knight.getId(), activeKnights).isPresent()
+                || (activeKnights.size() >= MAX_ACTIVE)) {
+            return false;
         }
-        return false;
+
+        activeKnights.add(knight);
+        return true;
     }
 
     /**
