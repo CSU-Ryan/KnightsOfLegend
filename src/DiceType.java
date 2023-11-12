@@ -6,6 +6,10 @@ public enum DiceType {
         return (this != NONE) ? this.name() : "-";
     }
 
+    public static DiceType typeOf(String name) {
+        return (name.equals("-")) ? DiceType.NONE : valueOf(name);
+    }
+
     public static void main(String[] args) {
         System.out.println("  D4: " + D4);
         System.out.println("  D6: " + D6);
