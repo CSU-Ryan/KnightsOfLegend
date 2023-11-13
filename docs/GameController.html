@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameController</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Central point of communication between GameData, GameView and CombatEngine. Constructed in the Main.java, but most
+<div class="block">Central point of communication between IO.GameData, GameView and CombatEngine. Constructed in the Main.java, but most
  all work  happens  here until the game ends.</div>
 </section>
 <section class="summary">
@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private final <a href="GameData.html" title="class in Unnamed Package">GameData</a></code></div>
+<div class="col-first even-row-color"><code>private final <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></code></div>
 <div class="col-second even-row-color"><code><a href="#data" class="member-name-link">data</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Game data passed into the constructor.</div>
@@ -116,7 +116,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(GameData,GameView,CombatEngine)" class="member-name-link">GameController</a><wbr>(<a href="GameData.html" title="class in Unnamed Package">GameData</a>&nbsp;data,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(GameData,GameView,CombatEngine)" class="member-name-link">GameController</a><wbr>(<a href="GameData.html" title="class in Unnamed Package">IO.GameData</a>&nbsp;data,
  <a href="GameView.html" title="interface in Unnamed Package">GameView</a>&nbsp;view,
  <a href="CombatEngine.html" title="class in Unnamed Package">CombatEngine</a>&nbsp;engine)</code></div>
 <div class="col-last even-row-color">
@@ -182,7 +182,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="data">
 <h3>data</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="GameData.html" title="class in Unnamed Package">GameData</a></span>&nbsp;<span class="element-name">data</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></span>&nbsp;<span class="element-name">data</span></div>
 <div class="block">Game data passed into the constructor.</div>
 </section>
 </li>
@@ -211,13 +211,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(GameData,GameView,CombatEngine)">
 <h3>GameController</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameController</span><wbr><span class="parameters">(<a href="GameData.html" title="class in Unnamed Package">GameData</a>&nbsp;data,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameController</span><wbr><span class="parameters">(<a href="GameData.html" title="class in Unnamed Package">IO.GameData</a>&nbsp;data,
  <a href="GameView.html" title="interface in Unnamed Package">GameView</a>&nbsp;view,
  <a href="CombatEngine.html" title="class in Unnamed Package">CombatEngine</a>&nbsp;engine)</span></div>
 <div class="block">The GameController needs all major components of the game to work - view, data, and combat</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>data</code> - GameData - does not care the type (CSV, JSON, etc), just the abstract class</dd>
+<dd><code>data</code> - IO.GameData - does not care the type (CSV, JSON, etc), just the abstract class</dd>
 <dd><code>view</code> - GameView - calls the various methods based on feedback from data</dd>
 <dd><code>engine</code> - runs combat between an active knight group and MOBs</dd>
 </dl>
@@ -258,7 +258,7 @@ loadScripts(document, 'script');</script>
  <ul>
      <li>exit or bye  (contains) - causes processCommand to return false</li>
      <li>ls or list all - list all knights. For example, view.listKnights(data.getKnights())</li>
-     <li>list active - list active knights via <a href="GameData.html#getActiveKnights()"><code>GameData.getActiveKnights()</code></a></li>
+     <li>list active - list active knights via <a href="GameData.html#getActiveKnights()"><code>IO.GameData.getActiveKnights()</code></a></li>
      <li>show (name or id) - if the command starts with show, take the remainder and show the knight card</li>
      <li>set active (name or id) - if command starts with set active, grabs the remainder of the line, and 
      try to add the knight to the active knight list.</li>

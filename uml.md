@@ -93,7 +93,7 @@ class GameData {
     -int : MAX_ACTIVE
     #List<MOB> : monsters
     -Random : random
-    +GameData()
+    +IO.GameData()
     #findKnight(String, List<Knight>) Knight
     +getActive(String) Knight
     +getActiveKnights() List<Knight>
@@ -140,7 +140,7 @@ class ConsoleView {
     +splashScreen() void
 }
 class CSVGameData {
-    +CSVGameData(String, String)
+    +IO.CSVGameData(String, String)
     +loadGameData(String) void
     +loadSaveData(String) void
     -parseGameDataLine(Scanner) void
@@ -151,21 +151,21 @@ class CSVGameData {
 ```mermaid
 classDiagram
 class CombatEngine {
-    -GameData : data
+    -IO.GameData : data
     -DiceSet : dice
     -Random : rnd
     -GameView : view
-    +CombatEngine(GameData, GameView)
+    +CombatEngine(IO.GameData, GameView)
     +clear() void
     -doBattle(List<MOB>, List<MOB>) int
     +initialize() void
     +runCombat() void 
 }
 class GameController {
-    -GameData : data
+    -IO.GameData : data
     -CombatEngine : engine
     -GameView : view
-    +GameController(GameData, GameView, CombatEngine)
+    +GameController(IO.GameData, GameView, CombatEngine)
     #processCommand(String) boolean
     -processRemoveActive(String) void
     -processSetActive(String) void

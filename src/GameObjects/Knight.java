@@ -1,3 +1,5 @@
+package GameObjects;
+
 public class Knight extends MOB {
     private Fortune activeFortune;
     protected final int id;

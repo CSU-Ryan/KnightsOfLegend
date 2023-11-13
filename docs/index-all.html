@@ -56,7 +56,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Stores the  active fortune  **if** one exists (else null)</div>
 </dd>
-<dt><a href="GameData.html#activeKnights" class="member-name-link">activeKnights</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#activeKnights" class="member-name-link">activeKnights</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">List of the active knights, they are references, not copies.</div>
 </dd>
@@ -97,9 +97,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The combat engine runs the combat for the game.</div>
 </dd>
-<dt><a href="CombatEngine.html#%3Cinit%3E(GameData,GameView)" class="member-name-link">CombatEngine(GameData, GameView)</a> - Constructor for class <a href="CombatEngine.html" title="class in Unnamed Package">CombatEngine</a></dt>
+<dt><a href="CombatEngine.html#%3Cinit%3E(GameData,GameView)" class="member-name-link">CombatEngine(IO.GameData, GameView)</a> - Constructor for class <a href="CombatEngine.html" title="class in Unnamed Package">CombatEngine</a></dt>
 <dd>
-<div class="block">To run the combat, a GameData and GameView is essential for it to work.</div>
+<div class="block">To run the combat, a IO.GameData and GameView is essential for it to work.</div>
 </dd>
 <dt><a href="ConsoleView.html" class="type-name-link" title="class in Unnamed Package">ConsoleView</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
 <dd>
@@ -113,13 +113,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Copies the mob to a new mob.</div>
 </dd>
-<dt><a href="CSVGameData.html" class="type-name-link" title="class in Unnamed Package">CSVGameData</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
+<dt><a href="CSVGameData.html" class="type-name-link" title="class in Unnamed Package">IO.CSVGameData</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
 <dd>
-<div class="block">Reads the game data from CSV files, and loads it into the protected methods in <a href="GameData.html" title="class in Unnamed Package"><code>GameData</code></a>.</div>
+<div class="block">Reads the game data from CSV files, and loads it into the protected methods in <a href="GameData.html" title="class in Unnamed Package"><code>IO.GameData</code></a>.</div>
 </dd>
-<dt><a href="CSVGameData.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">CSVGameData(String, String)</a> - Constructor for class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">IO.CSVGameData(String, String)</a> - Constructor for class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
-<div class="block">Constructs the CSVGameData object, by loading CSV files passed into it.</div>
+<div class="block">Constructs the IO.CSVGameData object, by loading CSV files passed into it.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -214,7 +214,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
-<dt><a href="GameData.html#findKnight(java.lang.String,java.util.List)" class="member-name-link">findKnight(String, List&lt;Knight&gt;)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#findKnight(java.lang.String,java.util.List)" class="member-name-link">findKnight(String, List&lt;Knight&gt;)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Finds a knight based on nameOrId based on the a List of knights passed into it.</div>
 </dd>
@@ -230,7 +230,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Constructor with a damage dice replacement by DiceType type</div>
 </dd>
-<dt><a href="GameData.html#fortunes" class="member-name-link">fortunes</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#fortunes" class="member-name-link">fortunes</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">List of fortunes.</div>
 </dd>
@@ -239,9 +239,9 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="GameController.html" class="type-name-link" title="class in Unnamed Package">GameController</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
 <dd>
-<div class="block">Central point of communication between GameData, GameView and CombatEngine.</div>
+<div class="block">Central point of communication between IO.GameData, GameView and CombatEngine.</div>
 </dd>
-<dt><a href="GameController.html#%3Cinit%3E(GameData,GameView,CombatEngine)" class="member-name-link">GameController(GameData, GameView, CombatEngine)</a> - Constructor for class <a href="GameController.html" title="class in Unnamed Package">GameController</a></dt>
+<dt><a href="GameController.html#%3Cinit%3E(GameData,GameView,CombatEngine)" class="member-name-link">GameController(IO.GameData, GameView, CombatEngine)</a> - Constructor for class <a href="GameController.html" title="class in Unnamed Package">GameController</a></dt>
 <dd>
 <div class="block">The GameController needs all major components of the game to work - view, data, and combat</div>
 </dd>
@@ -249,17 +249,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The location of the game data.</div>
 </dd>
-<dt><a href="GameData.html" class="type-name-link" title="class in Unnamed Package">GameData</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
+<dt><a href="GameData.html" class="type-name-link" title="class in Unnamed Package">IO.GameData</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
 <dd>
-<div class="block">GameData handles the data for the game.</div>
+<div class="block">IO.GameData handles the data for the game.</div>
 </dd>
-<dt><a href="GameData.html#%3Cinit%3E()" class="member-name-link">GameData()</a> - Constructor for class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#%3Cinit%3E()" class="member-name-link">IO.GameData()</a> - Constructor for class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="GameView.html" class="type-name-link" title="interface in Unnamed Package">GameView</a> - Interface in <a href="package-summary.html">Unnamed Package</a></dt>
 <dd>
 <div class="block">GameView defines the various methods for getting and sending information to the  client.</div>
 </dd>
-<dt><a href="GameData.html#getActive(java.lang.String)" class="member-name-link">getActive(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getActive(java.lang.String)" class="member-name-link">getActive(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Gets an <b>active</b> knight based on a string or id.</div>
 </dd>
@@ -267,7 +267,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the active fortune currently being applied to the knight.</div>
 </dd>
-<dt><a href="GameData.html#getActiveKnights()" class="member-name-link">getActiveKnights()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getActiveKnights()" class="member-name-link">getActiveKnights()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Returns list of knights currently set as active.</div>
 </dd>
@@ -325,11 +325,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Gets the knights id as an Integer (not int).</div>
 </dd>
-<dt><a href="GameData.html#getKnight(java.lang.String)" class="member-name-link">getKnight(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getKnight(java.lang.String)" class="member-name-link">getKnight(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Gets an knight from the <b>all knights</b> list based on a string or id.</div>
 </dd>
-<dt><a href="GameData.html#getKnights()" class="member-name-link">getKnights()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getKnights()" class="member-name-link">getKnights()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Returns all knights.</div>
 </dd>
@@ -355,17 +355,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the generic name of the MOB</div>
 </dd>
-<dt><a href="GameData.html#getRandomFortune()" class="member-name-link">getRandomFortune()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getRandomFortune()" class="member-name-link">getRandomFortune()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
-<div class="block">Gets a random fortune from <a href="GameData.html#fortunes"><code>GameData.fortunes</code></a>
+<div class="block">Gets a random fortune from <a href="GameData.html#fortunes"><code>IO.GameData.fortunes</code></a>
  Since fortunes.size()  gives you the total fortunes, and  random.nextInt(N) gives you a random number between 0-(N-1), combine them!</div>
 </dd>
-<dt><a href="GameData.html#getRandomMonsters()" class="member-name-link">getRandomMonsters()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getRandomMonsters()" class="member-name-link">getRandomMonsters()</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
-<div class="block">Gets a random monster from <a href="GameData.html#monsters"><code>GameData.monsters</code></a> assuming the max number
+<div class="block">Gets a random monster from <a href="GameData.html#monsters"><code>IO.GameData.monsters</code></a> assuming the max number
  of monsters is less than or equal to activeKnights.size().</div>
 </dd>
-<dt><a href="GameData.html#getRandomMonsters(int)" class="member-name-link">getRandomMonsters(int)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#getRandomMonsters(int)" class="member-name-link">getRandomMonsters(int)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Builds a list of random monsters of size number.</div>
 </dd>
@@ -401,7 +401,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="CombatEngine.html#initialize()" class="member-name-link">initialize()</a> - Method in class <a href="CombatEngine.html" title="class in Unnamed Package">CombatEngine</a></dt>
 <dd>
-<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>GameData.getRandomFortune()</code></a>.</div>
+<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>IO.GameData.getRandomFortune()</code></a>.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:K">K</h2>
@@ -420,7 +420,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="GameView.html#knightNotFound()" class="member-name-link">knightNotFound()</a> - Method in interface <a href="GameView.html" title="interface in Unnamed Package">GameView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="GameData.html#knights" class="member-name-link">knights</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#knights" class="member-name-link">knights</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">List of all the knights available</div>
 </dd>
@@ -433,11 +433,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="GameView.html#listKnights(java.util.List)" class="member-name-link">listKnights(List&lt;Knight&gt;)</a> - Method in interface <a href="GameView.html" title="interface in Unnamed Package">GameView</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="CSVGameData.html#loadGameData(java.lang.String)" class="member-name-link">loadGameData(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#loadGameData(java.lang.String)" class="member-name-link">loadGameData(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
 <div class="block">Loads game data based on fortunes or MOBs.</div>
 </dd>
-<dt><a href="CSVGameData.html#loadSaveData(java.lang.String)" class="member-name-link">loadSaveData(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#loadSaveData(java.lang.String)" class="member-name-link">loadSaveData(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
 <div class="block">Loads in the data from a knights CSV file.</div>
 </dd>
@@ -454,7 +454,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="Main.html#%3Cinit%3E()" class="member-name-link">Main()</a> - Constructor for class <a href="Main.html" title="class in Unnamed Package">Main</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="GameData.html#MAX_ACTIVE" class="member-name-link">MAX_ACTIVE</a> - Static variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#MAX_ACTIVE" class="member-name-link">MAX_ACTIVE</a> - Static variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">the max  number of active knights (defined by specifications to be 4)</div>
 </dd>
@@ -472,7 +472,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The basic constructor for the mob.</div>
 </dd>
-<dt><a href="GameData.html#monsters" class="member-name-link">monsters</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#monsters" class="member-name-link">monsters</a> - Variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">List of MOBs/Monsters</div>
 </dd>
@@ -490,7 +490,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
-<dt><a href="CSVGameData.html#parseGameDataLine(java.util.Scanner)" class="member-name-link">parseGameDataLine(Scanner)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#parseGameDataLine(java.util.Scanner)" class="member-name-link">parseGameDataLine(Scanner)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
 <div class="block">Optional helper method.</div>
 </dd>
@@ -549,18 +549,18 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
-<dt><a href="GameData.html#random" class="member-name-link">random</a> - Static variable in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#random" class="member-name-link">random</a> - Static variable in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Random number generator, used for grabbing random items for the structures.</div>
 </dd>
-<dt><a href="CSVGameData.html#readFile(java.lang.String)" class="member-name-link">readFile(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#readFile(java.lang.String)" class="member-name-link">readFile(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
 <div class="block">Optional method, but we used it so that we could isolate  our try/catch statements 
  to a single method.</div>
 </dd>
-<dt><a href="GameData.html#removeActive(Knight)" class="member-name-link">removeActive(Knight)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#removeActive(Knight)" class="member-name-link">removeActive(Knight)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
-<div class="block">Removes a knight from the <a href="GameData.html#activeKnights"><code>GameData.activeKnights</code></a> list <b>and</b> resets the damage on the knight!
+<div class="block">Removes a knight from the <a href="GameData.html#activeKnights"><code>IO.GameData.activeKnights</code></a> list <b>and</b> resets the damage on the knight!
  
  Remember,  list.remove returns true  if the remove was successful.</div>
 </dd>
@@ -583,11 +583,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
-<dt><a href="CSVGameData.html#save(java.lang.String)" class="member-name-link">save(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">CSVGameData</a></dt>
+<dt><a href="CSVGameData.html#save(java.lang.String)" class="member-name-link">save(String)</a> - Method in class <a href="CSVGameData.html" title="class in Unnamed Package">IO.CSVGameData</a></dt>
 <dd>
 <div class="block">Saves out the knight data as a CSV to the given filename.</div>
 </dd>
-<dt><a href="GameData.html#save(java.lang.String)" class="member-name-link">save(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#save(java.lang.String)" class="member-name-link">save(String)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
 <div class="block">Required for the implementing class to be able to save the file</div>
 </dd>
@@ -595,9 +595,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">The location of the saved file, with a default (new game) file being knights.csv.</div>
 </dd>
-<dt><a href="GameData.html#setActive(Knight)" class="member-name-link">setActive(Knight)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">GameData</a></dt>
+<dt><a href="GameData.html#setActive(Knight)" class="member-name-link">setActive(Knight)</a> - Method in class <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></dt>
 <dd>
-<div class="block">Adds a knight to the <a href="GameData.html#activeKnights"><code>GameData.activeKnights</code></a> list, as long as there are no more 
+<div class="block">Adds a knight to the <a href="GameData.html#activeKnights"><code>IO.GameData.activeKnights</code></a> list, as long as there are no more
  than 4 knights in the list.</div>
 </dd>
 <dt><a href="ConsoleView.html#setActiveFailed()" class="member-name-link">setActiveFailed()</a> - Method in class <a href="ConsoleView.html" title="class in Unnamed Package">ConsoleView</a></dt>

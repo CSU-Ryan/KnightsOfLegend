@@ -1,3 +1,5 @@
+package GameObjects;
+
 public class MOB implements Attributes {
     private final String name; // The name of the MOB.
     protected final int maxHP; // The maxHP of the MOB.

@@ -1,3 +1,5 @@
+package GameObjects;
+
 public class Fortune implements Attributes {
     private final String name;
     private final int hpBonus;

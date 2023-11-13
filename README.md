@@ -228,7 +228,7 @@ Based on that idea, the first classes you should actually look at implementing i
   - Make sure to test!
 
 Notice, these are not dependant much on the entire programming working for them to work. After you have
-those classes working, you can then work on getting the data loaded from the CSV files into the objects (GameData),
+those classes working, you can then work on getting the data loaded from the CSV files into the objects (IO.GameData),
 and **slowly** continue to build your objects. For each object, look at your javadoc and ask yourself
 only on a method basis:
 
@@ -269,12 +269,12 @@ You are very free to use code from the other assignments, but you should not cop
     }
   ```
 * Polymorphic Power  
-  This assignment uses a fair amount, especially with GameData and GameView. By using the abstract class and
+  This assignment uses a fair amount, especially with IO.GameData and GameView. By using the abstract class and
   interface throughout the rest of the code, we can easily swap the type of data and view. For example,
   what if we wanted a JSONGameData class? Would we want to change all of our code, or just that one class?
   To make this work in your code, here is a code snippet from our main method as an example:
   ```java
-     GameData data = new CSVGameData(gamedata, saveData);
+     IO.GameData data = new IO.CSVGameData(gamedata, saveData);
      GameView view  = new ConsoleView();
      CombatEngine engine = new CombatEngine(data, view);
      GameController controller = new GameController(data, view, engine);

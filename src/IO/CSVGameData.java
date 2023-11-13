@@ -1,3 +1,7 @@
+package IO;
+
+import GameObjects.*;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -52,6 +56,7 @@ public class CSVGameData extends GameData {
 
     /**
      * Creates a Fortune object from CSV line.
+     *
      * @param line CSV data for Fortune.
      * @return Fortune object.
      */
@@ -146,9 +151,9 @@ public class CSVGameData extends GameData {
     }
 
     public static void main(String[] args) {
-        String gamedata = "GameData/test_gamedata.csv";
-        String savedata = "GameData/test_savedata.csv";
-        String saveFile = "GameData/test_savefile.csv";
+        String gamedata = "IO.GameData/test_gamedata.csv";
+        String savedata = "IO.GameData/test_savedata.csv";
+        String saveFile = "IO.GameData/test_savefile.csv";
         Knight knight;
 
         CSVGameData gameData = new CSVGameData(gamedata, savedata);

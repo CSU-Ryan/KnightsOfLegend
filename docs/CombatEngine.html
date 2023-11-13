@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private final <a href="GameData.html" title="class in Unnamed Package">GameData</a></code></div>
+<div class="col-first even-row-color"><code>private final <a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></code></div>
 <div class="col-second even-row-color"><code><a href="#data" class="member-name-link">data</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The data for the game, passed in as part of the constructor.</div>
@@ -122,10 +122,10 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(GameData,GameView)" class="member-name-link">CombatEngine</a><wbr>(<a href="GameData.html" title="class in Unnamed Package">GameData</a>&nbsp;data,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(GameData,GameView)" class="member-name-link">CombatEngine</a><wbr>(<a href="GameData.html" title="class in Unnamed Package">IO.GameData</a>&nbsp;data,
  <a href="GameView.html" title="interface in Unnamed Package">GameView</a>&nbsp;view)</code></div>
 <div class="col-last even-row-color">
-<div class="block">To run the combat, a GameData and GameView is essential for it to work.</div>
+<div class="block">To run the combat, a IO.GameData and GameView is essential for it to work.</div>
 </div>
 </div>
 </section>
@@ -155,7 +155,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>GameData.getRandomFortune()</code></a>.</div>
+<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>IO.GameData.getRandomFortune()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#runCombat()" class="member-name-link">runCombat</a>()</code></div>
@@ -182,15 +182,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="data">
 <h3>data</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="GameData.html" title="class in Unnamed Package">GameData</a></span>&nbsp;<span class="element-name">data</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="GameData.html" title="class in Unnamed Package">IO.GameData</a></span>&nbsp;<span class="element-name">data</span></div>
 <div class="block">The data for the game, passed in as part of the constructor.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="GameData.html#getActiveKnights()"><code>GameData.getActiveKnights()</code></a></li>
-<li><a href="GameData.html#getRandomMonsters()"><code>GameData.getRandomMonsters()</code></a></li>
-<li><a href="GameData.html#getRandomFortune()"><code>GameData.getRandomFortune()</code></a></li>
+<li><a href="GameData.html#getActiveKnights()"><code>IO.GameData.getActiveKnights()</code></a></li>
+<li><a href="GameData.html#getRandomMonsters()"><code>IO.GameData.getRandomMonsters()</code></a></li>
+<li><a href="GameData.html#getRandomFortune()"><code>IO.GameData.getRandomFortune()</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -240,10 +240,10 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(GameData,GameView)">
 <h3>CombatEngine</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CombatEngine</span><wbr><span class="parameters">(<a href="GameData.html" title="class in Unnamed Package">GameData</a>&nbsp;data,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CombatEngine</span><wbr><span class="parameters">(<a href="GameData.html" title="class in Unnamed Package">IO.GameData</a>&nbsp;data,
  <a href="GameView.html" title="interface in Unnamed Package">GameView</a>&nbsp;view)</span></div>
-<div class="block">To run the combat, a GameData and GameView is essential for it to work. 
- It is designed to use classes that implement the GameView and GameData interfaces</div>
+<div class="block">To run the combat, a IO.GameData and GameView is essential for it to work.
+ It is designed to use classes that implement the GameView and IO.GameData interfaces</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>data</code> - a game dataset</dd>
@@ -263,7 +263,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="initialize()">
 <h3>initialize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span>()</div>
-<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>GameData.getRandomFortune()</code></a>. 
+<div class="block">Before every quest, active knights are assigned random fortunes (<a href="GameData.html#getRandomFortune()"><code>IO.GameData.getRandomFortune()</code></a>.
  Once a fortune is assigned to each active knight, call <a href="GameView.html#printFortunes(java.util.List)"><code>GameView.printFortunes(List)</code></a>
  
  Hints: Loops through getActiveKnights() and setActiveFortune using a getRandomFortune() from data.</div>
@@ -286,7 +286,7 @@ loadScripts(document, 'script');</script>
  
  At the start of each battle:
  <ul>
-     <li>Generates a random list of MOBs, no larger than the total number of knights <a href="GameData.html#getRandomMonsters()"><code>GameData.getRandomMonsters()</code></a></li>
+     <li>Generates a random list of MOBs, no larger than the total number of knights <a href="GameData.html#getRandomMonsters()"><code>IO.GameData.getRandomMonsters()</code></a></li>
      <li>Prints the battle text, on who the fight is between <a href="GameView.html#printBattleText(java.util.List,java.util.List)"><code>GameView.printBattleText(List, List)</code></a></li>
      <li>Runs through the combat</li>
  </ul>
@@ -358,7 +358,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <ul class="see-list-long">
 <li><a href="Knight.html#setActiveFortune(Fortune)"><code>Knight.setActiveFortune(Fortune)</code></a></li>
-<li><a href="GameData.html#getKnights()"><code>GameData.getKnights()</code></a></li>
+<li><a href="GameData.html#getKnights()"><code>IO.GameData.getKnights()</code></a></li>
 </ul>
 </dd>
 </dl>

@@ -217,7 +217,7 @@ loadScripts(document, 'script');</script>
  includes
  <pre>
      parseArgs(args); // method that parses the args, optional but cleaned up the code
-     GameData data = new CSVGameData(gamedata, saveData);
+     IO.GameData data = new IO.CSVGameData(gamedata, saveData);
      GameView view  = new ConsoleView();
      CombatEngine engine = new CombatEngine(data, view);
      GameController controller = new GameController(data, view, engine);

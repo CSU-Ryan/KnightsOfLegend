@@ -1,3 +1,5 @@
+package GameObjects;
+
 public interface Attributes {
     /**
      * Gets the armor attribute value, often between 8-20 for a D20 system, but not fixed. Also called "armor class/AC".
