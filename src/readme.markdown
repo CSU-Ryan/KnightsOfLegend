@@ -5,13 +5,13 @@ You will be creating all the java files from scratch fort this project. We creat
 We suggest you create all the java files with simply the skeleton of the file. For example:
 
 ```java
-public abstract class IO.GameData {
+public abstract class GameData {
 
 
 
 }
 ``` 
-saved as IO.GameData.java
+saved as GameData.java
 
 and
 
@@ -23,10 +23,10 @@ public interface Attributes {
 ```
 saved as Attributes.java
 
-You  will notice that IO.GameData  is  not declared as abstract. By creating all the skeletons, you can submit to the autograder - gaining the 1 point that everything compiles :) It is a small step, but one to think about.  Then when you work on each class, flush out the classes by  putting in method stubs, for example
+You  will notice that GameData  is  not declared as abstract. By creating all the skeletons, you can submit to the autograder - gaining the 1 point that everything compiles :) It is a small step, but one to think about.  Then, when you work on each class, flush out the classes by  putting in method stubs, for example
 
 ```java
-public abstract class IO.GameData {
+public abstract class GameData {
 
     // add a  note here on what you need to do. 
     protected Knight findKnight(String nameOrId, List<Knight> list) {

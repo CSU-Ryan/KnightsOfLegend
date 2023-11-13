@@ -21,13 +21,13 @@ public abstract class GameData {
 
 
     public GameData() {
-        fortunes = new ArrayList<Fortune>();
-        knights = new ArrayList<Knight>();
+        fortunes = new ArrayList<>();
+        knights = new ArrayList<>();
 
         MAX_ACTIVE = 4;
-        activeKnights = new ArrayList<Knight>();
+        activeKnights = new ArrayList<>();
 
-        monsters = new ArrayList<MOB>();
+        monsters = new ArrayList<>();
     }
 
     private Optional<Integer> parseInt(String str) {
@@ -181,7 +181,7 @@ public abstract class GameData {
      * @return a list of MOBs.
      */
     public List<MOB> getRandomMonsters(int encounterSize) {
-        ArrayList<MOB> encounter = new ArrayList<MOB>(encounterSize);
+        ArrayList<MOB> encounter = new ArrayList<>(encounterSize);
 
         for (int i = 0; i < encounterSize; ++i) {
             encounter.add(getRandomMonsterCopy());

@@ -142,7 +142,6 @@ public class CSVGameData extends GameData {
             for (Knight knight : knights) {
                 file.println(knight.toCSV());
             }
-            file.close();
         }
         catch (IOException e) {
             System.out.println("ERROR: Failed to save game.");
