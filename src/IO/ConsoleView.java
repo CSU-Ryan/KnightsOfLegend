@@ -3,7 +3,6 @@ package IO;
 import GameObjects.Knight;
 import GameObjects.MOB;
 
-import java.awt.*;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,8 +19,8 @@ public class ConsoleView implements GameView {
      */
 
     public ConsoleView() {
-        in = null;
-        out = null;
+        in = new Scanner(System.in);
+        out = System.out;
     }
 
     /**
@@ -30,6 +29,7 @@ public class ConsoleView implements GameView {
     @Override
     public void splashScreen() {
         // can be anything
+        out.println("hey (:");
     }
 
     /**
@@ -40,7 +40,8 @@ public class ConsoleView implements GameView {
     @Override
     public String displayMainMenu() {
         // asks "What would you like to do?"
-        return null;
+        out.println("What would you like to do?");
+        return in.nextLine();
     }
 
     /**
@@ -48,7 +49,7 @@ public class ConsoleView implements GameView {
      */
     @Override
     public void endGame() {
-
+        out.println("Enjoy your rest! Until another adventure.");
     }
 
     /**
@@ -67,6 +68,17 @@ public class ConsoleView implements GameView {
             save filename - save the game to the file name (default: saveData.csv)
             exit or goodbye - to leave the game
          */
+        out.println("""
+                Unsure what to do, here are some options:
+                            ls or list all  - listing the knights
+                            list active  - list the active knights knights only
+                            show name or id - show the knight details card
+                            set active name or id - set knight as active (note: only 4 knights can be active)
+                            remove active name or id - remove a knight from active status (heals knight)
+                            explore or adventure or quest - find random monsters to fight
+                            save filename - save the game to the file name (default: saveData.csv)
+                            exit or goodbye - to leave the game"""
+        );
     }
 
     /**
@@ -77,7 +89,17 @@ public class ConsoleView implements GameView {
     @Override
     public boolean checkContinue() {
         // "Would you like to continue on your quest (y/n)?"
-        return false;
+        char answer;
+        while (true) {
+            out.println("Would you like to continue on your quest (y/n)?");
+            answer = in.nextLine().charAt(0);
+            if (answer == 'y' || answer == 'Y') {
+                return true;
+            } else if (answer == 'n' || answer == 'N') {
+                return false;
+            }
+            out.println("Error, invalid response. Please try again.");
+        }
     }
 
     /**
@@ -88,6 +110,8 @@ public class ConsoleView implements GameView {
     @Override
     public void showKnight(Knight knight) {
         // add blank line.
+        out.println(knight);
+        out.println();
     }
 
     /**
@@ -99,6 +123,14 @@ public class ConsoleView implements GameView {
     public void listKnights(ArrayList<Knight> knights) {
         // Lists the knights by `id: name`.
         // or if no knights, "No knights to list".
+        if (knights.isEmpty()) {
+            out.println("No knights to list");
+            return;
+        }
+
+        for (Knight knight : knights) {
+            out.println(knight.getId() + ": " + knight.getName());
+        }
     }
 
     /**
@@ -110,6 +142,10 @@ public class ConsoleView implements GameView {
     public void printFortunes(ArrayList<Knight> activeKnights) {
         // "For this quest, our knights drew the following fortunes!"
         // Format: {Name} drew \n {Fortune}
+        out.println("For this quest, our knights drew the following fortunes!");
+        for (Knight knight : activeKnights) {
+            out.println(knight.getName() + " drew\n" + knight.getActiveFortune());
+        }
     }
 
     /**
@@ -122,6 +158,15 @@ public class ConsoleView implements GameView {
     public void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights) {
         // Lists a number of knights side by side with their 'foes' (aka monsters).
         // "Our heroes come across the following monsters. Prepare for battle!"
+        out.println("Our heroes come across the following monsters. Prepare for battle!");
+
+        int i;
+        for (i = 0; i < monsters.size(); ++i) {
+            out.printf("%s%-27s%n", activeKnights.get(i), monsters.get(i));
+        }
+        for (; i < activeKnights.size(); ++i) {
+            out.println(activeKnights.get(i));
+        }
     }
 
     /**
@@ -132,6 +177,7 @@ public class ConsoleView implements GameView {
     @Override
     public void printBattleText(MOB dead) {
         // {Name} was defeated!
+        out.println(dead.getName() + " was defeated!");
     }
 
     /**
@@ -140,6 +186,7 @@ public class ConsoleView implements GameView {
     @Override
     public void printDefeated() {
         // "All active knights have been defeated!"
+        out.println("All active knights have been defeated!");
     }
 
     /**
@@ -148,5 +195,10 @@ public class ConsoleView implements GameView {
     @Override
     public void setActiveFailed() {
         // "Unable to set active knight. Only four can be active at a time."
+        out.println("Unable to set active knight. Only four can be active at a time.");
+    }
+
+    public static void main(String[] args) {
+
     }
 }
