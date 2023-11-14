@@ -5,6 +5,7 @@ import GameObjects.MOB;
 
 import java.awt.*;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleView implements GameView {
@@ -95,7 +96,7 @@ public class ConsoleView implements GameView {
      * @param knights List of knights to display.
      */
     @Override
-    public void listKnights(List knights) {
+    public void listKnights(ArrayList<Knight> knights) {
         // Lists the knights by `id: name`.
         // or if no knights, "No knights to list".
     }
@@ -106,7 +107,7 @@ public class ConsoleView implements GameView {
      * @param activeKnights Knights to display fortunes.
      */
     @Override
-    public void printFortunes(List activeKnights) {
+    public void printFortunes(ArrayList<Knight> activeKnights) {
         // "For this quest, our knights drew the following fortunes!"
         // Format: {Name} drew \n {Fortune}
     }
@@ -118,7 +119,7 @@ public class ConsoleView implements GameView {
      * @param activeKnights Knights in the battle.
      */
     @Override
-    public void printBattleText(List monsters, List activeKnights) {
+    public void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights) {
         // Lists a number of knights side by side with their 'foes' (aka monsters).
         // "Our heroes come across the following monsters. Prepare for battle!"
     }

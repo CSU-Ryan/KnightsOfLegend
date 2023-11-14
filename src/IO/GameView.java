@@ -1,7 +1,7 @@
 package IO;
 
 import GameObjects.*;
-import java.awt.*;
+import java.util.ArrayList;
 
 public interface GameView {
     /**
@@ -45,14 +45,14 @@ public interface GameView {
      *
      * @param knights List of knights to display.
      */
-    void listKnights(List knights);
+    void listKnights(ArrayList<Knight> knights);
 
     /**
      * Displays the fortunes of the active knights.
      *
      * @param activeKnights Knights to display fortunes.
      */
-    void printFortunes(List activeKnights);
+    void printFortunes(ArrayList<Knight> activeKnights);
 
     /**
      * Displays the battle members.
@@ -60,7 +60,7 @@ public interface GameView {
      * @param monsters Monsters in the battle.
      * @param activeKnights Knights in the battle.
      */
-    void printBattleText(List monsters, List activeKnights);
+    void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights);
 
     /**
      * Displays that the monster was defeated.
