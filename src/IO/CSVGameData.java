@@ -137,15 +137,11 @@ public class CSVGameData extends GameData {
      * @param filename file to save data
      */
     @Override
-    public void save(String filename) {
-        try (PrintWriter file = new PrintWriter(filename)) {
-            for (Knight knight : knights) {
-                file.println(knight.toCSV());
-            }
-        }
-        catch (IOException e) {
-            System.out.println("ERROR: Failed to save game.");
-            System.err.println(e);
+    public void save(String filename) throws IOException {
+        PrintWriter file = new PrintWriter(filename);
+
+        for (Knight knight : knights) {
+            file.println(knight.toCSV());
         }
     }
 

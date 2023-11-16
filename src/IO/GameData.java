@@ -1,5 +1,6 @@
 package IO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -205,5 +206,5 @@ public abstract class GameData {
      * Saves the current gamestate to the given file.
      * @param filename file to save data
      */
-    public abstract void save(String filename);
+    public abstract void save(String filename) throws IOException;
 }
