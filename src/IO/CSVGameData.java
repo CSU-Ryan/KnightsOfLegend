@@ -176,6 +176,11 @@ public class CSVGameData extends GameData {
             k.addXP(10);
         }
 
-        gameData.save(saveFile);
+        try {
+            gameData.save(saveFile);
+        }
+        catch (IOException e) {
+            // TODO: idk lol
+        }
     }
 }
