@@ -30,6 +30,7 @@ public class ConsoleView implements GameView {
     public void splashScreen() {
         // can be anything
         out.println("hey (:");
+        out.println();
     }
 
     /**
@@ -68,16 +69,16 @@ public class ConsoleView implements GameView {
             save filename - save the game to the file name (default: saveData.csv)
             exit or goodbye - to leave the game
          */
-        out.println("""
-                Unsure what to do, here are some options:
-                            ls or list all  - listing the knights
-                            list active  - list the active knights knights only
-                            show name or id - show the knight details card
-                            set active name or id - set knight as active (note: only 4 knights can be active)
-                            remove active name or id - remove a knight from active status (heals knight)
-                            explore or adventure or quest - find random monsters to fight
-                            save filename - save the game to the file name (default: saveData.csv)
-                            exit or goodbye - to leave the game"""
+        out.println(
+                "Unsure what to do, here are some options:\n" +
+                "            ls or list all  - listing the knights\n" +
+                "            list active  - list the active knights knights only\n" +
+                "            show name or id - show the knight details card\n" +
+                "            set active name or id - set knight as active (note: only 4 knights can be active)\n" +
+                "            remove active name or id - remove a knight from active status (heals knight)\n" +
+                "            explore or adventure or quest - find random monsters to fight\n" +
+                "            save filename - save the game to the file name (default: saveData.csv)\n" +
+                "            exit or goodbye - to leave the game"
         );
     }
 
@@ -128,13 +129,13 @@ public class ConsoleView implements GameView {
      */
     @Override
     public void listKnights(ArrayList<Knight> knights) {
-        // Lists the knights by `id: name`.
         // or if no knights, "No knights to list".
         if (knights.isEmpty()) {
             out.println("No knights to list");
             return;
         }
 
+        // Lists the knights by `id: name`.
         for (Knight knight : knights) {
             out.println(knight.getId() + ": " + knight.getName());
         }
