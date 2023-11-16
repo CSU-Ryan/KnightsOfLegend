@@ -41,6 +41,11 @@ public interface GameView {
     void showKnight(Knight knight);
 
     /**
+     * Display when a knight is not found.
+     */
+    void knightNotFound();
+
+    /**
      * Lists the knights.
      *
      * @param knights List of knights to display.

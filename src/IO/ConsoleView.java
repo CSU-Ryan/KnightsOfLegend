@@ -115,6 +115,13 @@ public class ConsoleView implements GameView {
     }
 
     /**
+     * Prints when a knight is not found.
+     */
+    public void knightNotFound() {
+        out.println("Knight not found!");
+    }
+
+    /**
      * Lists the knights.
      *
      * @param knights List of knights to display.
