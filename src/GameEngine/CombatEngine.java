@@ -3,6 +3,7 @@ package GameEngine;
 import IO.*;
 import GameObjects.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
 
@@ -24,13 +25,17 @@ public class CombatEngine {
      * Assigns and displays randomized fortunes for active knights.
      */
     public void initialize() {
-        //TODO
+        for (Knight k : data.getActiveKnights()) {
+            k.setActiveFortune(data.getRandomFortune());
+        }
+        view.printFortunes((ArrayList<Knight>) data.getActiveKnights());
     }
 
     /**
      * Runs a battle.
      */
     public void runCombat() {
+        System.out.println("TODO: actual combat");
         //NOTE: this function is not graded.
         /*
          Combat will continue to run as long as there are either knights or monsters/MOBs. If MOBs are reduced to zero, the player will be promoted to see if they wish to continue exploring GameView.checkContinue(). If they respond yes, more random monsters will be generated, and combat begins again. At the start of each battle:
@@ -76,6 +81,8 @@ Upon a successful strike, the damage die is rolled to determine the amount of da
      * Removes fortunes from all knights.
      */
     public void clear() {
-        //TODO
+        for (Knight k : data.getKnights()) {
+            k.setActiveFortune(new Fortune());
+        }
     }
 }
