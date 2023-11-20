@@ -202,10 +202,35 @@ public class GameController {
     /**
      * Handles call to `save {filename}`.
      *
-     * @param filename file to save game to.
+     * @param saveNumber file to save game to.
      * @throws IOException if failed to access file.
      */
-    private void callSave(String filename) throws IOException {
+    private void callSave(String saveNumber) throws IOException {
+        String filename = "SaveFiles/";
+        switch (saveNumber) {
+            case "1":
+            case "one":
+                filename += "one.csv";
+                break;
+            case "2":
+            case "two":
+                filename += "two.csv";
+                break;
+            case "3":
+            case "three":
+                filename += "three.csv";
+                break;
+            case "4":
+            case "four":
+                filename += "four.csv";
+                break;
+            case "test":
+                filename += "test.csv";
+                break;
+            default:
+                filename = saveNumber;
+                System.err.println("WARNING: saving file outside of saves folder.");
+        }
         data.save(filename);
         view.saved(filename);
     }
