@@ -59,7 +59,6 @@ public abstract class GameData {
      * @param nameOrId name or ID of the knight.
      * @return the active knight.
      */
-    @Deprecated
     public Knight getActive(String nameOrId) {
         return findKnight(nameOrId, activeKnights);
     }
@@ -69,7 +68,6 @@ public abstract class GameData {
      * @param nameOrId name or ID of the knight.
      * @return the knight.
      */
-    @Deprecated
     public Knight getKnight(String nameOrId) {
         return findKnight(nameOrId, knights);
     }
@@ -107,12 +105,11 @@ public abstract class GameData {
     /**
      * Finds a Knight from the list of knights.
      *
-     * @deprecated Use findKnightName or findKnightID.
+     * @prefer: findKnightName or findKnightID.
      * @param nameOrId name or ID of the knight.
      * @param list list of knights.
      * @return the knight from the list.
      */
-    @Deprecated
     protected Knight findKnight(String nameOrId, List<Knight> list) throws NoSuchElementException {
         Optional<Integer> search = parseInt(nameOrId);
         Optional<Knight> result;
@@ -203,7 +200,7 @@ public abstract class GameData {
     }
 
     /**
-     * Saves the current gamestate to the given file.
+     * Saves the current game-state to the given file.
      * @param filename file to save data
      */
     public abstract void save(String filename) throws IOException;

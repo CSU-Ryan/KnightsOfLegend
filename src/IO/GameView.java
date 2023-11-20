@@ -24,7 +24,7 @@ public interface GameView {
 
     /**
      * Displays a save confirmation.
-     * @param filename
+     * @param filename path of file.
      */
     void saved(String filename);
 

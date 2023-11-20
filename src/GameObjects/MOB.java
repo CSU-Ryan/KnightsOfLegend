@@ -14,11 +14,10 @@ public class MOB implements Attributes {
         this.maxHP = maxHP;
         this.armor = armor;
         this.hitModifier = hitModifier;
-        // TODO:
         //  I hate zybooks with all my being. I have to add a stupid null check because they unit test my functions
         //  outside the scope of my own code.because even if I want to handle the program in a slightly smarter or more
         //  sensible way I am punished because they feel the need to unit test my code, despite this project supposedly
-        //  being there so I can use my own implementation skills, giving me some actual freedom.
+        //  being there, so I can use my own implementation skills, giving me some actual freedom.
         //  Straight BS.
         if (damageDie == null) {
             this.damageDie = DiceType.NONE;
@@ -87,7 +86,6 @@ public class MOB implements Attributes {
      * Adds damage to the mobs overall damage.
      * @param hit the int amount to add
      */
-    //TODO: this might be the cause of all your pain
     public void addDamage(int hit) {
         damage = Math.min(maxHP, damage + hit);
     }

@@ -22,9 +22,13 @@ public class GameController {
      * Starts the game, causing it to run until a client exits. Starts with splashScreen, loops as long as processCommand returns true, prints endgame when loop is done.
      */
     public void start() {
+        boolean proceed;
         view.splashScreen();
 
-        while (processCommand(view.displayMainMenu()));
+        do {
+            proceed = processCommand(view.displayMainMenu());
+        }
+        while (proceed);
     }
 
     /**
@@ -91,13 +95,7 @@ public class GameController {
                     throw new IllegalArgumentException("Invalid command.");
             }
         }
-        catch (IllegalArgumentException e) {
-            view.displayException(e);
-        }
-        catch (IOException e) {
-            view.displayException(e);
-        }
-        catch (NoSuchElementException e) {
+        catch (IllegalArgumentException | IOException | NoSuchElementException e) {
             view.displayException(e);
         }
         return true;

@@ -20,7 +20,7 @@ public class Fortune implements Attributes {
         this.hpBonus = hpBonus;
         this.armor = armor;
         this.hitModifier = hitModifier;
-        //TODO: Sh**ty zybooks
+        //Sh**ty Zybooks
         if (type == null) {
             this.dtype = DiceType.NONE;
         } else {
@@ -65,7 +65,6 @@ public class Fortune implements Attributes {
     public static void main(String[] args) {
         Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
         Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
-        //TODO:
         // BS Zybooks
         Fortune zybooksPlague = new Fortune("The plague of Zybooks", -9999, -9999, -9999, null);
 

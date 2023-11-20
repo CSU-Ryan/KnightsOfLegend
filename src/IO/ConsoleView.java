@@ -52,7 +52,7 @@ public class ConsoleView implements GameView {
 
     /**
      * Displays a save confirmation.
-     * @param filename
+     * @param filename path of file.
      */
     public void saved(String filename) {
         out.println("Progress saved to " + filename);
@@ -74,7 +74,7 @@ public class ConsoleView implements GameView {
         /* the options are as follows:
         Unsure what to do, here are some options:
             ls or list all  - listing the knights
-            list active  - list the active knights knights only
+            list active  - list the active knights only
             show name or id - show the knight details card
             set active name or id - set knight as active (note: only 4 knights can be active)
             remove active name or id - remove a knight from active status (heals knight)
@@ -237,16 +237,5 @@ public class ConsoleView implements GameView {
     @Override
     public void removeActiveSucceeded(Knight knight) {
         out.println("Deactivated " + knight.getName());
-    }
-
-    public static void main(String[] args) {
-        ConsoleView view = new ConsoleView();
-
-        view.splashScreen();
-        do {
-            String in = view.displayMainMenu();
-
-
-        } while (view.checkContinue());
     }
 }

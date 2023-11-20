@@ -81,7 +81,7 @@ public class CSVGameData extends GameData {
             return new Scanner(new File(fileName));
         }
         catch (FileNotFoundException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return new Scanner("");
     }
@@ -133,7 +133,7 @@ public class CSVGameData extends GameData {
     }
 
     /**
-     * Saves the current gamestate to the given file.
+     * Saves the current game-state to the given file.
      * @param filename file to save data
      */
     @Override
@@ -180,8 +180,6 @@ public class CSVGameData extends GameData {
         try {
             gameData.save(saveFile);
         }
-        catch (IOException e) {
-            // TODO: idk lol
-        }
+        catch (IOException ignored) {}
     }
 }

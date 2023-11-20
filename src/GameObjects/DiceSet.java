@@ -25,7 +25,7 @@ public class DiceSet {
                 break;
             case D20: i = 20;
                 break;
-            case NONE: System.err.println("Dice.roll() called with NONE dtype.");
+            case NONE: System.err.println("Dice.roll() called with NONE DiceType.");
                 break;
         }
         return rnd.nextInt(i) + 1;
