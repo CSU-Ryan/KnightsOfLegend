@@ -27,9 +27,14 @@ public class GameController {
 
     protected boolean processCommand(String command) {
         int spaceIndex = command.indexOf(' ');
-        String comm = command.substring(0, spaceIndex);
-        String args = command.substring(spaceIndex+1);
-        return processCommand(comm, args);
+        if (spaceIndex != -1) {
+            String comm = command.substring(0, spaceIndex);
+            String args = command.substring(spaceIndex + 1);
+            return processCommand(comm, args);
+        }
+        else {
+            return processCommand(command, "");
+        }
     }
 
     /**
@@ -40,6 +45,8 @@ public class GameController {
      * @return boolean whether command was successfully called.
      */
     protected boolean processCommand(String command, String args) {
+        command = command.trim().toLowerCase();
+        args = args.trim().toLowerCase();
         try {
             switch (command) {
                 case "list":
@@ -64,9 +71,11 @@ public class GameController {
                 case "save":
                     callSave(args);
                     break;
+                case "quit":
                 case "exit":
                 case "goodbye":
                     view.endGame();
+                    return false;
                 case "help":
                     view.printHelp();
                     break;
@@ -76,15 +85,12 @@ public class GameController {
         }
         catch (IllegalArgumentException e) {
             view.displayException(e);
-            return false;
         }
         catch (IOException e) {
             view.displayException(e);
-            return false;
         }
         catch (NoSuchElementException e) {
             view.displayException(e);
-            return false;
         }
         finally { return true; }
     }
@@ -132,9 +138,9 @@ public class GameController {
     private void callSet(String args) throws IllegalArgumentException, NoSuchElementException {
         args = args.toLowerCase();
         String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' '+1));
+        String nameOrId = args.substring(args.indexOf(' ')+1);
 
-        Knight knight = data.findKnight(args, data.knights);
+        Knight knight = data.findKnight(nameOrId, data.knights);
 
         switch (arg) {
             case "active":
@@ -160,9 +166,9 @@ public class GameController {
     private void callRemove(String args) throws IllegalArgumentException, NoSuchElementException {
         args = args.toLowerCase();
         String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' '+1));
+        String nameOrId = args.substring(args.indexOf(' ')+1);
 
-        Knight knight = data.findKnight(args, data.knights);
+        Knight knight = data.findKnight(nameOrId, data.knights);
 
         switch (arg) {
             case "active":
