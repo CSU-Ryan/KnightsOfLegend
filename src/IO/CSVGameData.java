@@ -143,6 +143,7 @@ public class CSVGameData extends GameData {
         for (Knight knight : knights) {
             file.println(knight.toCSV());
         }
+        file.close();
     }
 
     public static void main(String[] args) {
