@@ -3,9 +3,6 @@ package IO;
 import GameObjects.Knight;
 import GameObjects.MOB;
 
-import java.io.IOException;
-import java.util.NoSuchElementException;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,8 +23,10 @@ public class ConsoleView implements GameView {
     public ConsoleView() {
         in = new Scanner(System.in);
         out = System.out;
+    }
 
-        //TODO: instantiate game.
+    public void displayException(Exception e) {
+        out.println(e.getMessage());
     }
 
     /**

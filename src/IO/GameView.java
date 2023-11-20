@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 public interface GameView {
     /**
+     * Displays an exception.
+     * @param e The exception to display.
+     */
+    void displayException(Exception e);
+
+    /**
      * Displays a splashscreen at the launch of the game.
      */
     void splashScreen();
