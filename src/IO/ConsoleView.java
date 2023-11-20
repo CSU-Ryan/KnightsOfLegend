@@ -11,8 +11,6 @@ public class ConsoleView implements GameView {
     private final Scanner in;
     private final PrintStream out;
 
-    private GameData game;
-
     /*
         Game rules: You can have four active knights. As long as they are active, they won't heal,
         but they can gain XP by going on adventures.
@@ -89,150 +87,6 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Handles the possible commands from the player [see printHelp()].
-     *
-     * @param command command call, first word of call.
-     * @param args arguments for command, rest of call.
-     * @return boolean whether command was successfully called.
-     */
-    public boolean callAction(String command, String args) {
-        try {
-            switch (command) {
-                case "list":
-                case "ls":
-                    callList(args);
-                    break;
-                case "show":
-                    callShow(args);
-                    break;
-                case "set":
-                    callSet(args);
-                    break;
-                case "remove":
-                case "rm":
-                    callRemove(args);
-                    break;
-                case "explore":
-                case "adventure":
-                case "quest":
-                    beginAdventure();
-                    break;
-                case "save":
-                    callSave(args);
-                    break;
-                case "exit":
-                case "goodbye":
-                    endGame();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid command.");
-            }
-        }
-        catch (IllegalArgumentException e) {
-            out.println(e.getMessage());
-            return false;
-        }
-        catch (IOException e) {
-            out.println(e.getMessage());
-            return false;
-        }
-        catch (NoSuchElementException e) {
-            out.println(e.getMessage());
-            return false;
-        }
-        finally { return true; }
-    }
-
-    /**
-     * Handles call to `list {category}`.
-     *
-     * @param category category to list.
-     * @throws IllegalArgumentException if category is invalid.
-     */
-    private void callList(String category) throws IllegalArgumentException {
-        category = category.toLowerCase();
-        switch (category) {
-            case "":
-            case "all":
-                listKnights(game.knights);
-                break;
-            case "active":
-                listKnights(game.activeKnights);
-                break;
-            default:
-                throw new IllegalArgumentException("Call to 'list' has improper argument.");
-        }
-    }
-
-    /**
-     * Handles call to `show {name/ID}`.
-     *
-     * @param args name/ID.
-     * @throws NoSuchElementException if no knight with name/ID exists.
-     */
-    private void callShow(String args) throws NoSuchElementException {
-        args = args.toLowerCase();
-
-        showKnight(game.findKnight(args, game.knights));
-    }
-
-    /**
-     * Handles call to `set {category} {name/ID}`.
-     *
-     * @param args category to find knight with name/ID.
-     * @throws IllegalArgumentException if category is invalid.
-     * @throws NoSuchElementException if no knight with name/ID exists.
-     */
-    private void callSet(String args) throws IllegalArgumentException, NoSuchElementException {
-        args = args.toLowerCase();
-        String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' '+1));
-
-        Knight knight = game.findKnight(args, game.knights);
-
-        switch (arg) {
-            case "active":
-                if (!game.setActive(knight)) setActiveFailed();
-                break;
-            default:
-                throw new IllegalArgumentException("call to 'set' has improper argument.");
-        }
-    }
-
-    /**
-     * Handles call to `remove {category} {name/ID}`.
-     *
-     * @param args category to find knight with name/ID.
-     * @throws IllegalArgumentException if category is invalid.
-     * @throws NoSuchElementException if kno knight with name/ID exists.
-     */
-    private void callRemove(String args) throws IllegalArgumentException, NoSuchElementException {
-        args = args.toLowerCase();
-        String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' '+1));
-
-        Knight knight = game.findKnight(args, game.knights);
-
-        switch (arg) {
-            case "active":
-                game.removeActive(knight);
-                break;
-            default:
-                throw new IllegalArgumentException("call to 'remove' has improper argument.");
-        }
-    }
-
-    /**
-     * Handles call to `save {filename}`.
-     *
-     * @param filename file to save game to.
-     * @throws IOException if failed to access file.
-     */
-    private void callSave(String filename) throws IOException {
-        game.save(filename);
-    }
-
-    /**
      * Asks the player if they want to continue.
      *
      * @return The player's response (y/n).
@@ -304,14 +158,6 @@ public class ConsoleView implements GameView {
         for (Knight knight : activeKnights) {
             out.println(knight.getName() + " drew\n" + knight.getActiveFortune());
         }
-    }
-
-    public void beginAdventure() {
-        //TODO
-    }
-
-    public void beginBattle() {
-        //TODO
     }
 
     /**
