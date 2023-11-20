@@ -22,7 +22,9 @@ public class GameController {
      * Starts the game, causing it to run until a client exits. Starts with splashScreen, loops as long as processCommand returns true, prints endgame when loop is done.
      */
     public void start() {
-        //TODO
+        view.splashScreen();
+
+        while (processCommand(view.displayMainMenu()));
     }
 
     /**
@@ -191,7 +193,9 @@ public class GameController {
      */
     private void beginAdventure() {
         engine.initialize();
-        engine.runCombat();
+        do {
+            engine.runCombat();
+        } while (view.checkContinue());
         engine.clear();
     }
 
