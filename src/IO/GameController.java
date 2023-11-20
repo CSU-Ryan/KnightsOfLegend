@@ -100,7 +100,7 @@ public class GameController {
         catch (NoSuchElementException e) {
             view.displayException(e);
         }
-        finally { return true; }
+        return true;
     }
 
     /**
