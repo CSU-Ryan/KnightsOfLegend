@@ -23,6 +23,12 @@ public interface GameView {
     String displayMainMenu();
 
     /**
+     * Displays a save confirmation.
+     * @param filename
+     */
+    void saved(String filename);
+
+    /**
      * Displays a message for completing the game.
      */
     void endGame();
@@ -86,7 +92,21 @@ public interface GameView {
     void printDefeated();
 
     /**
+     * Displays a confirmation when a knight has been activated.
+     *
+     * @param knight the activated knight.
+     */
+    void setActiveSucceeded(Knight knight);
+
+    /**
      * Displays when a knight cannot be activated.
      */
     void setActiveFailed();
+
+    /**
+     * Displays a confirmation when a knight has been deactivated.
+     *
+     * @param knight the deactivated knight.
+     */
+    void removeActiveSucceeded(Knight knight);
 }

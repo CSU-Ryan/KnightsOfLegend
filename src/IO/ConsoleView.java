@@ -25,6 +25,7 @@ public class ConsoleView implements GameView {
 
     public void displayException(Exception e) {
         out.println(e.getMessage());
+        printHelp();
     }
 
     /**
@@ -47,6 +48,14 @@ public class ConsoleView implements GameView {
         // asks "What would you like to do?"
         out.println("What would you like to do?");
         return in.nextLine();
+    }
+
+    /**
+     * Displays a save confirmation.
+     * @param filename
+     */
+    public void saved(String filename) {
+        out.println("Progress saved to " + filename);
     }
 
     /**
@@ -202,12 +211,32 @@ public class ConsoleView implements GameView {
     }
 
     /**
+     * Prints a confirmation when a knight has been activated.
+     *
+     * @param knight the knight which was activated.
+     */
+    @Override
+    public void setActiveSucceeded(Knight knight) {
+        out.println("Activated " + knight.getName());
+    }
+
+    /**
      * Prints when a knight cannot be activated.
      */
     @Override
     public void setActiveFailed() {
         // "Unable to set active knight. Only four can be active at a time."
         out.println("Unable to set active knight. Only four can be active at a time.");
+    }
+
+    /**
+     * Displays a confirmation when a knight has been deactivated.
+     *
+     * @param knight the deactivated knight.
+     */
+    @Override
+    public void removeActiveSucceeded(Knight knight) {
+        out.println("Deactivated " + knight.getName());
     }
 
     public static void main(String[] args) {

@@ -67,6 +67,8 @@ public class GameController {
                 case "exit":
                 case "goodbye":
                     view.endGame();
+                case "help":
+                    view.printHelp();
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid command.");
@@ -136,7 +138,12 @@ public class GameController {
 
         switch (arg) {
             case "active":
-                if (!data.setActive(knight)) view.setActiveFailed();
+                if (!data.setActive(knight)) {
+                    view.setActiveFailed();
+                }
+                else {
+                    view.setActiveSucceeded(knight);
+                }
                 break;
             default:
                 throw new IllegalArgumentException("call to 'set' has improper argument.");
@@ -160,6 +167,7 @@ public class GameController {
         switch (arg) {
             case "active":
                 data.removeActive(knight);
+                view.removeActiveSucceeded(knight);
                 break;
             default:
                 throw new IllegalArgumentException("call to 'remove' has improper argument.");
@@ -183,6 +191,7 @@ public class GameController {
      */
     private void callSave(String filename) throws IOException {
         data.save(filename);
+        view.saved(filename);
     }
 
 }
