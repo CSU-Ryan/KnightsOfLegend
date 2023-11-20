@@ -25,6 +25,12 @@ public class GameController {
         //TODO
     }
 
+    /**
+     * Handles the possible commands from the player [see printHelp()].
+     *
+     * @param command full command call.
+     * @return boolean whether command was successfully called.
+     */
     protected boolean processCommand(String command) {
         int spaceIndex = command.indexOf(' ');
         if (spaceIndex != -1) {
