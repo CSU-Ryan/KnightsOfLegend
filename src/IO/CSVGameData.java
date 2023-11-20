@@ -149,7 +149,7 @@ public class CSVGameData extends GameData {
     public static void main(String[] args) {
         String gamedata = "IO.GameData/test_gamedata.csv";
         String savedata = "IO.GameData/test_savedata.csv";
-        String saveFile = "IO.GameData/test_savefile.csv";
+        String saveFile = "IO.SaveFiles/test.csv";
         Knight knight;
 
         CSVGameData gameData = new CSVGameData(gamedata, savedata);
