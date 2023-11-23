@@ -125,7 +125,7 @@ public abstract class GameData {
         if (result.isPresent()) {
             return result.get();
         }
-        else throw new NoSuchElementException("Knight `" + nameOrId + "' not found.");
+        else throw new NoSuchElementException("Knight `" + nameOrId + "` not found.");
     }
 
     /**
