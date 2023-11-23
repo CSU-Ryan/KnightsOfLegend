@@ -105,7 +105,6 @@ public class ConsoleView implements GameView {
      */
     @Override
     public boolean checkContinue() {
-        // "Would you like to continue on your quest (y/n)?"
         char answer;
         while (true) {
             out.println("Would you like to continue on your quest (y/n)?");
@@ -126,7 +125,6 @@ public class ConsoleView implements GameView {
      */
     @Override
     public void showKnight(Knight knight) {
-        // add blank line.
         out.println(knight);
         out.println();
     }
