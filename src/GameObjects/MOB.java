@@ -106,7 +106,16 @@ public class MOB implements Attributes {
     public int getHitModifier() {
         return hitModifier;
     }
-    
+
+    public int calculateHit(DiceSet dice, int enemyArmor) {
+        int roll = dice.roll(DiceType.D20) + getHitModifier();
+
+        if (roll > enemyArmor) {
+            return dice.roll(getDamageDie());
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         
         MOB mob1 = new MOB("mob1", 10, 1, -1, DiceType.D20);
