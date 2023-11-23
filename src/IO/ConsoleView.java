@@ -25,6 +25,7 @@ public class ConsoleView implements GameView {
 
     public void displayException(Exception e) {
         out.println(e.getMessage());
+        out.println();
         printHelp();
     }
 
@@ -56,6 +57,7 @@ public class ConsoleView implements GameView {
      */
     public void saved(String filename) {
         out.println("Progress saved to " + filename);
+        out.println();
     }
 
     /**
@@ -64,6 +66,7 @@ public class ConsoleView implements GameView {
     @Override
     public void endGame() {
         out.println("Enjoy your rest! Until another adventure.");
+        out.println();
     }
 
     /**
@@ -91,7 +94,7 @@ public class ConsoleView implements GameView {
                 "            remove active name or id - remove a knight from active status (heals knight)\n" +
                 "            explore or adventure or quest - find random monsters to fight\n" +
                 "            save filename - save the game to the file name (default: saveData.csv)\n" +
-                "            exit or goodbye - to leave the game"
+                "            exit or goodbye - to leave the game\n"
         );
     }
 
@@ -133,6 +136,7 @@ public class ConsoleView implements GameView {
      */
     public void knightNotFound() {
         out.println("Knight not found!");
+        out.println();
     }
 
     /**
@@ -145,6 +149,7 @@ public class ConsoleView implements GameView {
         // or if no knights, "No knights to list".
         if (knights.isEmpty()) {
             out.println("No knights to list");
+            out.println();
             return;
         }
 
@@ -152,6 +157,7 @@ public class ConsoleView implements GameView {
         for (Knight knight : knights) {
             out.println(knight.getId() + ": " + knight.getName());
         }
+        out.println();
     }
 
     /**
@@ -167,6 +173,7 @@ public class ConsoleView implements GameView {
         for (Knight knight : activeKnights) {
             out.println(knight.getName() + " drew\n" + knight.getActiveFortune());
         }
+        out.println();
     }
 
     /**
@@ -188,6 +195,7 @@ public class ConsoleView implements GameView {
         for (; i < activeKnights.size(); ++i) {
             out.println(activeKnights.get(i));
         }
+        out.println();
     }
 
     /**
@@ -207,7 +215,8 @@ public class ConsoleView implements GameView {
     @Override
     public void printDefeated() {
         // "All active knights have been defeated!"
-        out.println("All active knights have been defeated!");
+        out.println("All active knights have been defeated!\n");
+        out.println();
     }
 
     /**
@@ -218,6 +227,7 @@ public class ConsoleView implements GameView {
     @Override
     public void setActiveSucceeded(Knight knight) {
         out.println("Activated " + knight.getName());
+        out.println();
     }
 
     /**
@@ -227,6 +237,7 @@ public class ConsoleView implements GameView {
     public void setActiveFailed() {
         // "Unable to set active knight. Only four can be active at a time."
         out.println("Unable to set active knight. Only four can be active at a time.");
+        out.println();
     }
 
     /**
@@ -237,5 +248,6 @@ public class ConsoleView implements GameView {
     @Override
     public void removeActiveSucceeded(Knight knight) {
         out.println("Deactivated " + knight.getName());
+        out.println();
     }
 }
