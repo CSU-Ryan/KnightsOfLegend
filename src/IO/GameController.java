@@ -129,7 +129,7 @@ public class GameController {
      * @throws NoSuchElementException if no knight with name/ID exists.
      */
     private void callShow(String args) throws NoSuchElementException {
-        args = args.toLowerCase();
+        args = args.trim().toLowerCase();
 
         view.showKnight(data.findKnight(args, data.knights));
     }

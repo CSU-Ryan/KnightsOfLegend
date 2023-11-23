@@ -190,10 +190,10 @@ public class ConsoleView implements GameView {
 
         int i;
         for (i = 0; i < monsters.size(); ++i) {
-            out.printf("%s%-27s%n", activeKnights.get(i), monsters.get(i));
+            out.printf("%s%27s%n", activeKnights.get(i).getName(), monsters.get(i).getName());
         }
         for (; i < activeKnights.size(); ++i) {
-            out.println(activeKnights.get(i));
+            out.println(activeKnights.get(i).getName());
         }
         out.println();
     }
