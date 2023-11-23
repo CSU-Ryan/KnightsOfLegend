@@ -13,6 +13,8 @@ public class CombatEngine {
     private final Random rnd; // Used in runCombat() to select who is fighting who.
     private final GameView view; // The View used for the game, passed in as part of the constructor.
 
+    private final int DEATH_XP = 1;
+
     public CombatEngine(GameData data, GameView view) {
         this.data = data;
         this.view = view;
@@ -35,46 +37,81 @@ public class CombatEngine {
      * Runs a battle.
      */
     public void runCombat() {
-        System.out.println("TODO: actual combat");
-        //NOTE: this function is not graded.
-        /*
-         Combat will continue to run as long as there are either knights or monsters/MOBs. If MOBs are reduced to zero, the player will be promoted to see if they wish to continue exploring GameView.checkContinue(). If they respond yes, more random monsters will be generated, and combat begins again. At the start of each battle:
+        ArrayList<Knight> party = (ArrayList<Knight>) data.getActiveKnights();
+        ArrayList<MOB> monsters;
 
-    Generates a random list of MOBs, no larger than the total number of knights GameData.getRandomMonsters()
-    Prints the battle text, on who the fight is between GameView.printBattleText(List, List)
-    Runs through the combat
-
-
-The combat order itself is undefined on order of actions, but the following must happen
-
-    When knights are defeated (MOB.getHP() <= 0), they are removed from active knights
-    When MOBs are defeated, every active knight earns 1 XP point (Knight.addXP(int))
-    While combat order is undefined, a common implementation is cycle through the knights having them attack a random monster. We then cycle through the MOBs having them each attack a random knight.
-    When a knight or mob is defeated, we print that they were defeated GameView.printBattleText(MOB)
-
-If all knights are defeated, we notify the player using GameView.printDefeated().
-
-Calculating Hits
-To calculate a successful hit, you roll a D20 (DiceSet.roll(DiceType) take that value, add the MOBs/Knights toHitModifier. If the value is greater than the armor value, they score a hit, and the damage die is rolled.
-
-     D20 + hitModifier > armor  (successful hit formula)
-
-
-
-Upon a successful strike, the damage die is rolled to determine the amount of damage the opponent takes Hint to students: private helper methods are extremely helpful here. As is helps break up the above steps. Make sure to take it in small parts, printing out in each step.
-         */
-        //TODO
+        boolean hasWon;
+        do {
+            monsters = (ArrayList<MOB>) data.getRandomMonsters();
+            hasWon = doBattle(party, monsters);
+        } while (hasWon && view.checkContinue());
     }
 
     /**
-     * helper method?
-     * @param attackers
-     * @param defenders
+     * Runs a battle.
+     * @param knights the player's living party.
+     * @param monsters
      * @return
      */
-    private int doBattle(List<MOB> attackers, List<MOB> defenders) {
-        //TODO
-        return -1;
+    private boolean doBattle(ArrayList<Knight> knights, ArrayList<MOB> monsters) {
+        boolean hasDied;
+        List<MOB> monstersToRemove = new ArrayList<>();
+        List<Knight> knightsToRemove = new ArrayList<>();
+
+        view.printBattleText(monsters, knights);
+
+        while (!knights.isEmpty() && !monsters.isEmpty()) {
+            // Knight turns
+            for (Knight k : knights) {
+                hasDied = doTurn(k, monsters);
+                if (hasDied) {
+                    knightsToRemove.add(k);
+                }
+            }
+            // Monster turns
+            for (MOB m : monsters) {
+                hasDied = doTurn(m, knights);
+                if (hasDied) {
+                    for (Knight k : knights) k.addXP(DEATH_XP);
+                    monstersToRemove.add(m);
+                }
+            }
+            // Remove dead MOBs.
+            for (Knight k : knightsToRemove) knights.remove(k);
+            for (MOB m : monstersToRemove) monsters.remove(m);
+        }
+        if (knights.isEmpty()) {
+            view.printDefeated();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * runs one MOB's turn.
+     *
+     * @param attacker Who's turn it is.
+     * @param defenders The group against our attacker.
+     * @return
+     */
+    private boolean doTurn(MOB attacker, List<? extends MOB> defenders) {
+        // Check if defeated.
+        if (attacker.getHP() <= 0) {
+            view.printBattleText(attacker);
+            return true;
+        }
+
+        // Random Attack
+        MOB target = getTarget(defenders);
+        int damage = attacker.calculateHit(dice, target.getArmor());
+        target.addDamage(damage);
+
+        return false;
+    }
+
+    private MOB getTarget(List<? extends MOB> targetPool) {
+        return targetPool.get(rnd.nextInt(targetPool.size()));
     }
 
     /**
@@ -83,6 +120,11 @@ Upon a successful strike, the damage die is rolled to determine the amount of da
     public void clear() {
         for (Knight k : data.getKnights()) {
             k.setActiveFortune(new Fortune());
+            k.resetDamage();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }

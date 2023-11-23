@@ -190,10 +190,12 @@ public class GameController {
      * Begins an adventure.
      */
     private void beginAdventure() {
+        if (data.activeKnights.isEmpty()) {
+            view.displayException(new Exception("Cannot begin adventure, as your party is empty!"));
+            return;
+        }
         engine.initialize();
-        do {
-            engine.runCombat();
-        } while (view.checkContinue());
+        engine.runCombat();
         engine.clear();
     }
 
