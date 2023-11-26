@@ -1,5 +1,8 @@
 package GameObjects;
 
+/**
+ * A general character which has health and can attack.
+ */
 public class MOB implements Attributes {
     private final String name; // The name of the MOB.
     protected final int maxHP; // The maxHP of the MOB.
@@ -9,6 +12,15 @@ public class MOB implements Attributes {
     protected final DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
 
 
+    /**
+     * Constructs a MOB with given stats.
+     *
+     * @param name        the name of the MOB.
+     * @param maxHP       the maximum HP of the MOB.
+     * @param armor       the armor class.
+     * @param hitModifier the hit modifier.
+     * @param damageDie   the die for damage rolls.
+     */
     public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
         this.name = name;
         this.maxHP = maxHP;
@@ -27,7 +39,9 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Builds a MOB Card for easy printing of the stats.
+     * Creates a card displaying the MOB's stats.
+     *
+     * @return a string of the info card.
      */
     @Override
     public String toString() {
@@ -40,35 +54,58 @@ public class MOB implements Attributes {
                 "+============================+";
     }
 
+    /**
+     * Creates a copy of the MOB.
+     *
+     * @return a new identical MOB.
+     */
     public MOB copy() {
         return new MOB(name, maxHP, armor, hitModifier, damageDie);
     }
 
+    /**
+     * Creates a copy of the MOB.
+     *
+     * @param name a new name for the copy.
+     * @return a new MOB.
+     */
     public MOB copy(String name) {
         return new MOB(name, maxHP, armor, hitModifier, damageDie);
     }
 
     /**
-     * Returns the generic name of the MOB
-     * @return the name of the MOB
+     * Gets the name of the MOB.
+     *
+     * @return the name of the MOB.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Returns current HP of the MOB.
-     * @return current HP of the MOB
+     * Gets the current HP of the MOB.
+     *
+     * @return current HP of the MOB.
      */
     public int getHP() {
         return getMaxHP() - getDamage();
     }
 
+    /**
+     * Gets the MOB's max HP.
+     *
+     * @return the MOB's max HP.
+     */
     @Override
     public int getMaxHP() {
         return maxHP;
     }
 
+    /**
+     * Gets the MOB's armor class.
+     *
+     * @return the MOB's armor value.
+     */
     @Override
     public int getArmor() {
         return armor;
@@ -76,37 +113,60 @@ public class MOB implements Attributes {
 
     /**
      * Gets the amount of damage the MOB has taken.
-     * @return the amount of damage the MOB has taken
+     *
+     * @return the amount of damage the MOB has taken.
      */
     public int getDamage() {
         return damage;
     }
 
     /**
-     * Adds damage to the mobs overall damage.
-     * @param hit the int amount to add
+     * Adds to the mobs overall damage.
+     *
+     * @param hit the damage to add.
      */
     public void addDamage(int hit) {
         damage = Math.min(maxHP, damage + hit);
     }
 
     /**
-     * Resets the damage taken to 0.
+     * Resets the damage to 0.
      */
     public void resetDamage() {
         damage = 0;
     }
 
+    /**
+     * Gets the MOB's damage die.
+     *
+     * @return the MOB's damage DiceType.
+     */
     @Override
     public DiceType getDamageDie() {
         return damageDie;
     }
 
+    /**
+     * Gets the MOB's hit modifier.
+     *
+     * @return the MOB's hit modifier.
+     */
     @Override
     public int getHitModifier() {
         return hitModifier;
     }
 
+    /**
+     * Calculates the damage of an attack.
+     * <p>
+     *     An attack hits if <code>(roll(D20) + hitModifier) > enemyArmor</code><br>
+     *     Damage is determined from rolling the object's damageDie.
+     * </p>
+     *
+     * @param dice       the dice set for rolling.
+     * @param enemyArmor the enemy's armor class.
+     * @return the value of the attack.
+     */
     public int calculateHit(DiceSet dice, int enemyArmor) {
         int roll = dice.roll(DiceType.D20) + getHitModifier();
 
