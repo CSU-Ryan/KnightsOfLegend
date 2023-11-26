@@ -10,7 +10,7 @@ import java.util.Random;
 import GameObjects.*;
 
 public abstract class GameData {
-    private final Random RANDOM = new Random();
+    private final Random RANDOM;
 
     protected ArrayList<Fortune> fortunes;
     protected ArrayList<Knight> knights;
@@ -22,6 +22,8 @@ public abstract class GameData {
 
 
     public GameData() {
+        RANDOM = new Random();
+
         fortunes = new ArrayList<>();
         knights = new ArrayList<>();
 
