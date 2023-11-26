@@ -174,7 +174,7 @@ public class GameController {
         String arg = args.substring(0, args.indexOf(' '));
         String nameOrId = args.substring(args.indexOf(' ')+1);
 
-        Knight knight = data.findKnight(nameOrId, data.knights);
+        Knight knight = data.getActive(nameOrId);
 
         switch (arg) {
             case "active":
