@@ -169,9 +169,12 @@ public class MOB implements Attributes {
      * @return the value of the attack.
      */
     public int calculateHit(DiceSet dice, int enemyArmor) {
+        // Roll to overcome enemy's armor class.
         int roll = dice.roll(DiceType.D20) + getHitModifier();
 
+        // Check if roll overcomes armor.
         if (roll > enemyArmor) {
+            // Rolls dice for damage.
             return dice.roll(getDamageDie());
         }
         return 0;
