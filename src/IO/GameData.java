@@ -61,7 +61,7 @@ public abstract class GameData {
      * @param nameOrId name or ID of the knight.
      * @return the active knight.
      */
-    public Knight getActive(String nameOrId) {
+    public Knight getActive(String nameOrId) throws NoSuchElementException {
         return findKnight(nameOrId, activeKnights);
     }
 
@@ -70,7 +70,7 @@ public abstract class GameData {
      * @param nameOrId name or ID of the knight.
      * @return the knight.
      */
-    public Knight getKnight(String nameOrId) {
+    public Knight getKnight(String nameOrId) throws NoSuchElementException {
         return findKnight(nameOrId, knights);
     }
 
