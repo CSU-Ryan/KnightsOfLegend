@@ -1,11 +1,25 @@
 package GameObjects;
 
+/**
+ * A knight which can join the player's party and fight for them.
+ */
 public class Knight extends MOB {
     private Fortune activeFortune;
     protected final int id;
     protected int xp;
 
 
+    /**
+     * Constructs a knight from the given stats.
+     *
+     * @param id          the unique ID number
+     * @param name        the name
+     * @param maxHP       the max HP
+     * @param armor       the armor class
+     * @param hitModifier the hit modifier
+     * @param damageDie   the die for rolling damage
+     * @param xp          the current XP
+     */
     public Knight(int id, String name, int maxHP, int armor, int hitModifier, DiceType damageDie, int xp) {
         super(name, maxHP, armor, hitModifier, damageDie);
         this.id = id;
@@ -13,6 +27,11 @@ public class Knight extends MOB {
         this.activeFortune = new Fortune();
     }
 
+    /**
+     * Creates a card displaying the knight's current stats.
+     *
+     * @return a string of the info card.
+     */
     @Override
     public String toString() {
         return "+============================+\n" +
@@ -25,33 +44,71 @@ public class Knight extends MOB {
                 "+============================+";
     }
 
+    /**
+     * Formats the knight's stats for storage in a CSV file.<br>
+     * <br>
+     * stored as<br>
+     * <code>name,maxHP,armor,hitModifier,damageDie,xp</code><br>
+     *
+     * @return the knight's stats as a string.
+     */
     public String toCSV() {
         return String.format("%s,%d,%d,%d,%s,%d",
                 getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie(), getXP());
     }
 
+    /**
+     * Gets the knight's ID.
+     *
+     * @return the knight's ID.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * Gets the knight's current XP.
+     *
+     * @return the knight's XP.
+     */
     public int getXP() {
         return xp;
     }
 
+    /**
+     * Adds to the current XP level.
+     *
+     * @param xp the XP to add.
+     */
     public void addXP(int xp) {
         this.xp += xp;
     }
 
+    /**
+     * Gets the knight's max HP.
+     *
+     * @return the knight's max HP.
+     */
     @Override
     public int getMaxHP() {
         return super.getMaxHP() + getActiveFortune().getMaxHP();
     }
 
+    /**
+     * Gets the knight's armor class.
+     *
+     * @return the knight's armor level.
+     */
     @Override
     public int getArmor() {
         return super.getArmor() + getActiveFortune().getArmor();
     }
 
+    /**
+     * Gets the knight's damage die.
+     *
+     * @return the knight's damage DiceType.
+     */
     @Override
     public DiceType getDamageDie() {
         DiceType fortuneDie = getActiveFortune().getDamageDie();
@@ -59,15 +116,30 @@ public class Knight extends MOB {
         return (fortuneDie != DiceType.NONE) ? fortuneDie : super.getDamageDie();
     }
 
+    /**
+     * Gets the knight's hit modifier.
+     *
+     * @return the knight's hit modifier.
+     */
     @Override
     public int getHitModifier() {
         return super.getHitModifier() + getActiveFortune().getHitModifier();
     }
 
+    /**
+     * Sets the knight's fortune.
+     *
+     * @param fortune the fortune to give the knight.
+     */
     public void setActiveFortune(Fortune fortune) {
         activeFortune = fortune;
     }
 
+    /**
+     * Gets the knight's fortune.
+     *
+     * @return the knight's active fortune.
+     */
     public Fortune getActiveFortune() {
         return activeFortune;
     }
