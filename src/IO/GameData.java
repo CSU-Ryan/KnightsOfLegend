@@ -9,6 +9,9 @@ import java.util.Random;
 
 import GameObjects.*;
 
+/**
+ * Handles accessing and manipulating data during gameplay.
+ */
 public abstract class GameData {
     private final Random RANDOM;
 
@@ -21,6 +24,9 @@ public abstract class GameData {
     protected ArrayList<MOB> monsters;
 
 
+    /**
+     * Constructs an object to hold and access gamedata.
+     */
     public GameData() {
         RANDOM = new Random();
 
@@ -33,6 +39,12 @@ public abstract class GameData {
         monsters = new ArrayList<>();
     }
 
+    /**
+     * Attempts to parse a string into an int.
+     *
+     * @param str the int as string
+     * @return if str is an int, returns Optional.of(int), otherwise Optional.empty().
+     */
     private Optional<Integer> parseInt(String str) {
         try {
             return Optional.of(Integer.parseInt(str));
@@ -43,44 +55,82 @@ public abstract class GameData {
     }
 
     /**
-     * @return List of knights.
+     * Gets the knights.
+     *
+     * @return the list of knights
      */
     public List<Knight> getKnights() {
         return knights;
     }
 
     /**
-     * @return List of active knights.
+     * Gets the active knights.
+     *
+     * @return the list of active knights
      */
     public List<Knight> getActiveKnights() {
         return activeKnights;
     }
 
     /**
-     * Finds an active knight.
-     * @param nameOrId name or ID of the knight.
-     * @return the active knight.
+     * Gets an active knight.
+     *
+     * @param nameOrId the name or ID of the knight
+     * @return the active knight
+     * @throws NoSuchElementException if knight is not in list
      */
     public Knight getActive(String nameOrId) throws NoSuchElementException {
         return findKnight(nameOrId, activeKnights);
     }
 
     /**
-     * Finds a knight.
-     * @param nameOrId name or ID of the knight.
-     * @return the knight.
+     * Gets a knight.
+     *
+     * @param nameOrId the name or ID of the knight
+     * @return the knight
+     * @throws NoSuchElementException if knight is not in list
      */
     public Knight getKnight(String nameOrId) throws NoSuchElementException {
         return findKnight(nameOrId, knights);
     }
 
     /**
+     * Finds a Knight.
+     *
+     * @param nameOrId the name or ID of the knight
+     * @param list     the list of knights to search
+     * @return the knight from the list
+     * @throws NoSuchElementException if knight is not in list
+     * @deprecated use findKnightName or findKnightID for better clarity of use
+     */
+    protected Knight findKnight(String nameOrId, List<Knight> list) throws NoSuchElementException {
+        Optional<Integer> search = parseInt(nameOrId);
+        Optional<Knight> result;
+
+        // If input is an ID.
+        if (search.isPresent()) {
+            result = findKnightID(search.get(), list);
+        }
+        // If input is a name.
+        else {
+            result = findKnightName(nameOrId, list);
+        }
+
+        if (result.isPresent()) {
+            return result.get();
+        }
+        else throw new NoSuchElementException("Knight `" + nameOrId + "` not found.");
+    }
+
+    /**
      * Finds a knight.
-     * @param searchName name of the knight.
-     * @param list list of knights.
-     * @return the knight from the list.
+     *
+     * @param searchName the name of the knight
+     * @param list       the list of knights to search
+     * @return Optional of the knight from the list. If not found, Optional none.
      */
     protected Optional<Knight> findKnightName(String searchName, List<Knight> list) {
+        searchName = searchName.trim();
         String knightName;
         for (Knight knight : list) {
             knightName = knight.getName().trim();
@@ -92,10 +142,11 @@ public abstract class GameData {
     }
 
     /**
-     * Finds a knight from the list of knights.
-     * @param id ID of the knight.
-     * @param list list of knights.
-     * @return the knight from the list.
+     * Finds a knight.
+     *
+     * @param id   the ID of the knight
+     * @param list the list of knights to search
+     * @return Optional of the knight from the list. If not found, Optional none.
      */
     protected Optional<Knight> findKnightID(int id, List<Knight> list) {
         for (Knight knight : list) {
@@ -107,33 +158,10 @@ public abstract class GameData {
     }
 
     /**
-     * Finds a Knight from the list of knights.
+     * Adds knight to active party.
      *
-     * @prefer: findKnightName or findKnightID.
-     * @param nameOrId name or ID of the knight.
-     * @param list list of knights.
-     * @return the knight from the list.
-     */
-    protected Knight findKnight(String nameOrId, List<Knight> list) throws NoSuchElementException {
-        Optional<Integer> search = parseInt(nameOrId);
-        Optional<Knight> result;
-
-        if (search.isPresent()) {
-            result = findKnightID(search.get(), list);
-        }
-        else {
-            result = findKnightName(nameOrId, list);
-        }
-        if (result.isPresent()) {
-            return result.get();
-        }
-        else throw new NoSuchElementException("Knight `" + nameOrId + "` not found.");
-    }
-
-    /**
-     * Adds knight to active party
-     * @param knight knight to add
-     * @return boolean whether party has space to add knight
+     * @param knight the knight to add
+     * @return whether party has space to add knight
      */
     public boolean setActive(Knight knight) {
 
@@ -148,6 +176,7 @@ public abstract class GameData {
 
     /**
      * Removes knight from active party and resets the knight's health.
+     *
      * @param knight knight to remove
      */
     public void removeActive(Knight knight) {
@@ -157,8 +186,9 @@ public abstract class GameData {
     }
 
     /**
-     * Gets a random Fortune.
-     * @return a Fortune.
+     * Gets a random {@link Fortune}.
+     *
+     * @return a fortune
      */
     public Fortune getRandomFortune() {
         int randomIndex = RANDOM.nextInt(fortunes.size());
@@ -179,8 +209,9 @@ public abstract class GameData {
 
     /**
      * Gets a list with given size of random monsters.
-     * @param encounterSize number of monsters to return.
-     * @return a list of MOBs.
+     *
+     * @param encounterSize number of monsters to return
+     * @return a list of MOBs
      */
     public List<MOB> getRandomMonsters(int encounterSize) {
         ArrayList<MOB> encounter = new ArrayList<>(encounterSize);
@@ -193,10 +224,9 @@ public abstract class GameData {
     }
 
     /**
-     * Gets a random monster from monsters.
-     * Returns a copy of the monster.
+     * Gets a new random monster.
      *
-     * @return a random monster from monsters.
+     * @return a copy of a random monster.
      */
     public MOB getRandomMonsterCopy() {
         int randomMOBIndex = RANDOM.nextInt(monsters.size());
@@ -205,6 +235,7 @@ public abstract class GameData {
 
     /**
      * Saves the current game-state to the given file.
+     *
      * @param filename file to save data
      */
     public abstract void save(String filename) throws IOException;
