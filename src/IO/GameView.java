@@ -3,10 +3,27 @@ package IO;
 import GameObjects.*;
 import java.util.ArrayList;
 
+/**
+ * Describes protocols for interacting with the user.<br>
+ * <br>
+ * Commands:
+ * <ul>
+ *     <li>ls/list all  - listing the knights</li>
+ *     <li>list active  - list the active knights knights only</li>
+ *     <li>show knight - show the knight details card</li>
+ *     <li>set active knight - set knight as active (note: only 4 knights can be active)</li>
+ *     <li>remove active knight - remove a knight from active status (heals knight)</li>
+ *     <li>explore/adventure/quest - find random monsters to fight</li>
+ *     <li>save filename - save the game to the file name (default: saveData.csv)</li>
+ *     <li>quit/exit/goodbye - to leave the game</li>
+ * </ul>
+ */
 public interface GameView {
+
     /**
      * Displays an exception.
-     * @param e The exception to display.
+     *
+     * @param e the exception to display.
      */
     void displayException(Exception e);
 
@@ -18,13 +35,15 @@ public interface GameView {
     /**
      * Displays option menu for the player.
      *
-     * @return The player's input.
+     * @see
+     * @return the player's input.
      */
     String displayMainMenu();
 
     /**
-     * Displays a save confirmation.
-     * @param filename path of file.
+     * Displays a confirmation from saving.
+     *
+     * @param filename path of save file.
      */
     void saved(String filename);
 
@@ -41,14 +60,14 @@ public interface GameView {
     /**
      * Asks the player if they want to continue.
      *
-     * @return The player's response.
+     * @return the player's response.
      */
     boolean checkContinue();
 
     /**
      * Displays the given knight.
      *
-     * @param knight The knight to be displayed.
+     * @param knight the knight to be displayed.
      */
     void showKnight(Knight knight);
 
@@ -60,22 +79,22 @@ public interface GameView {
     /**
      * Lists the knights.
      *
-     * @param knights List of knights to display.
+     * @param knights list of knights to display.
      */
     void listKnights(ArrayList<Knight> knights);
 
     /**
      * Displays the fortunes of the active knights.
      *
-     * @param activeKnights Knights to display fortunes.
+     * @param activeKnights knights to display fortunes.
      */
     void printFortunes(ArrayList<Knight> activeKnights);
 
     /**
      * Displays the battle members.
      *
-     * @param monsters Monsters in the battle.
-     * @param activeKnights Knights in the battle.
+     * @param monsters monsters in the battle.
+     * @param activeKnights knights in the battle.
      */
     void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights);
 
