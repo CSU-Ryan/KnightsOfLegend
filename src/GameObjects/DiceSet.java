@@ -11,24 +11,24 @@ public class DiceSet {
      * @return random int (1-faceCount)
      */
     public int roll(DiceType diceType) {
-        int i = 1;
+        int faceCount = 1;
         switch (diceType) {
-            case D4: i = 4;
+            case D4: faceCount = 4;
                 break;
-            case D6: i = 6;
+            case D6: faceCount = 6;
                 break;
-            case D8: i = 8;
+            case D8: faceCount = 8;
                 break;
-            case D10: i = 10;
+            case D10: faceCount = 10;
                 break;
-            case D12: i = 12;
+            case D12: faceCount = 12;
                 break;
-            case D20: i = 20;
+            case D20: faceCount = 20;
                 break;
             case NONE: System.err.println("Dice.roll() called with NONE DiceType.");
                 break;
         }
-        return rnd.nextInt(i) + 1;
+        return rnd.nextInt(faceCount) + 1;
     }
 
     public static void main(String[] args) {
@@ -42,6 +42,4 @@ public class DiceSet {
         System.out.println("TESTING DiceSet (D20): " + dice.roll(DiceType.D20));
         System.out.println("TESTING DiceSet (NONE): " + dice.roll(DiceType.NONE));
     }
-
-    
 }
