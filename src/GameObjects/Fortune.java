@@ -39,10 +39,11 @@ public class Fortune implements Attributes {
      * @param type the DiceType to change to.
      */
     public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
-        this.name = name;
+        this.name = name.trim();
         this.hpBonus = hpBonus;
         this.armor = armor;
         this.hitModifier = hitModifier;
+
         //Sh**ty Zybooks
         if (type == null) {
             this.dtype = DiceType.NONE;
