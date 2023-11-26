@@ -22,7 +22,7 @@ public class MOB implements Attributes {
      * @param damageDie   the die for damage rolls.
      */
     public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
-        this.name = name;
+        this.name = name.trim();
         this.maxHP = maxHP;
         this.armor = armor;
         this.hitModifier = hitModifier;
