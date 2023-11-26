@@ -195,10 +195,9 @@ public class GameController {
      * @see CombatEngine
      * @throws NoSuchElementException if activeKnights is empty
      */
-    private void beginAdventure() {
+    private void beginAdventure() throws NoSuchElementException {
         if (data.activeKnights.isEmpty()) {
-            view.displayException(new Exception("Cannot begin adventure, as your party is empty!"));
-            return;
+            throw new NoSuchElementException("Cannot begin adventure, as your party is empty!");
         }
         engine.initialize();
         engine.runCombat();
