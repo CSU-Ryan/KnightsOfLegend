@@ -2,13 +2,17 @@ package GameObjects;
 
 import java.util.Random;
 
+/**
+ * Handles manipulating and using dice.
+ */
 public class DiceSet {
     private final static Random rnd = new Random();
 
     /**
      * Rolls a dice.
-     * @param diceType number of faces on dice
-     * @return random int (1-faceCount)
+     *
+     * @param diceType type of dice to roll
+     * @return random int within [1, faceCount]
      */
     public int roll(DiceType diceType) {
         int faceCount = 1;
