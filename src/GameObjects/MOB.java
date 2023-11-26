@@ -126,7 +126,8 @@ public class MOB implements Attributes {
      * @param hit the damage to add.
      */
     public void addDamage(int hit) {
-        damage = Math.min(maxHP, damage + hit);
+        // ensures damage is between 0 and maxHP
+        damage = Math.max(0, Math.min(getMaxHP(), getDamage() + hit));
     }
 
     /**
