@@ -32,7 +32,7 @@ public class GameController {
     }
 
     /**
-     * Handles the possible commands from the player [see printHelp()].
+     * Handles the possible commands from the player. See {@link ConsoleView} for full list.
      *
      * @param command full command call.
      * @return boolean whether command was successfully called.
@@ -187,7 +187,13 @@ public class GameController {
     }
 
     /**
-     * Begins an adventure.
+     * Begins an adventure.<br><br>
+     * <p>
+     *     Using the player's active party, they battle a series of monsters.<br>
+     *     The adventure ends either when the player decides to stop or their whole party has been defeated.
+     * </p>
+     * @see CombatEngine
+     * @throws NoSuchElementException if activeKnights is empty
      */
     private void beginAdventure() {
         if (data.activeKnights.isEmpty()) {
