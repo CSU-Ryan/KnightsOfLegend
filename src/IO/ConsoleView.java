@@ -3,28 +3,50 @@ package IO;
 import GameObjects.Knight;
 import GameObjects.MOB;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Interacts with the player through IO streams.
+ *
+ * @see IO.GameView
+ */
 public class ConsoleView implements GameView {
     private final Scanner in;
     private final PrintStream out;
 
-    /*
-        Game rules: You can have four active knights. As long as they are active, they won't heal,
-        but they can gain XP by going on adventures.
-        When you make a knight inactive, they will heal. How many monsters can you defeat
-        before, you have to heal?
-     */
 
+    /**
+     * Constructs an IO connection with the user through the console.
+     */
     public ConsoleView() {
-        in = new Scanner(System.in);
-        out = System.out;
+        this(System.in, System.out);
     }
 
-    public void displayException(Exception e) {
-        out.println(e.getMessage());
+    /**
+     * Constructs an IO connection with the user with given IO streams.
+     *
+     * @param in  the InputStream from the user
+     * @param out the PrintStream to print information
+     */
+    public ConsoleView(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
+    }
+
+    /**
+     * Prints an exception.<br>
+     * <br>
+     * <p>
+     *     Prints the exception's message with a blank line following.
+     * </p>
+     *
+     * @param exception the exception to print
+     */
+    public void displayException(Exception exception) {
+        out.println(exception.getMessage());
         out.println();
         printHelp();
     }
@@ -40,28 +62,34 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Asks what the player wants to do.
+     * Asks what the player wants to do.<br>
+     * <br>
+     * Prints: "<i>What would you like to do?</i>"
      *
-     * @return The player's response.
+     * @return the response line
      */
     @Override
     public String displayMainMenu() {
-        // asks "What would you like to do?"
         out.println("What would you like to do?");
         return in.nextLine();
     }
 
     /**
-     * Displays a save confirmation.
-     * @param filename path of file.
+     * Displays a confirmation from saving.<br>
+     * <br>
+     * "<i>Progress saved to {filepath}</i>"
+     *
+     * @param filepath path of the save file
      */
-    public void saved(String filename) {
-        out.println("Progress saved to " + filename);
+    public void saved(String filepath) {
+        out.println("Progress saved to " + filepath);
         out.println();
     }
 
     /**
-     * Prints a message for completing the game.
+     * Prints a message for completing the game.<br>
+     * <br>
+     * "<i>Enjoy your rest! Until another adventure.</i>"
      */
     @Override
     public void endGame() {
@@ -70,21 +98,12 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints the help menu.
+     * Prints the help menu.<br>
+     * <br>
+     * For commands, see {@link IO.GameView}
      */
     @Override
     public void printHelp() {
-        /* the options are as follows:
-        Unsure what to do, here are some options:
-            ls or list all  - listing the knights
-            list active  - list the active knights only
-            show name or id - show the knight details card
-            set active name or id - set knight as active (note: only 4 knights can be active)
-            remove active name or id - remove a knight from active status (heals knight)
-            explore or adventure or quest - find random monsters to fight
-            save filename - save the game to the file name (default: saveData.csv)
-            exit or goodbye - to leave the game
-         */
         out.println(
                 "Unsure what to do, here are some options:\n" +
                 "            ls or list all  - listing the knights\n" +
@@ -99,15 +118,19 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Asks the player if they want to continue.
+     * Asks the player if they want to continue.<br>
+     * <br>
+     * "<i>Would you like to continue on your quest (y/n)?</i>"
      *
-     * @return The player's response (y/n).
+     * @return a boolean on whether to continue
      */
     @Override
     public boolean checkContinue() {
         char answer;
+
         while (true) {
             out.println("Would you like to continue on your quest (y/n)?");
+
             answer = in.nextLine().charAt(0);
             if (answer == 'y' || answer == 'Y') {
                 return true;
@@ -119,9 +142,10 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints the given knight.
+     * Prints the given knight's stats card<br>
+     * (see {@link Knight#toString()}).
      *
-     * @param knight The knight to be displayed.
+     * @param knight the knight to be printed
      */
     @Override
     public void showKnight(Knight knight) {
@@ -130,21 +154,29 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints when a knight is not found.
+     * Prints when a knight is not found, followed by a blank line.<br>
+     * <br>
+     * "<i>Knight not found!</i>"
      */
+    @Override
     public void knightNotFound() {
         out.println("Knight not found!");
         out.println();
     }
 
     /**
-     * Lists the knights.
+     * Prints the given list of knights.<br>
+     * <br>
+     * <p>
+     *     Prints the knights line by line,with format<br>
+     *     <i>ID: name</i><br>
+     *     If the list is empty, "<i>No knights to list</i>"
+     * </p>
      *
-     * @param knights List of knights to display.
+     * @param knights the list of knights to display
      */
     @Override
     public void listKnights(ArrayList<Knight> knights) {
-        // or if no knights, "No knights to list".
         if (knights.isEmpty()) {
             out.println("No knights to list");
             out.println();
@@ -159,14 +191,19 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints the fortunes of the active knights.
+     * Prints the fortunes of the given knights.<br>
+     * <br>
+     * <p><i>
+     *     For this quest, our knights drew the following fortunes!<br>
+     *     {Name} drew<br>
+     *     {fortune stat card}<br>
+     * </i></p><br>
+     * (for stat card, see {@link GameObjects.Fortune#toString()})
      *
-     * @param activeKnights Knights to display fortunes.
+     * @param activeKnights list of knights to display
      */
     @Override
     public void printFortunes(ArrayList<Knight> activeKnights) {
-        // "For this quest, our knights drew the following fortunes!"
-        // Format: {Name} drew \n {Fortune}
         out.println("For this quest, our knights drew the following fortunes!");
         for (Knight knight : activeKnights) {
             out.println(knight.getName() + " drew\n" + knight.getActiveFortune());
@@ -175,15 +212,20 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints the battle members.
+     * Prints the battle members.<br>
+     * <br>
+     * <p><i>
+     *     Our heroes come across the following monsters. Prepare for battle!<br>
+     *     {Knight name} {Monster name}<br>
+     *     {Knight name} {Monster name}<br>
+     *     Etc.
+     * </i></p>
      *
-     * @param monsters      Monsters in the battle.
-     * @param activeKnights Knights in the battle.
+     * @param monsters      monsters in the battle
+     * @param activeKnights knights in the battle
      */
     @Override
     public void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights) {
-        // Lists a number of knights side by side with their 'foes' (aka monsters).
-        // "Our heroes come across the following monsters. Prepare for battle!"
         out.println("Our heroes come across the following monsters. Prepare for battle!");
 
         int i;
@@ -197,55 +239,62 @@ public class ConsoleView implements GameView {
     }
 
     /**
-     * Prints that the monster was defeated.
+     * Prints the defeat message for a character.<br>
+     * <br>
+     * "<i>{name} was defeated!</i>"
      *
-     * @param dead the defeated monster.
+     * @param defeated the defeated MOB
      */
     @Override
-    public void printBattleText(MOB dead) {
-        // {Name} was defeated!
-        out.println(dead.getName() + " was defeated!");
+    public void printBattleText(MOB defeated) {
+        out.println(defeated.getName() + " was defeated!");
     }
 
     /**
-     * Prints when all knights are defeated.
+     * Prints when all knights are defeated.<br>
+     * <br>
+     * "<i>All active knights have been defeated!</i>"
      */
     @Override
     public void printDefeated() {
-        // "All active knights have been defeated!"
-        out.println("All active knights have been defeated!\n");
+        out.println("All active knights have been defeated!");
         out.println();
     }
 
     /**
-     * Prints a confirmation when a knight has been activated.
+     * Prints a confirmation when a knight has been activated.<br>
+     * <br>
+     * "<i>Activated {name}.</i>"
      *
-     * @param knight the knight which was activated.
+     * @param knight the activated knight.
      */
     @Override
     public void setActiveSucceeded(Knight knight) {
-        out.println("Activated " + knight.getName());
+        out.println("Activated " + knight.getName() + ".");
         out.println();
     }
 
     /**
-     * Prints when a knight cannot be activated.
-     */
-    @Override
-    public void setActiveFailed() {
-        // "Unable to set active knight. Only four can be active at a time."
-        out.println("Unable to set active knight. Only four can be active at a time.");
-        out.println();
-    }
-
-    /**
-     * Displays a confirmation when a knight has been deactivated.
+     * Prints a confirmation when a knight has been deactivated.<br>
+     * <br>
+     * "<i>Deactivated {name}.</i>"
      *
      * @param knight the deactivated knight.
      */
     @Override
     public void removeActiveSucceeded(Knight knight) {
-        out.println("Deactivated " + knight.getName());
+        out.println("Deactivated " + knight.getName() + ".");
+        out.println();
+    }
+
+    /**
+     * Prints when a knight cannot be activated.<br>
+     * <br>
+     * "<i>Unable to set active knight. Only four can be active at a time.</i>"
+     */
+    @Override
+    public void setActiveFailed() {
+        out.println("Unable to set active knight. Only four can be active at a time.");
         out.println();
     }
 }
