@@ -1,5 +1,8 @@
 package GameObjects;
 
+/**
+ * A modifier for a MOB, changing their stats.
+ */
 public class Fortune implements Attributes {
     private final String name;
     private final int hpBonus;
@@ -7,14 +10,34 @@ public class Fortune implements Attributes {
     private final int hitModifier;
     private final DiceType dtype;
 
+    /**
+     * Constructs an empty fortune. I.e., one with no impact on stats.
+     */
     public Fortune() {
         this("None", 0, 0, 0, DiceType.NONE);
     }
 
+    /**
+     * Constructs a fortune with given stat changes. (+ for increase, - for decrease).
+     *
+     * @param name the name of the fortune.
+     * @param hpBonus the HP modifier.
+     * @param armor the armor modifier.
+     * @param hitModifier the hit modifier.
+     */
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
         this(name, hpBonus, armor, hitModifier, DiceType.NONE);
     }
 
+    /**
+     * Constructs a fortune with given stat changes. (+ for increase, - for decrease).
+     *
+     * @param name the name of the fortune.
+     * @param hpBonus the HP modifier.
+     * @param armor the armor modifier.
+     * @param hitModifier the hit modifier.
+     * @param type the DiceType to change to.
+     */
     public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
         this.name = name;
         this.hpBonus = hpBonus;
@@ -28,6 +51,11 @@ public class Fortune implements Attributes {
         }
     }
 
+    /**
+     * Creates a card displaying the fortune's stat modifiers.
+     *
+     * @return a string of the info card.
+     */
     public String toString() {
         return "+======================+\n" +
                 String.format("|%-22s|%n", getName()) +
@@ -38,25 +66,50 @@ public class Fortune implements Attributes {
                 "+======================+";
     }
 
+    /**
+     * Gets the name of the fortune.
+     *
+     * @return a string of the name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the HP modifier.
+     *
+     * @return an int.
+     */
     @Override
     public int getMaxHP() {
         return hpBonus;
     }
 
+    /**
+     * Gets the armor modifier.
+     *
+     * @return an int.
+     */
     @Override
     public int getArmor() {
         return armor;
     }
 
+    /**
+     * Gets the hit modifier.
+     *
+     * @return an int.
+     */
     @Override
     public int getHitModifier() {
         return hitModifier;
     }
 
+    /**
+     * gets the type of damage die.
+     *
+     * @return a DiceType.
+     */
     @Override
     public DiceType getDamageDie() {
         return dtype;
