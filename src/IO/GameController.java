@@ -150,11 +150,11 @@ public class GameController {
 
         switch (arg) {
             case "active":
-                if (!data.setActive(knight)) {
-                    view.setActiveFailed();
+                if (data.setActive(knight)) {
+                    view.setActiveSucceeded(knight);
                 }
                 else {
-                    view.setActiveSucceeded(knight);
+                    view.setActiveFailed();
                 }
                 break;
             default:
