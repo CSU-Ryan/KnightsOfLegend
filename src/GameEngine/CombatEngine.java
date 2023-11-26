@@ -8,29 +8,39 @@ import java.util.Random;
 import java.util.List;
 
 public class CombatEngine {
-    private final GameData data; // The data for the game, passed in as part of the constructor.
-    private final DiceSet dice; // A DiceSet to be used for the Combat engine
-    private final Random rnd; // Used in runCombat() to select who is fighting who.
-    private final GameView view; // The View used for the game, passed in as part of the constructor.
 
-    private final int DEATH_XP = 1;
+    private final GameData DATA; // The data for the game.
+    private final GameView IO; // The IO system.
 
-    public CombatEngine(GameData data, GameView view) {
-        this.data = data;
-        this.view = view;
+    private final DiceSet DICE_SET; // Allows a die to be rolled.
+    private final Random RANDOM;
 
-        rnd = new Random();
-        dice = new DiceSet();
+    private final int DEATH_XP; // The amount of xp granted for killing a monster.
+
+    /**
+     * Constructs the combat engine.
+     *
+     * @param data game data.
+     * @param io player IO accessor.
+     */
+    public CombatEngine(GameData data, GameView io) {
+        DATA = data;
+        IO = io;
+
+        RANDOM = new Random();
+        DICE_SET = new DiceSet();
+
+        DEATH_XP = 1;
     }
 
     /**
      * Assigns and displays randomized fortunes for active knights.
      */
     public void initialize() {
-        for (Knight k : data.getActiveKnights()) {
-            k.setActiveFortune(data.getRandomFortune());
+        for (Knight k : DATA.getActiveKnights()) {
+            k.setActiveFortune(DATA.getRandomFortune());
         }
-        view.printFortunes((ArrayList<Knight>) data.getActiveKnights());
+        IO.printFortunes((ArrayList<Knight>) DATA.getActiveKnights());
     }
 
     /**
@@ -42,9 +52,9 @@ public class CombatEngine {
 
         boolean hasWon;
         do {
-            monsters = (ArrayList<MOB>) data.getRandomMonsters();
             hasWon = doBattle(party, monsters);
         } while (hasWon && view.checkContinue());
+            monsters = (ArrayList<MOB>) DATA.getRandomMonsters();
     }
 
     /**
@@ -57,8 +67,8 @@ public class CombatEngine {
         boolean hasDied;
         List<MOB> monstersToRemove = new ArrayList<>();
         List<Knight> knightsToRemove = new ArrayList<>();
+        IO.printBattleText(monsters, knights);
 
-        view.printBattleText(monsters, knights);
 
         while (!knights.isEmpty() && !monsters.isEmpty()) {
             // Knight turns
@@ -111,15 +121,15 @@ public class CombatEngine {
     }
 
     private MOB getTarget(List<? extends MOB> targetPool) {
-        return targetPool.get(rnd.nextInt(targetPool.size()));
+        return targetPool.get(RANDOM.nextInt(targetPool.size()));
     }
 
     /**
      * Removes fortunes from all knights.
      */
     public void clear() {
-        for (Knight k : data.getKnights()) {
-            k.setActiveFortune(new Fortune());
+        for (Knight k : DATA.getKnights()) {
+            k.setActiveFortune(new Fortune()); // Equivalent of removing fortune.
             k.resetDamage();
         }
     }
