@@ -7,6 +7,21 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
 
+/**
+ * Handles a simple combat system.<br>
+ * <br><br>
+ * <p>
+ *     For a battle, a party of knights and monsters fight.<br>
+ *     Each cycle, the knights do their turn, then the monsters.<br>
+ *     Only at the end of each cycle are knights/monsters (MOBs) defeated and removed from play.<br>
+ *     <br>
+ *     For each MOB's turn, they select a random target and attack them.<br>
+ *     (See {@link GameObjects.MOB#calculateHit(DiceSet, int)} for how damage is calculated)<br>
+ *     <br>
+ *     If a monster dies, all living knights are rewarded experience points (XP).
+ *
+ * </p>
+ */
 public class CombatEngine {
 
     private final GameData DATA; // The data for the game.
@@ -34,7 +49,7 @@ public class CombatEngine {
     }
 
     /**
-     * Assigns and displays randomized fortunes for active knights.
+     * Assigns fortunes for active knights.
      */
     public void initialize() {
         for (Knight k : DATA.getActiveKnights()) {
@@ -44,7 +59,7 @@ public class CombatEngine {
     }
 
     /**
-     * Runs a battle.
+     * Runs a quest.
      */
     public void runCombat() {
         ArrayList<Knight> party = (ArrayList<Knight>) DATA.getActiveKnights();
@@ -62,10 +77,11 @@ public class CombatEngine {
     }
 
     /**
-     * Runs a battle.
-     * @param knights the player's living party.
-     * @param monsters
-     * @return
+     * Iterates through all character's turns.
+     *
+     * @param knights the player's active party.
+     * @param monsters the enemies of the encounter.
+     * @return true if the party has been defeated, else false.
      */
     private boolean doBattle(ArrayList<Knight> knights, ArrayList<MOB> monsters) {
         IO.printBattleText(monsters, knights);
@@ -87,11 +103,11 @@ public class CombatEngine {
     }
 
     /**
-     * runs one MOB's turn.
+     * Runs one MOB's turn.
      *
-     * @param attacker Who's turn it is.
-     * @param defenders The group against our attacker.
-     * @return
+     * @param attacker the active MOB
+     * @param defenders the opposition
+     * @return xp from a defeat
      */
     private int doTurn(MOB attacker, List<? extends MOB> defenders) {
         // Random Attack
@@ -110,12 +126,20 @@ public class CombatEngine {
         return 0;
     }
 
+    /**
+     * Selects a target for the attack.
+     *
+     * @param targetPool the group to select a target from.
+     * @return the selected target.
+     */
     private MOB getTarget(List<? extends MOB> targetPool) {
         return targetPool.get(RANDOM.nextInt(targetPool.size()));
     }
 
     /**
-     * Removes fortunes from all knights.
+     * Resets the knights.
+     *
+     * Removes their fortunes and resets their health.
      */
     public void clear() {
         for (Knight k : DATA.getKnights()) {
