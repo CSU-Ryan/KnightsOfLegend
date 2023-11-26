@@ -132,8 +132,10 @@ public abstract class GameData {
     protected Optional<Knight> findKnightName(String searchName, List<Knight> list) {
         searchName = searchName.trim();
         String knightName;
+
         for (Knight knight : list) {
             knightName = knight.getName().trim();
+
             if (knightName.equalsIgnoreCase(searchName)) {
                 return Optional.of(knight);
             }
@@ -150,6 +152,7 @@ public abstract class GameData {
      */
     protected Optional<Knight> findKnightID(int id, List<Knight> list) {
         for (Knight knight : list) {
+
             if (knight.getId() == id) {
                 return Optional.of(knight);
             }
@@ -164,7 +167,6 @@ public abstract class GameData {
      * @return whether party has space to add knight
      */
     public boolean setActive(Knight knight) {
-
         if (findKnightID(knight.getId(), activeKnights).isPresent()
                 || (activeKnights.size() >= MAX_ACTIVE)) {
             return false;
@@ -180,7 +182,6 @@ public abstract class GameData {
      * @param knight knight to remove
      */
     public void removeActive(Knight knight) {
-        // Removes a knight from the activeKnights list **and** resets the damage on the knight! Remember, list.remove returns true if the remove was successful.
         activeKnights.remove(knight);
         knight.resetDamage();
     }
