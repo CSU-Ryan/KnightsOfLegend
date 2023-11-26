@@ -47,14 +47,18 @@ public class CombatEngine {
      * Runs a battle.
      */
     public void runCombat() {
-        ArrayList<Knight> party = (ArrayList<Knight>) data.getActiveKnights();
+        ArrayList<Knight> party = (ArrayList<Knight>) DATA.getActiveKnights();
         ArrayList<MOB> monsters;
 
-        boolean hasWon;
+        boolean hasLost;
         do {
-            hasWon = doBattle(party, monsters);
-        } while (hasWon && view.checkContinue());
             monsters = (ArrayList<MOB>) DATA.getRandomMonsters();
+            hasLost = doBattle(party, monsters);
+            if (hasLost) {
+                IO.printDefeated();
+                break;
+            }
+        } while (IO.checkContinue());
     }
 
     /**
@@ -64,38 +68,22 @@ public class CombatEngine {
      * @return
      */
     private boolean doBattle(ArrayList<Knight> knights, ArrayList<MOB> monsters) {
-        boolean hasDied;
-        List<MOB> monstersToRemove = new ArrayList<>();
-        List<Knight> knightsToRemove = new ArrayList<>();
         IO.printBattleText(monsters, knights);
 
-
+        int xpReward;
         while (!knights.isEmpty() && !monsters.isEmpty()) {
             // Knight turns
             for (Knight k : knights) {
-                hasDied = doTurn(k, monsters);
-                if (hasDied) {
-                    knightsToRemove.add(k);
-                }
+                xpReward = doTurn(k, monsters);
+                for (Knight knight : knights) knight.addXP(xpReward);
+
             }
             // Monster turns
             for (MOB m : monsters) {
-                hasDied = doTurn(m, knights);
-                if (hasDied) {
-                    for (Knight k : knights) k.addXP(DEATH_XP);
-                    monstersToRemove.add(m);
-                }
+                doTurn(m, knights);
             }
-            // Remove dead MOBs.
-            for (Knight k : knightsToRemove) knights.remove(k);
-            for (MOB m : monstersToRemove) monsters.remove(m);
         }
-        if (knights.isEmpty()) {
-            view.printDefeated();
-            return false;
-        }
-
-        return true;
+        return (knights.isEmpty());
     }
 
     /**
@@ -105,19 +93,21 @@ public class CombatEngine {
      * @param defenders The group against our attacker.
      * @return
      */
-    private boolean doTurn(MOB attacker, List<? extends MOB> defenders) {
-        // Check if defeated.
-        if (attacker.getHP() <= 0) {
-            view.printBattleText(attacker);
-            return true;
-        }
-
+    private int doTurn(MOB attacker, List<? extends MOB> defenders) {
         // Random Attack
         MOB target = getTarget(defenders);
-        int damage = attacker.calculateHit(dice, target.getArmor());
+        int damage = attacker.calculateHit(DICE_SET, target.getArmor());
         target.addDamage(damage);
 
-        return false;
+        if (target.getHP() <= 0) {
+            defenders.remove(target);
+            IO.printBattleText(target);
+
+            if (!(target instanceof Knight)) {
+                return DEATH_XP;
+            }
+        }
+        return 0;
     }
 
     private MOB getTarget(List<? extends MOB> targetPool) {
