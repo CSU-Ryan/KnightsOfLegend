@@ -16,7 +16,7 @@ import java.util.List;
  *     Only at the end of each cycle are knights/monsters (MOBs) defeated and removed from play.<br>
  *     <br>
  *     For each MOB's turn, they select a random target and attack them.<br>
- *     (See {@link GameObjects.MOB#calculateHit(DiceSet, int)} for how damage is calculated)<br>
+ *     (See {@link GameObjects.MOB#calculateAttack(DiceSet, MOB)} for how damage is calculated)<br>
  *     <br>
  *     If a monster dies, all living knights are rewarded experience points (XP).
  *
@@ -112,7 +112,7 @@ public class CombatEngine {
     private int doTurn(MOB attacker, List<? extends MOB> defenders) {
         // Random Attack
         MOB target = getTarget(defenders);
-        int damage = attacker.calculateHit(DICE_SET, target.getArmor());
+        int damage = attacker.calculateAttack(DICE_SET, target);
         target.addDamage(damage);
 
         if (target.getHP() <= 0) {

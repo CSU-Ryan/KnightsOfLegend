@@ -158,26 +158,27 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Calculates the damage of an attack.
+     */
+    public int calculateAttack(DiceSet dice, MOB target) {
+        return (rollHit(dice, target)) ? rollDamage(dice) : 0;
+    }
+
+    public boolean rollHit(DiceSet dice, MOB target) {
+        return (getHitModifier() + dice.roll(DiceType.D20)) > target.getArmor();
+    }
+
+    /**
+     * Calculates the damage of an attack.<br>
+     * <br>
      * <p>
-     *     An attack hits if <code>(roll(D20) + hitModifier) > enemyArmor</code><br>
      *     Damage is determined from rolling the object's damageDie.
      * </p>
      *
-     * @param dice       the dice set for rolling.
-     * @param enemyArmor the enemy's armor class.
+     * @param dice the dice set for rolling.
      * @return the value of the attack.
      */
-    public int calculateHit(DiceSet dice, int enemyArmor) {
-        // Roll to overcome enemy's armor class.
-        int roll = dice.roll(DiceType.D20) + getHitModifier();
-
-        // Check if roll overcomes armor.
-        if (roll > enemyArmor) {
-            // Rolls dice for damage.
-            return dice.roll(getDamageDie());
-        }
-        return 0;
+    public int rollDamage(DiceSet dice) {
+        return dice.roll(getDamageDie());
     }
 
     public static void main(String[] args) {
