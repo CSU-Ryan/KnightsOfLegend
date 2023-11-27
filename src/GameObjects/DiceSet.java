@@ -3,7 +3,9 @@ package GameObjects;
 import java.util.Random;
 
 /**
- * Handles manipulating and using dice.
+ * Handles rolling dice.
+ *
+ * @see #roll(DiceType)
  */
 public class DiceSet {
     private final static Random RANDOM = new Random();
