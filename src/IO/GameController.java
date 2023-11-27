@@ -5,6 +5,7 @@ import GameObjects.Knight;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class GameController {
     private final GameData data; // Game data.
@@ -32,48 +33,33 @@ public class GameController {
     }
 
     /**
-     * Handles the possible commands from the player. See {@link ConsoleView} for full list.
+     * Handles the possible commands from the player. See {@link GameView} for full list.
      *
-     * @param command full command call.
-     * @return boolean whether to continue prompting the user.
+     * @param input the full command call
+     * @return boolean whether to continue prompting the user
      */
-    protected boolean processCommand(String command) {
-        int spaceIndex = command.indexOf(' ');
-        if (spaceIndex != -1) {
-            String comm = command.substring(0, spaceIndex);
-            String args = command.substring(spaceIndex + 1);
-            return processCommand(comm, args);
-        }
-        else {
-            return processCommand(command, "");
-        }
-    }
+    protected boolean processCommand(String input) {
+        Scanner scanner = new Scanner(input.toLowerCase());
 
-    /**
-     * Handles the possible commands from the player [see printHelp()].
-     *
-     * @param command command call, first word of call.
-     * @param args arguments for command, rest of call.
-     * @return boolean whether command was successfully called.
-     */
-    protected boolean processCommand(String command, String args) {
-        command = command.trim().toLowerCase();
-        args = args.trim().toLowerCase();
+        if (!scanner.hasNext()) return false;
+
+        String command = scanner.next();
+
         try {
             switch (command) {
                 case "list":
                 case "ls":
-                    callList(args);
+                    callList(scanner);
                     break;
                 case "show":
-                    callShow(args);
+                    callShow(scanner);
                     break;
                 case "set":
-                    callSet(args);
+                    callSet(scanner);
                     break;
                 case "remove":
                 case "rm":
-                    callRemove(args);
+                    callRemove(scanner);
                     break;
                 case "explore":
                 case "adventure":
@@ -81,7 +67,7 @@ public class GameController {
                     beginAdventure();
                     break;
                 case "save":
-                    callSave(args);
+                    callSave(scanner);
                     break;
                 case "quit":
                 case "exit":
@@ -102,13 +88,18 @@ public class GameController {
     }
 
     /**
-     * Handles call to `list {category}`.
+     * Handles call to list a category.
+     * <br>
+     * <p>
+     *     Call format:<br>
+     *     <code>list {category}</code>
+     * </p>
      *
-     * @param category category to list.
-     * @throws IllegalArgumentException if category is invalid.
+     * @param scanner scanner of category to list
+     * @throws IllegalArgumentException if category is invalid
      */
-    private void callList(String category) throws IllegalArgumentException {
-        category = category.toLowerCase();
+    private void callList(Scanner scanner) throws IllegalArgumentException {
+        String category = (scanner.hasNext()) ? scanner.next() : "";
         switch (category) {
             case "":
             case "all":
@@ -123,32 +114,50 @@ public class GameController {
     }
 
     /**
-     * Handles call to `show {name/ID}`.
+     * Handles call to show a given knight.
+     * <br>
+     * <p>
+     *     Call format:<br>
+     *     <code>show {name/ID}</code>
+     * </p>
      *
-     * @param args name/ID.
-     * @throws NoSuchElementException if no knight with name/ID exists.
+     * @param scanner scanner of the name/ID
+     * @throws NoSuchElementException if no knight with name/ID exists
      */
-    private void callShow(String args) throws NoSuchElementException {
-        args = args.trim().toLowerCase();
+    private void callShow(Scanner scanner) throws IllegalArgumentException, NoSuchElementException {
+        if (!scanner.hasNext()) throw
+                new IllegalArgumentException("Call to 'show' requires input.");
 
-        view.showKnight(data.findKnight(args, data.knights));
+        view.showKnight(
+                data.findKnight(scanner.nextLine().trim(), data.knights));
     }
 
     /**
-     * Handles call to `set {category} {name/ID}`.
+     * Handles call to set a knight to a party.
+     * <br>
+     * <p>
+     *     Call format:<br>
+     *     <code>set {category} {name/ID}</code>
+     * </p>
      *
-     * @param args category to find knight with name/ID.
-     * @throws IllegalArgumentException if category is invalid.
-     * @throws NoSuchElementException if no knight with name/ID exists.
+     * @param scanner scanner of the user's category choice
+     * @throws IllegalArgumentException if the category is invalid
+     * @throws NoSuchElementException if no knight with name/ID exists
      */
-    private void callSet(String args) throws IllegalArgumentException, NoSuchElementException {
-        args = args.toLowerCase();
-        String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' ')+1);
+    private void callSet(Scanner scanner) throws IllegalArgumentException, NoSuchElementException {
+        String category;
+        String nameOrID;
+        if (scanner.hasNext()) {
+            category = scanner.next();
+        } else throw new IllegalArgumentException("Call to 'set' requires a category.");
 
-        Knight knight = data.getKnight(nameOrId);
+        if (scanner.hasNext()) {
+            nameOrID = scanner.nextLine().trim();
+        } else throw new IllegalArgumentException("Call to set requires a name or ID.");
 
-        switch (arg) {
+        Knight knight = data.getKnight(nameOrID);
+
+        switch (category) {
             case "active":
                 if (data.setActive(knight)) {
                     view.setActiveSucceeded(knight);
@@ -158,25 +167,39 @@ public class GameController {
                 }
                 break;
             default:
-                throw new IllegalArgumentException("call to 'set' has improper argument.");
+                throw new IllegalArgumentException("Categories to set a knight are: \n'active'");
         }
     }
 
     /**
-     * Handles call to `remove {category} {name/ID}`.
+     * Handles call to remove a knight from a party.<br>
+     * <br>
+     * <p>
+     *     Call format:<br>
+     *     <code>remove {category} {name/ID}</code>
+     * </p>
      *
-     * @param args category to find knight with name/ID.
-     * @throws IllegalArgumentException if category is invalid.
-     * @throws NoSuchElementException if kno knight with name/ID exists.
+     * @param scanner scanner of the user's category choice
+     * @throws IllegalArgumentException if the category is invalid
+     * @throws NoSuchElementException if no knight with name/ID exists
      */
-    private void callRemove(String args) throws IllegalArgumentException, NoSuchElementException {
-        args = args.toLowerCase();
-        String arg = args.substring(0, args.indexOf(' '));
-        String nameOrId = args.substring(args.indexOf(' ')+1);
+    private void callRemove(Scanner scanner) throws IllegalArgumentException, NoSuchElementException {
+        String category;
+        String nameOrID;
+        if (scanner.hasNext()) {
+            category = scanner.next();
+        } else throw new IllegalArgumentException("Call to 'set' requires a category.");
 
-        Knight knight = data.getActive(nameOrId);
+        if (scanner.hasNext()) {
+            nameOrID = scanner.nextLine().trim();
+        } else {
+            nameOrID = category;
+            category = "active";
+        }
 
-        switch (arg) {
+        Knight knight = data.getActive(nameOrID);
+
+        switch (category) {
             case "active":
                 data.removeActive(knight);
                 view.removeActiveSucceeded(knight);
@@ -187,7 +210,8 @@ public class GameController {
     }
 
     /**
-     * Begins an adventure.<br><br>
+     * Begins an adventure.<br>
+     * <br>
      * <p>
      *     Using the player's active party, they battle a series of monsters.<br>
      *     The adventure ends either when the player decides to stop or their whole party has been defeated.
@@ -205,12 +229,22 @@ public class GameController {
     }
 
     /**
-     * Handles call to `save {filename}`.
+     * Handles call to save current gamestate.<br>
+     * <br>
+     * <p>
+     *     Call format:<br>
+     *     <code>save {filename}</code>
+     * </p>
      *
-     * @param saveNumber file to save game to.
-     * @throws IOException if failed to access file.
+     * @param scanner scanner of the user's intended save file
+     * @throws IOException if failed to access file
      */
-    private void callSave(String saveNumber) throws IOException {
+    private void callSave(Scanner scanner) throws IOException {
+        String saveNumber;
+        if (scanner.hasNext()) {
+            saveNumber = scanner.next();
+        } else throw new IllegalArgumentException("Call to 'save' must include a save file.");
+
         String filename = "SaveFiles/";
         switch (saveNumber) {
             case "1":
@@ -234,7 +268,7 @@ public class GameController {
                 break;
             default:
                 filename = saveNumber;
-                System.err.println("WARNING: saving file outside of saves folder.");
+                view.displayWarning("WARNING: saving file outside of saves folder.");
         }
         data.save(filename);
         view.saved(filename);
