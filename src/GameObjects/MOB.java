@@ -4,10 +4,11 @@ package GameObjects;
  * A general character which has health and can attack.
  */
 public class MOB implements Attributes {
+
     private final String name; // The name of the MOB.
     protected final int maxHP; // The maxHP of the MOB.
-    protected final int armor; // The armor rating of the MOB.
     protected int damage; // The amount of damage the MOB has taken.
+    protected final int armor; // The armor rating of the MOB.
     protected final int hitModifier; // The hitModifier of the MOB.
     protected final DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
 
@@ -24,6 +25,7 @@ public class MOB implements Attributes {
     public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
         this.name = name.trim();
         this.maxHP = maxHP;
+        this.damage = 0;
         this.armor = armor;
         this.hitModifier = hitModifier;
         //  I hate zybooks with all my being. I have to add a stupid null check because they unit test my functions
@@ -36,22 +38,6 @@ public class MOB implements Attributes {
         } else {
             this.damageDie = damageDie;
         }
-    }
-
-    /**
-     * Creates a card displaying the MOB's stats.
-     *
-     * @return a string of the info card.
-     */
-    @Override
-    public String toString() {
-        return "+============================+\n" +
-                String.format("| %-27s|%n", getName()) +
-                "|                            |\n" +
-                String.format("|         Health: %-10d |%n", getHP())  +
-                String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie().toString(), getArmor()) +
-                "|                            |\n" +
-                "+============================+";
     }
 
     /**
@@ -102,16 +88,6 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Gets the MOB's armor class.
-     *
-     * @return the MOB's armor value.
-     */
-    @Override
-    public int getArmor() {
-        return armor;
-    }
-
-    /**
      * Gets the amount of damage the MOB has taken.
      *
      * @return the amount of damage the MOB has taken.
@@ -138,13 +114,13 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Gets the MOB's damage die.
+     * Gets the MOB's armor class.
      *
-     * @return the MOB's damage DiceType.
+     * @return the MOB's armor value.
      */
     @Override
-    public DiceType getDamageDie() {
-        return damageDie;
+    public int getArmor() {
+        return armor;
     }
 
     /**
@@ -158,18 +134,13 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Calculates the damage inflicted by an attack.<br>
-     * <br>
-     * <p>
-     *     An attack hits if {@link #rollHit(DiceSet, MOB)} returns true.<br>
-     *     The amount of damage is determined by {@link #rollDamage(DiceSet)}.
-     * </p>
-     * @param dice the dice set for rolling
-     * @param target the target of the attack
-     * @return the damage inflicted by the attack
+     * Gets the MOB's damage die.
+     *
+     * @return the MOB's damage DiceType.
      */
-    public int calculateAttack(DiceSet dice, MOB target) {
-        return (rollHit(dice, target)) ? rollDamage(dice) : 0;
+    @Override
+    public DiceType getDamageDie() {
+        return damageDie;
     }
 
     /**
@@ -200,6 +171,37 @@ public class MOB implements Attributes {
      */
     public int rollDamage(DiceSet dice) {
         return dice.roll(getDamageDie());
+    }
+
+    /**
+     * Calculates the damage inflicted by an attack.<br>
+     * <br>
+     * <p>
+     *     An attack hits if {@link #rollHit(DiceSet, MOB)} returns true.<br>
+     *     The amount of damage is determined by {@link #rollDamage(DiceSet)}.
+     * </p>
+     * @param dice the dice set for rolling
+     * @param target the target of the attack
+     * @return the damage inflicted by the attack
+     */
+    public int calculateAttack(DiceSet dice, MOB target) {
+        return (rollHit(dice, target)) ? rollDamage(dice) : 0;
+    }
+
+    /**
+     * Creates a card displaying the MOB's stats.
+     *
+     * @return a string of the info card.
+     */
+    @Override
+    public String toString() {
+        return "+============================+\n" +
+                String.format("| %-27s|%n", getName()) +
+                "|                            |\n" +
+                String.format("|         Health: %-10d |%n", getHP())  +
+                String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie().toString(), getArmor()) +
+                "|                            |\n" +
+                "+============================+";
     }
 
     public static void main(String[] args) {

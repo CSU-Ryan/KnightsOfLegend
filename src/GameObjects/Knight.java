@@ -28,60 +28,12 @@ public class Knight extends MOB {
     }
 
     /**
-     * Creates a card displaying the knight's current stats.
-     *
-     * @return a string of the info card.
-     */
-    @Override
-    public String toString() {
-        return "+============================+\n" +
-                String.format("| %-27s|%n", getName()) +
-                String.format("| id: %-23d|%n", getId()) +
-                "|                            |\n" +
-                String.format("| Health: %-6d     XP: %-4d|%n", getHP(), getXP())  +
-                String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie(), getArmor()) +
-                "|                            |\n" +
-                "+============================+";
-    }
-
-    /**
-     * Formats the knight's stats for storage in a CSV file.<br>
-     * <br>
-     * stored as<br>
-     * <code>name,maxHP,armor,hitModifier,damageDie,xp</code><br>
-     *
-     * @return the knight's stats as a string.
-     */
-    public String toCSV() {
-        return String.format("%s,%d,%d,%d,%s,%d",
-                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie(), getXP());
-    }
-
-    /**
      * Gets the knight's ID.
      *
      * @return the knight's ID.
      */
     public Integer getId() {
         return id;
-    }
-
-    /**
-     * Gets the knight's current XP.
-     *
-     * @return the knight's XP.
-     */
-    public int getXP() {
-        return xp;
-    }
-
-    /**
-     * Adds to the current XP level.
-     *
-     * @param xp the XP to add.
-     */
-    public void addXP(int xp) {
-        this.xp += xp;
     }
 
     /**
@@ -105,6 +57,16 @@ public class Knight extends MOB {
     }
 
     /**
+     * Gets the knight's hit modifier.
+     *
+     * @return the knight's hit modifier.
+     */
+    @Override
+    public int getHitModifier() {
+        return super.getHitModifier() + getActiveFortune().getHitModifier();
+    }
+
+    /**
      * Gets the knight's damage die.
      *
      * @return the knight's damage DiceType.
@@ -117,13 +79,12 @@ public class Knight extends MOB {
     }
 
     /**
-     * Gets the knight's hit modifier.
+     * Gets the knight's fortune.
      *
-     * @return the knight's hit modifier.
+     * @return the knight's active fortune.
      */
-    @Override
-    public int getHitModifier() {
-        return super.getHitModifier() + getActiveFortune().getHitModifier();
+    public Fortune getActiveFortune() {
+        return activeFortune;
     }
 
     /**
@@ -136,12 +97,53 @@ public class Knight extends MOB {
     }
 
     /**
-     * Gets the knight's fortune.
+     * Gets the knight's current XP.
      *
-     * @return the knight's active fortune.
+     * @return the knight's XP.
      */
-    public Fortune getActiveFortune() {
-        return activeFortune;
+    public int getXP() {
+        return xp;
+    }
+
+    /**
+     * Adds to the current XP level.
+     *
+     * @param xp the XP to add.
+     */
+    public void addXP(int xp) {
+        this.xp += xp;
+    }
+
+    /**
+     * Creates a card displaying the knight's current stats.
+     *
+     * @return a string of the info card.
+     */
+    @Override
+    public String toString() {
+        return "+============================+\n" +
+                String.format("| %-27s|%n", getName()) +
+                String.format("| id: %-23d|%n", getId()) +
+                "|                            |\n" +
+                String.format("| Health: %-6d     XP: %-4d|%n", getHP(), getXP())  +
+                String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie(), getArmor()) +
+                "|                            |\n" +
+                "+============================+";
+    }
+
+    /**
+     * Formats the knight's stats for storage in a CSV file.<br>
+     * <br>
+     * <p>
+     *     Stored as:<br>
+     *     <code>name,maxHP,armor,hitModifier,damageDie,xp</code>
+     * </p>
+     *
+     * @return the knight's stats as a CSV string
+     */
+    public String toCSV() {
+        return String.format("%s,%d,%d,%d,%s,%d",
+                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie(), getXP());
     }
 
     public static void main(String[] args) {

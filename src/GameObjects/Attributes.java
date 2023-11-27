@@ -6,22 +6,22 @@ package GameObjects;
  * <br>
  * Ensures a game object has:
  * <ul>
- *     <li>{@link #toString()}<br>       An info card describing the object's stats</li>
- *     <li>{@link #getArmor()}<br>       An armor level</li>
  *     <li>{@link #getMaxHP()}<br>       A hit-point (HP) level</li>
- *     <li>{@link #getDamageDie()}<br>   A {@link DiceType} for {@link MOB#rollDamage(DiceSet)}</li>
+ *     <li>{@link #getArmor()}<br>       An armor level</li>
  *     <li>{@link #getHitModifier()}<br> A modifier for {@link MOB#rollHit(DiceSet, MOB)}</li>
+ *     <li>{@link #getDamageDie()}<br>   A {@link DiceType} for {@link MOB#rollDamage(DiceSet)}</li>
+ *     <li>{@link #toString()}<br>       An info card describing the object's stats</li>
  * </ul>
  */
 public interface Attributes {
 
+
     /**
-     * Creates an info card of this object's stats.
+     * Gets the maximum hit points (HP) or HP-modifier of the object.
      *
-     * @return a string of the info card.
+     * @return the max HP
      */
-    @Override
-    String toString();
+    int getMaxHP();
 
     /**
      * Gets the armor value or modifier.<br>
@@ -33,11 +33,12 @@ public interface Attributes {
     int getArmor();
 
     /**
-     * Gets the maximum hit points (HP) or HP-modifier of the object.
+     * gets the value or modifier added when rolling to overcome armor.
      *
-     * @return the max HP
+     * @return the hit modifier
+     * @see MOB#rollHit(DiceSet, MOB)
      */
-    int getMaxHP();
+    int getHitModifier();
 
     /**
      * Gets the type of the object's damage die.<br>
@@ -51,10 +52,10 @@ public interface Attributes {
     DiceType getDamageDie();
 
     /**
-     * gets the value or modifier added when rolling to overcome armor.
+     * Creates an info card of this object's stats.
      *
-     * @return the hit modifier
-     * @see MOB#rollHit(DiceSet, MOB)
+     * @return a string of the info card.
      */
-    int getHitModifier();
+    @Override
+    String toString();
 }
