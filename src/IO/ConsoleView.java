@@ -234,7 +234,7 @@ public class ConsoleView implements GameView {
         out.println("Knights                     Foes");
         int i;
         for (i = 0; i < monsters.size(); ++i) {
-            out.printf("%s%27s%n", activeKnights.get(i).getName(), monsters.get(i).getName());
+            out.printf("%-28s%s%n", activeKnights.get(i).getName(), monsters.get(i).getName());
         }
         for (; i < activeKnights.size(); ++i) {
             out.println(activeKnights.get(i).getName());
