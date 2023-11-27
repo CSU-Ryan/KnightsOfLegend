@@ -126,7 +126,7 @@ public class Knight extends MOB {
                 String.format("| %-27s|%n", getName()) +
                 String.format("| id: %-23d|%n", getId()) +
                 "|                            |\n" +
-                String.format("| Health: %-6d     XP: %-4d|%n", getHP(), getXP())  +
+                String.format("| Health: %-6d  XP: %-7d|%n", getHP(), getXP())  +
                 String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie(), getArmor()) +
                 "|                            |\n" +
                 "+============================+";

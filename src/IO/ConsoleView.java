@@ -70,7 +70,7 @@ public class ConsoleView implements GameView {
      */
     @Override
     public String displayMainMenu() {
-        out.println("What would you like to do?");
+        out.print("What would you like to do? ");
         return in.nextLine();
     }
 
@@ -231,7 +231,7 @@ public class ConsoleView implements GameView {
     @Override
     public void printBattleText(ArrayList<MOB> monsters, ArrayList<Knight> activeKnights) {
         out.println("Our heroes come across the following monsters. Prepare for battle!");
-
+        out.println("Knights                     Foes");
         int i;
         for (i = 0; i < monsters.size(); ++i) {
             out.printf("%s%27s%n", activeKnights.get(i).getName(), monsters.get(i).getName());
