@@ -4,6 +4,7 @@ package GameObjects;
  * A knight which can join the player's party and fight for them.
  */
 public class Knight extends MOB {
+
     private Fortune activeFortune;
     protected final int id;
     protected int xp;
@@ -141,9 +142,9 @@ public class Knight extends MOB {
      *
      * @return the knight's stats as a CSV string
      */
+    @Override
     public String toCSV() {
-        return String.format("%s,%d,%d,%d,%s,%d",
-                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie(), getXP());
+        return super.toCSV() + "," + getXP();
     }
 
     public static void main(String[] args) {

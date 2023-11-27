@@ -200,6 +200,21 @@ public class MOB implements Attributes {
                 "+============================+";
     }
 
+    /**
+     * Formats the MOB's stats for storage in a CSV file.<br>
+     * <br>
+     * <p>
+     *     Stored as:<br>
+     *     <code>name,maxHP,armor,hitModifier,damageDie</code>
+     * </p>
+     *
+     * @return the knight's stats as a CSV string
+     */
+    public String toCSV() {
+        return String.format("%s,%d,%d,%d,%s",
+                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie());
+    }
+
     public static void main(String[] args) {
         
         MOB mob1 = new MOB("mob1", 10, 1, -1, DiceType.D20);
