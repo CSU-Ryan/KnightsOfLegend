@@ -73,7 +73,7 @@ public class CSVGameData extends GameData {
         line.useDelimiter(",");
 
         return new Fortune(
-                line.next().trim(),
+                line.next(),
                 line.nextInt(),
                 line.nextInt(),
                 line.nextInt(),
