@@ -21,7 +21,7 @@ public class Fortune implements Attributes {
     private final int hpBonus;
     private final int armor;
     private final int hitModifier;
-    private final DiceType dtype;
+    private final DiceType damageDie;
 
     /**
      * Constructs a neutral "empty" fortune, one which does not impact stats.
@@ -59,20 +59,16 @@ public class Fortune implements Attributes {
      * @param hpBonus     the HP modifier
      * @param armor       the armor modifier
      * @param hitModifier the hit modifier
-     * @param type        the DiceType to change to
+     * @param damageDie   the replacement damageDie
      */
-    public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
+    public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType damageDie) {
         this.name = name.trim();
         this.hpBonus = hpBonus;
         this.armor = armor;
         this.hitModifier = hitModifier;
 
         //Sh**ty Zybooks
-        if (type == null) {
-            this.dtype = DiceType.NONE;
-        } else {
-            this.dtype = type;
-        }
+        this.damageDie = (damageDie != null) ? damageDie : DiceType.NONE;
     }
 
     /**
@@ -121,7 +117,7 @@ public class Fortune implements Attributes {
      */
     @Override
     public DiceType getDamageDie() {
-        return dtype;
+        return damageDie;
     }
 
     /**

@@ -33,11 +33,7 @@ public class MOB implements Attributes {
         //  sensible way I am punished because they feel the need to unit test my code, despite this project supposedly
         //  being there, so I can use my own implementation skills, giving me some actual freedom.
         //  Straight BS.
-        if (damageDie == null) {
-            this.damageDie = DiceType.NONE;
-        } else {
-            this.damageDie = damageDie;
-        }
+        this.damageDie = (damageDie != null) ? damageDie : DiceType.NONE;
     }
 
     /**
