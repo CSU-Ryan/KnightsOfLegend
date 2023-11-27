@@ -158,11 +158,32 @@ public class MOB implements Attributes {
     }
 
     /**
+     * Calculates the damage inflicted by an attack.<br>
+     * <br>
+     * <p>
+     *     An attack hits if {@link #rollHit(DiceSet, MOB)} returns true.<br>
+     *     The amount of damage is determined by {@link #rollDamage(DiceSet)}.
+     * </p>
+     * @param dice the dice set for rolling
+     * @param target the target of the attack
+     * @return the damage inflicted by the attack
      */
     public int calculateAttack(DiceSet dice, MOB target) {
         return (rollHit(dice, target)) ? rollDamage(dice) : 0;
     }
 
+    /**
+     * Determines if an attack hits.<br>
+     * <br>
+     * <p>
+     *     An attack hits if a D20 roll plus the attacker's hit modifier is greater than the target's armor.<br>
+     *     In other words: <code>roll(D20) + AttackerHitModifier > targetArmor</code>
+     * </p>
+     *
+     * @param dice the dice set for rolling
+     * @param target the target of the attack
+     * @return a boolean whether the attack hits
+     */
     public boolean rollHit(DiceSet dice, MOB target) {
         return (getHitModifier() + dice.roll(DiceType.D20)) > target.getArmor();
     }
