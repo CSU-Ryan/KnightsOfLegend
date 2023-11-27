@@ -19,7 +19,6 @@ import java.util.List;
  *     (See {@link GameObjects.MOB#calculateAttack(DiceSet, MOB)} for how damage is calculated)<br>
  *     <br>
  *     If a monster dies, all living knights are rewarded experience points (XP).
- *
  * </p>
  */
 public class CombatEngine {
