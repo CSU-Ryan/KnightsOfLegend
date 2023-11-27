@@ -34,9 +34,9 @@ public interface GameView {
     /**
      * Displays an exception.
      *
-     * @param e the exception to display.
+     * @param exception the exception to display.
      */
-    void displayException(Exception e);
+    void displayException(Exception exception);
 
     /**
      * Displays a splashscreen at the launch of the game.
