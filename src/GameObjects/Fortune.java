@@ -1,7 +1,20 @@
 package GameObjects;
 
 /**
- * A modifier for a MOB, changing their stats.
+ * A modifier for an object, changing their stats.<br>
+ * <br>
+ * The fortune's stats:
+ * <ul>
+ *     <li>{@link #getMaxHP()}<br> maxHP modifies the max HP of the affected object.</li>
+ *     <li>{@link #getArmor()}<br> armor modifies the armor value of the affected object.</li>
+ *     <li>{@link #getHitModifier()}<br> hitModifier changes the hit modifier of the affected object.</li>
+ *     <li>{@link #getDamageDie()}<br> damageDie changes the attack die of the affected object.</li>
+ *     <li>{@link #getName()}<br> the name of the fortune.</li>
+ * </ul>
+ *
+ * @see #Fortune()
+ * @see #Fortune(String, int, int, int)
+ * @see #Fortune(String, int, int, int, DiceType)
  */
 public class Fortune implements Attributes {
     private final String name;
@@ -11,32 +24,42 @@ public class Fortune implements Attributes {
     private final DiceType dtype;
 
     /**
-     * Constructs an empty fortune. I.e., one with no impact on stats.
+     * Constructs a neutral "empty" fortune, one which does not impact stats.
      */
     public Fortune() {
         this("None", 0, 0, 0, DiceType.NONE);
     }
 
     /**
-     * Constructs a fortune with given stat changes. (+ for increase, - for decrease).
+     * Constructs a fortune with the given stat changes.<br>
+     * <br>
+     * <p>
+     *     Positive values increase the stat, negative decrease it.<br>
+     *     Does not modify the damage die.
+     * </p>
      *
-     * @param name the name of the fortune.
-     * @param hpBonus the HP modifier.
-     * @param armor the armor modifier.
-     * @param hitModifier the hit modifier.
+     * @param name        the name of the fortune
+     * @param hpBonus     the HP modifier
+     * @param armor       the armor modifier
+     * @param hitModifier the hit modifier
      */
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
         this(name, hpBonus, armor, hitModifier, DiceType.NONE);
     }
 
     /**
-     * Constructs a fortune with given stat changes. (+ for increase, - for decrease).
+     * Constructs a fortune with the given stat changes.<br>
+     * <br>
+     * <p>
+     *     Positive values increase the stat, negative decrease it.<br>
+     *     Replaces damage die with given one.
+     * </p>
      *
-     * @param name the name of the fortune.
-     * @param hpBonus the HP modifier.
-     * @param armor the armor modifier.
-     * @param hitModifier the hit modifier.
-     * @param type the DiceType to change to.
+     * @param name        the name of the fortune
+     * @param hpBonus     the HP modifier
+     * @param armor       the armor modifier
+     * @param hitModifier the hit modifier
+     * @param type        the DiceType to change to
      */
     public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType type) {
         this.name = name.trim();
@@ -53,10 +76,60 @@ public class Fortune implements Attributes {
     }
 
     /**
+     * Gets the name of the fortune.
+     *
+     * @return a string of the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Gets the fortune's HP bonus.
+     *
+     * @return an int to add to the max HP
+     */
+    @Override
+    public int getMaxHP() {
+        return hpBonus;
+    }
+
+    /**
+     * Gets the fortune's HP bonus.
+     *
+     * @return an int to add to the armor
+     */
+    @Override
+    public int getArmor() {
+        return armor;
+    }
+
+    /**
+     * Gets the fortune's hit modifier bonus.
+     *
+     * @return an into to add to the hitModifier
+     */
+    @Override
+    public int getHitModifier() {
+        return hitModifier;
+    }
+
+    /**
+     * gets the fortune's damage die.
+     *
+     * @return the replacement damageDie
+     */
+    @Override
+    public DiceType getDamageDie() {
+        return dtype;
+    }
+
+    /**
      * Creates a card displaying the fortune's stat modifiers.
      *
-     * @return a string of the info card.
+     * @return a string of the info card
      */
+    @Override
     public String toString() {
         return "+======================+\n" +
                 String.format("|%-22s|%n", getName()) +
@@ -65,55 +138,6 @@ public class Fortune implements Attributes {
                 String.format("|Hit Bonus: %+11d|%n", getHitModifier()) +
                 String.format("|Damage Adj: %10s|%n", getDamageDie())  +
                 "+======================+";
-    }
-
-    /**
-     * Gets the name of the fortune.
-     *
-     * @return a string of the name.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Gets the HP modifier.
-     *
-     * @return an int.
-     */
-    @Override
-    public int getMaxHP() {
-        return hpBonus;
-    }
-
-    /**
-     * Gets the armor modifier.
-     *
-     * @return an int.
-     */
-    @Override
-    public int getArmor() {
-        return armor;
-    }
-
-    /**
-     * Gets the hit modifier.
-     *
-     * @return an int.
-     */
-    @Override
-    public int getHitModifier() {
-        return hitModifier;
-    }
-
-    /**
-     * gets the type of damage die.
-     *
-     * @return a DiceType.
-     */
-    @Override
-    public DiceType getDamageDie() {
-        return dtype;
     }
 
     public static void main(String[] args) {
