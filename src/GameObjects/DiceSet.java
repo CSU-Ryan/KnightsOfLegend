@@ -11,10 +11,15 @@ public class DiceSet {
     private final static Random RANDOM = new Random();
 
     /**
-     * Rolls a dice.
+     * Rolls a dice.<br>
+     * <br>
+     * <p>
+     *     Uses {@link java.util.Random} to determine the result of a die-roll.<br>
+     *     Gives a random value between 1 and the face-count (inclusive).
+     * </p>
      *
      * @param diceType type of dice to roll
-     * @return random int within [1, faceCount]
+     * @return the roll's value
      */
     public int roll(DiceType diceType) {
         int faceCount = 1;
