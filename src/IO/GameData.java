@@ -130,13 +130,13 @@ public abstract class GameData {
      * @return Optional of the knight from the list. If not found, Optional none.
      */
     protected Optional<Knight> findKnightName(String searchName, List<Knight> list) {
-        searchName = searchName.trim();
+        searchName = searchName.trim().toLowerCase();
         String knightName;
 
         for (Knight knight : list) {
-            knightName = knight.getName().trim();
+            knightName = knight.getName().toLowerCase();
 
-            if (knightName.equalsIgnoreCase(searchName)) {
+            if (knightName.contains(searchName)) {
                 return Optional.of(knight);
             }
         }
