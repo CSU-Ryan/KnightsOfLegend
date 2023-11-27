@@ -105,16 +105,20 @@ public class ConsoleView implements GameView {
     @Override
     public void printHelp() {
         out.println(
-                "Unsure what to do, here are some options:\n" +
-                "            ls or list all  - listing the knights\n" +
-                "            list active  - list the active knights knights only\n" +
-                "            show name or id - show the knight details card\n" +
-                "            set active name or id - set knight as active (note: only 4 knights can be active)\n" +
-                "            remove active name or id - remove a knight from active status (heals knight)\n" +
-                "            explore or adventure or quest - find random monsters to fight\n" +
-                "            save filename - save the game to the file name (default: saveData.csv)\n" +
-                "            exit or goodbye - to leave the game\n"
+            "Unsure what to do, here are some options:\n" +
+            "            ls or list all  - listing the knights\n" +
+            "            list active  - list the active knights knights only\n" +
+            "            show name or id - show the knight details card\n" +
+            "            set active name or id - set knight as active (note: only 4 knights can be active)\n" +
+            "            remove active name or id - remove a knight from active status (heals knight)\n" +
+            "            explore or adventure or quest - find random monsters to fight\n" +
+            "            save filename - save the game to the file name (default: saveData.csv)\n" +
+            "            exit or goodbye - to leave the game\n" +
+            "\n" +
+            "Game rules: You can have four active knights. As long as they are active, they won't heal, but they can gain XP by going on adventures.\n" +
+            "When you make a knight inactive, they will heal. How many monsters can you defeat before, you have to heal?"
         );
+        out.println();
     }
 
     /**
