@@ -166,10 +166,14 @@ public abstract class GameData {
      * @param knight the knight to add
      * @return whether party has space to add knight
      */
-    public boolean setActive(Knight knight) {
-        if (findKnightID(knight.getId(), activeKnights).isPresent()
-                || (activeKnights.size() >= MAX_ACTIVE)) {
+    public boolean setActive(Knight knight) throws NoSuchElementException {
+        if (activeKnights.size() >= MAX_ACTIVE) {
             return false;
+        }
+
+        if (findKnightID(knight.getId(), activeKnights).isPresent()) {
+            // TODO: The Exception type is inaccurate.
+            throw new NoSuchElementException("Failed to activate " + knight.getName() + ". Knight is already active.");
         }
 
         activeKnights.add(knight);
