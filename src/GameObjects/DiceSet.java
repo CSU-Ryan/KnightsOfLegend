@@ -6,7 +6,7 @@ import java.util.Random;
  * Handles manipulating and using dice.
  */
 public class DiceSet {
-    private final static Random rnd = new Random();
+    private final static Random RANDOM = new Random();
 
     /**
      * Rolls a dice.
@@ -32,7 +32,7 @@ public class DiceSet {
             case NONE: System.err.println("Dice.roll() called with NONE DiceType.");
                 break;
         }
-        return rnd.nextInt(faceCount) + 1;
+        return RANDOM.nextInt(faceCount) + 1;
     }
 
     public static void main(String[] args) {
