@@ -136,6 +136,21 @@ public class Fortune implements Attributes {
                 "+======================+";
     }
 
+    /**
+     * Formats the fortune's stats for storage in a CSV file.<br>
+     * <br>
+     * <p>
+     *     Stored as:<br>
+     *     <code>name,bonusHP,armor,hitModifier,damageDie</code>
+     * </p>
+     *
+     * @return the fortune's stats as a CSV string
+     */
+    public String toCSV() {
+        return String.format("%s,%d,%d,%d,%s",
+                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie());
+    }
+
     public static void main(String[] args) {
         Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
         Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
