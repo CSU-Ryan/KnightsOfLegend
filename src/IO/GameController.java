@@ -35,7 +35,7 @@ public class GameController {
      * Handles the possible commands from the player. See {@link ConsoleView} for full list.
      *
      * @param command full command call.
-     * @return boolean whether command was successfully called.
+     * @return boolean whether to continue prompting the user.
      */
     protected boolean processCommand(String command) {
         int spaceIndex = command.indexOf(' ');
