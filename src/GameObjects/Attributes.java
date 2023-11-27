@@ -1,8 +1,8 @@
 package GameObjects;
 
 /**
- * Attributes collection for typical game objects.<br>
- * (monsters, knights, spells, fortunes, etc.).<br>
+ * Collection of attributes for typical game objects<br>
+ * (monsters, knights, spells, fortunes, Etc.).<br>
  * <br>
  * Ensures a game object has:
  * <ul>

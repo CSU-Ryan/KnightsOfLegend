@@ -208,7 +208,7 @@ public class MOB implements Attributes {
      *     <code>name,maxHP,armor,hitModifier,damageDie</code>
      * </p>
      *
-     * @return the knight's stats as a CSV string
+     * @return the MOB's stats as a CSV string
      */
     public String toCSV() {
         return String.format("%s,%d,%d,%d,%s",
