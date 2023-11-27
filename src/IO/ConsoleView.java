@@ -37,6 +37,20 @@ public class ConsoleView implements GameView {
     }
 
     /**
+     * Presents a warning to the user.<br>
+     * <br>
+     * <p>
+     *     Intended for communication with the user that isn't an error, but they may want to be warned against.
+     * </p>
+     *
+     * @param message the warning message
+     */
+    public void displayWarning(String message) {
+        out.println(message);
+        out.println();
+    }
+
+    /**
      * Prints an exception.<br>
      * <br>
      * <p>
