@@ -1,5 +1,7 @@
 package IO;
 
+import GameObjects.DiceType;
+import GameObjects.Fortune;
 import GameObjects.Knight;
 import GameObjects.MOB;
 
@@ -314,5 +316,98 @@ public class ConsoleView implements GameView {
     public void setActiveFailed() {
         out.println("Unable to set active knight. Only four can be active at a time.");
         out.println();
+    }
+
+    public static void main(String[] args) {
+        PrintStream out = System.out;
+        ConsoleView view = new ConsoleView(System.in, out);
+
+        out.println("*----------------->");
+
+        out.println("Testing displayWarning.");
+        view.displayWarning("WARNING: test of warning");
+        out.println("*----------------->");
+
+        out.println("Testing displayException.");
+        Exception e = new Exception("Exception! testing");
+        view.displayException(e);
+        out.println("*----------------->");
+
+        out.println("Testing splashScreen.");
+        view.splashScreen();
+        out.println("*----------------->");
+
+        out.println("Testing displayMainMenu.");
+        String response = view.displayMainMenu();
+        out.println("Result: " + response);
+        out.println("*----------------->");
+
+        out.println("Testing saved.");
+        view.saved("Test\\foo\\bar\\test.csv");
+        out.println("*----------------->");
+
+        out.println("Testing endGame.");
+        view.endGame();
+        out.println("*----------------->");
+
+        out.println("Testing printHelp.");
+        view.printHelp();
+        out.println("*----------------->");
+
+        out.println("Testing checkContinue.");
+        boolean result = view.checkContinue();
+        out.println("Result: " + result);
+        out.println("*----------------->");
+
+        out.println("Testing showKnight.");
+        Knight testKnight = new Knight(0, "testKnight", 0, 0, 0, GameObjects.DiceType.NONE, 0);
+        view.showKnight(testKnight);
+        out.println("*----------------->");
+
+        out.println("Testing knightNotFound.");
+        view.knightNotFound();
+        out.println("*----------------->");
+
+        out.println("Testing listKnights.");
+        ArrayList<Knight> testKnights = new ArrayList<>();
+        testKnights.add(testKnight);
+        testKnights.add(new Knight(1, "knight2", -5, -1, -1, DiceType.D4, 99));
+        testKnights.add(new Knight(-1, "knight69", -10, 1, 100, DiceType.D20, 999));
+        view.listKnights(testKnights);
+        out.println("*----------------->");
+
+        out.println("Testing printFortunes.");
+        testKnights.get(1).setActiveFortune(new Fortune("test 2", 1, -1, 1, DiceType.D4));
+        testKnights.get(2).setActiveFortune(new Fortune());
+        view.printFortunes(testKnights);
+        out.println("*----------------->");
+
+        out.println("Testing printBattleText(ArrayList<MOB>, ArrayList<Knight>).");
+        ArrayList<MOB> testMOBs = new ArrayList<>();
+        MOB testMOB = new MOB("test", 0, 0, 0, DiceType.D4);
+        testMOBs.add(testMOB);
+        testMOBs.add(testMOB.copy("test2"));
+        view.printBattleText(testMOBs, testKnights);
+        out.println("*----------------->");
+
+        out.println("Testing printBattleText(MOB).");
+        view.printBattleText(testMOB);
+        out.println("*----------------->");
+
+        out.println("Testing printDefeated.");
+        view.printDefeated();
+        out.println("*----------------->");
+
+        out.println("Testing setActiveSucceeded.");
+        view.setActiveSucceeded(testKnight);
+        out.println("*----------------->");
+
+        out.println("Testing removeActiveSucceeded.");
+        view.removeActiveSucceeded(testKnight);
+        out.println("*----------------->");
+
+        out.println("Testing setActiveFailed.");
+        view.setActiveFailed();
+        out.println("*----------------->");
     }
 }
