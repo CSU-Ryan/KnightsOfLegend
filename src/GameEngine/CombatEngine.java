@@ -86,19 +86,22 @@ public class CombatEngine {
         IO.printBattleText(monsters, knights);
 
         int xpReward;
-        while (!knights.isEmpty() && !monsters.isEmpty()) {
+        while (true) {
             // Knight turns
             for (Knight k : knights) {
+                if (monsters.isEmpty()) return false;
+
                 xpReward = doTurn(k, monsters);
                 for (Knight knight : knights) knight.addXP(xpReward);
 
             }
             // Monster turns
             for (MOB m : monsters) {
+                if (knights.isEmpty()) return true;
+
                 doTurn(m, knights);
             }
         }
-        return (knights.isEmpty());
     }
 
     /**
