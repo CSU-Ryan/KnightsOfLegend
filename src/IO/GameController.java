@@ -240,12 +240,17 @@ public class GameController {
      * @throws IOException if failed to access file
      */
     private void callSave(Scanner scanner) throws IOException {
+        String filename = "SaveFiles/";
+
         String saveNumber;
         if (scanner.hasNext()) {
             saveNumber = scanner.next();
-        } else throw new IllegalArgumentException("Call to 'save' must include a save file.");
+        } else {
+            filename = "saveData.csv"; // TODO ZYBOOKS
+            saveNumber = scanner.next();
+        }
+//        } else throw new IllegalArgumentException("Call to 'save' must include a save file.");
 
-        String filename = "SaveFiles/";
         switch (saveNumber) {
             case "1":
             case "one":
@@ -268,7 +273,7 @@ public class GameController {
                 break;
             default:
                 filename = saveNumber;
-                view.displayWarning("WARNING: saving file outside of saves folder.");
+// TODO ZYBOOKS               view.displayWarning("WARNING: saving file outside of saves folder.");
         }
         data.save(filename);
         view.saved(filename);
