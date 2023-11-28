@@ -146,18 +146,20 @@ public class ConsoleView implements GameView {
      */
     @Override
     public boolean checkContinue() {
+        String answerLine;
         char answer;
 
         while (true) {
-            out.println("Would you like to continue on your quest (y/n)?");
+            out.print("Would you like to continue on your quest (y/n)? ");
 
-            answer = in.nextLine().charAt(0);
+            answerLine = in.nextLine();
+            answer = (answerLine.isEmpty()) ? ' ' : answerLine.charAt(0);
             if (answer == 'y' || answer == 'Y') {
                 return true;
             } else if (answer == 'n' || answer == 'N') {
                 return false;
             }
-            out.println("Error, invalid response. Please try again.");
+            out.println("Invalid response. Please try again.");
         }
     }
 
