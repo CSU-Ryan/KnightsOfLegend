@@ -73,7 +73,8 @@ public class ConsoleView implements GameView {
     @Override
     public void splashScreen() {
         // can be anything
-        out.println("hey (:");
+        out.println("Round Table Games: Knights of Legend\n" +
+                "loading...");
         out.println();
     }
 
