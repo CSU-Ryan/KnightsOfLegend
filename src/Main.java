@@ -1,7 +1,8 @@
+import GameEngine.CombatEngine;
+import IO.*;
+
 import java.util.Scanner;
 
-import IO.*;
-import GameEngine.CombatEngine;
 
 public class Main {
     private static String gamedata = "GameData/gamedata.csv";
