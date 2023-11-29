@@ -3,7 +3,9 @@ package IO;
 import java.io.IOException;
 import java.util.*;
 
-import GameObjects.*;
+import GameObjects.Effects.Fortune;
+import GameObjects.MobileObjects.Knight;
+import GameObjects.MobileObjects.MOB;
 
 /**
  * Handles accessing and manipulating data during gameplay.

@@ -1,6 +1,9 @@
 package IO;
 
-import GameObjects.*;
+import GameEngine.DiceType;
+import GameObjects.Effects.Fortune;
+import GameObjects.MobileObjects.Knight;
+import GameObjects.MobileObjects.MOB;
 
 import java.io.*;
 import java.util.Scanner;

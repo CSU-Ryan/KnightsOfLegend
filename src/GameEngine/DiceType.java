@@ -1,4 +1,4 @@
-package GameObjects;
+package GameEngine;
 
 /**
  * Enumerates the possible types of dice (i.e. faces on die).

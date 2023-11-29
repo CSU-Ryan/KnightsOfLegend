@@ -1,4 +1,7 @@
-package GameObjects;
+package GameObjects.MobileObjects;
+
+import GameEngine.DiceSet;
+import GameEngine.DiceType;
 
 /**
  * Collection of attributes for typical game objects<br>

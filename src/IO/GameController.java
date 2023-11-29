@@ -1,7 +1,7 @@
 package IO;
 
 import GameEngine.*;
-import GameObjects.Knight;
+import GameObjects.MobileObjects.Knight;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;

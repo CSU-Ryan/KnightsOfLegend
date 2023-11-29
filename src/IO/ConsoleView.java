@@ -1,9 +1,9 @@
 package IO;
 
-import GameObjects.DiceType;
-import GameObjects.Fortune;
-import GameObjects.Knight;
-import GameObjects.MOB;
+import GameEngine.DiceType;
+import GameObjects.Effects.Fortune;
+import GameObjects.MobileObjects.Knight;
+import GameObjects.MobileObjects.MOB;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -221,7 +221,7 @@ public class ConsoleView implements GameView {
      *     {Name} drew<br>
      *     {fortune stat card}<br>
      * </i></p><br>
-     * (for stat card, see {@link GameObjects.Fortune#toString()})
+     * (for stat card, see {@link Fortune#toString()})
      *
      * @param activeKnights list of knights to display
      */
@@ -363,7 +363,7 @@ public class ConsoleView implements GameView {
         out.println("*----------------->");
 
         out.println("Testing showKnight.");
-        Knight testKnight = new Knight(0, "testKnight", 0, 0, 0, GameObjects.DiceType.NONE, 0);
+        Knight testKnight = new Knight(0, "testKnight", 0, 0, 0, DiceType.NONE, 0);
         view.showKnight(testKnight);
         out.println("*----------------->");
 

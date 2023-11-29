@@ -1,6 +1,8 @@
 package IO;
 
-import GameObjects.*;
+import GameObjects.MobileObjects.Knight;
+import GameObjects.MobileObjects.MOB;
+
 import java.util.ArrayList;
 
 /**

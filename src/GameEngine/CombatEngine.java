@@ -1,7 +1,9 @@
 package GameEngine;
 
+import GameObjects.Effects.Fortune;
+import GameObjects.MobileObjects.Knight;
+import GameObjects.MobileObjects.MOB;
 import IO.*;
-import GameObjects.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +18,7 @@ import java.util.List;
  *     Only at the end of each cycle are knights/monsters (MOBs) defeated and removed from play.<br>
  *     <br>
  *     For each MOB's turn, they select a random target and attack them.<br>
- *     (See {@link GameObjects.MOB#calculateAttack(DiceSet, MOB)} for how damage is calculated)<br>
+ *     (See {@link MOB#calculateAttack(DiceSet, MOB)} for how damage is calculated)<br>
  *     <br>
  *     If a monster dies, all living knights are rewarded experience points (XP).
  * </p>

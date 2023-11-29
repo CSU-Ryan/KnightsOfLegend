@@ -1,4 +1,7 @@
-package GameObjects;
+package GameObjects.MobileObjects;
+
+import GameEngine.DiceType;
+import GameObjects.Effects.Fortune;
 
 /**
  * A knight which can join the player's party and fight for them.

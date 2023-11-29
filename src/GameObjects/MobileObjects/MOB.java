@@ -1,4 +1,7 @@
-package GameObjects;
+package GameObjects.MobileObjects;
+
+import GameEngine.DiceSet;
+import GameEngine.DiceType;
 
 /**
  * A general character which has health and can attack.

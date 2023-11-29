@@ -1,4 +1,7 @@
-package GameObjects;
+package GameObjects.Effects;
+
+import GameObjects.MobileObjects.Attributes;
+import GameEngine.DiceType;
 
 /**
  * A modifier for an object, changing their stats.<br>
