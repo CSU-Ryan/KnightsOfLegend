@@ -20,12 +20,12 @@ public class Knight extends MOB {
      * @param name        the name
      * @param maxHP       the max HP
      * @param armor       the armor class
-     * @param hitModifier the hit modifier
+     * @param accuracy    the accuracy
      * @param damageDie   the die for rolling damage
      * @param xp          the current XP
      */
-    public Knight(int id, String name, int maxHP, int armor, int hitModifier, DiceType damageDie, int xp) {
-        super(name, maxHP, armor, hitModifier, damageDie);
+    public Knight(int id, String name, int maxHP, int armor, int accuracy, DiceType damageDie, int xp) {
+        super(name, maxHP, armor, accuracy, damageDie);
         this.id = id;
         this.xp = xp;
         this.activeFortune = new Fortune();
@@ -61,13 +61,13 @@ public class Knight extends MOB {
     }
 
     /**
-     * Gets the knight's hit modifier.
+     * Gets the knight's accuracy.
      *
-     * @return the knight's hit modifier.
+     * @return the knight's accuracy.
      */
     @Override
-    public int getHitModifier() {
-        return super.getHitModifier() + getActiveFortune().getHitModifier();
+    public int getAccuracy() {
+        return super.getAccuracy() + getActiveFortune().getAccuracy();
     }
 
     /**
@@ -140,7 +140,7 @@ public class Knight extends MOB {
      * <br>
      * <p>
      *     Stored as:<br>
-     *     <code>name,maxHP,armor,hitModifier,damageDie,xp</code>
+     *     <code>name,maxHP,armor,accuracy,damageDie,xp</code>
      * </p>
      *
      * @return the knight's stats as a CSV string
@@ -161,7 +161,7 @@ public class Knight extends MOB {
         System.out.println();
 
         System.out.println(knight1);
-        System.out.println("hitMod: " + knight1.getHitModifier());
+        System.out.println("Accuracy: " + knight1.getAccuracy());
         System.out.println("MaxHP: " + knight1.getMaxHP());
         System.out.println("Damage: " + knight1.getDamage());
         System.out.println();

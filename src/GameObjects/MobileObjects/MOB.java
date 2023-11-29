@@ -12,7 +12,7 @@ public class MOB implements Attributes {
     protected final int maxHP; // The maxHP of the MOB.
     protected int damage; // The amount of damage the MOB has taken.
     protected final int armor; // The armor rating of the MOB.
-    protected final int hitModifier; // The hitModifier of the MOB.
+    protected final int accuracy; // The accuracy of the MOB.
     protected final DiceType damageDie; // The type of damage die used if the mob successfully strikes the target.
 
 
@@ -22,15 +22,15 @@ public class MOB implements Attributes {
      * @param name        the name of the MOB.
      * @param maxHP       the maximum HP of the MOB.
      * @param armor       the armor class.
-     * @param hitModifier the hit modifier.
+     * @param accuracy    the accuracy level.
      * @param damageDie   the die for damage rolls.
      */
-    public MOB(String name, int maxHP, int armor, int hitModifier, DiceType damageDie) {
+    public MOB(String name, int maxHP, int armor, int accuracy, DiceType damageDie) {
         this.name = name.trim();
         this.maxHP = maxHP;
         this.damage = 0;
         this.armor = armor;
-        this.hitModifier = hitModifier;
+        this.accuracy = accuracy;
         //  I hate zybooks with all my being. I have to add a stupid null check because they unit test my functions
         //  outside the scope of my own code.because even if I want to handle the program in a slightly smarter or more
         //  sensible way I am punished because they feel the need to unit test my code, despite this project supposedly
@@ -45,7 +45,7 @@ public class MOB implements Attributes {
      * @return a new identical MOB.
      */
     public MOB copy() {
-        return new MOB(name, maxHP, armor, hitModifier, damageDie);
+        return new MOB(name, maxHP, armor, accuracy, damageDie);
     }
 
     /**
@@ -55,7 +55,7 @@ public class MOB implements Attributes {
      * @return a new MOB.
      */
     public MOB copy(String name) {
-        return new MOB(name, maxHP, armor, hitModifier, damageDie);
+        return new MOB(name, maxHP, armor, accuracy, damageDie);
     }
 
     /**
@@ -123,13 +123,13 @@ public class MOB implements Attributes {
     }
 
     /**
-     * Gets the MOB's hit modifier.
+     * Gets the MOB's accuracy.
      *
-     * @return the MOB's hit modifier.
+     * @return the MOB's accuracy.
      */
     @Override
-    public int getHitModifier() {
-        return hitModifier;
+    public int getAccuracy() {
+        return accuracy;
     }
 
     /**
@@ -146,8 +146,8 @@ public class MOB implements Attributes {
      * Determines if an attack hits.<br>
      * <br>
      * <p>
-     *     An attack hits if a D20 roll plus the attacker's hit modifier is greater than the target's armor.<br>
-     *     In other words: <code>roll(D20) + AttackerHitModifier > targetArmor</code>
+     *     An attack hits if a D20 roll plus the attacker's accuracy is greater than the target's armor.<br>
+     *     In other words: <code>roll(D20) + AttackerAccuracy > targetArmor</code>
      * </p>
      *
      * @param dice the dice set for rolling
@@ -155,7 +155,7 @@ public class MOB implements Attributes {
      * @return a boolean whether the attack hits
      */
     public boolean rollHit(DiceSet dice, MOB target) {
-        return (getHitModifier() + dice.roll(DiceType.D20)) > target.getArmor();
+        return (getAccuracy() + dice.roll(DiceType.D20)) > target.getArmor();
     }
 
     /**
@@ -208,14 +208,14 @@ public class MOB implements Attributes {
      * <br>
      * <p>
      *     Stored as:<br>
-     *     <code>name,maxHP,armor,hitModifier,damageDie</code>
+     *     <code>name,maxHP,armor,accuracy,damageDie</code>
      * </p>
      *
      * @return the MOB's stats as a CSV string
      */
     public String toCSV() {
         return String.format("%s,%d,%d,%d,%s",
-                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie());
+                getName(), getMaxHP(), getArmor(), getAccuracy(), getDamageDie());
     }
 
     public static void main(String[] args) {
@@ -224,7 +224,7 @@ public class MOB implements Attributes {
         MOB mob2 = mob1.copy("mob2");
 
         System.out.println(mob1);
-        System.out.println("hitMod: " + mob1.getHitModifier());
+        System.out.println("Accuracy: " + mob1.getAccuracy());
         System.out.println("MaxHP: " + mob1.getMaxHP());
         System.out.println("Damage: " + mob1.getDamage());
         System.out.println();

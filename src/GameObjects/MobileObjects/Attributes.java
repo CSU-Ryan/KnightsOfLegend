@@ -11,7 +11,7 @@ import GameEngine.DiceType;
  * <ul>
  *     <li>{@link #getMaxHP()}<br>       A hit-point (HP) level</li>
  *     <li>{@link #getArmor()}<br>       An armor level</li>
- *     <li>{@link #getHitModifier()}<br> A modifier for {@link MOB#rollHit(DiceSet, MOB)}</li>
+ *     <li>{@link #getAccuracy()}<br> A modifier for {@link MOB#rollHit(DiceSet, MOB)}</li>
  *     <li>{@link #getDamageDie()}<br>   A {@link DiceType} for {@link MOB#rollDamage(DiceSet)}</li>
  *     <li>{@link #toString()}<br>       An info card describing the object's stats</li>
  * </ul>
@@ -36,12 +36,17 @@ public interface Attributes {
     int getArmor();
 
     /**
-     * gets the value or modifier added when rolling to overcome armor.
+     * gets the object's accuracy stat.<br>
+     * <br>
+     * <p>
+     *     Accuracy is used when rolling to overcome an opponent's armor.<br>
+     *     <code>attackerAccuracy + roll(D20) > enemyArmor</code>
+     * </p>
      *
-     * @return the hit modifier
+     * @return the object's accuracy
      * @see MOB#rollHit(DiceSet, MOB)
      */
-    int getHitModifier();
+    int getAccuracy();
 
     /**
      * Gets the type of the object's damage die.<br>

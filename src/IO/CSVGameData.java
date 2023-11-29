@@ -29,7 +29,7 @@ public class CSVGameData extends GameData {
      * Creates a Knight object from a CSV line.<br>
      * <br>
      * Knights are stored as<br>
-     * <i>name,maxHP,armor,hitModifier,damageDie,xp</i><br>
+     * <i>name,maxHP,armor,accuracy,damageDie,xp</i><br>
      *
      * @param line CSV data for the knight
      * @return the knight from the CSV data

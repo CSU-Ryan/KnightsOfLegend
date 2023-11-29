@@ -10,7 +10,7 @@ import GameEngine.DiceType;
  * <ul>
  *     <li>{@link #getMaxHP()}<br> maxHP modifies the max HP of the affected object.</li>
  *     <li>{@link #getArmor()}<br> armor modifies the armor value of the affected object.</li>
- *     <li>{@link #getHitModifier()}<br> hitModifier changes the hit modifier of the affected object.</li>
+ *     <li>{@link #getAccuracy()}<br> accuracyModifier changes the accuracy of the affected object.</li>
  *     <li>{@link #getDamageDie()}<br> damageDie changes the attack die of the affected object.</li>
  *     <li>{@link #getName()}<br> the name of the fortune.</li>
  * </ul>
@@ -23,7 +23,7 @@ public class Fortune implements Attributes {
     private final String name;
     private final int hpBonus;
     private final int armor;
-    private final int hitModifier;
+    private final int accuracy;
     private final DiceType damageDie;
 
     /**
@@ -44,10 +44,10 @@ public class Fortune implements Attributes {
      * @param name        the name of the fortune
      * @param hpBonus     the HP modifier
      * @param armor       the armor modifier
-     * @param hitModifier the hit modifier
+     * @param accuracy    the accuracy modifier
      */
-    public Fortune(String name, int hpBonus, int armor, int hitModifier) {
-        this(name, hpBonus, armor, hitModifier, DiceType.NONE);
+    public Fortune(String name, int hpBonus, int armor, int accuracy) {
+        this(name, hpBonus, armor, accuracy, DiceType.NONE);
     }
 
     /**
@@ -61,14 +61,14 @@ public class Fortune implements Attributes {
      * @param name        the name of the fortune
      * @param hpBonus     the HP modifier
      * @param armor       the armor modifier
-     * @param hitModifier the hit modifier
+     * @param accuracy    the accuracy modifier
      * @param damageDie   the replacement damageDie
      */
-    public Fortune(String name, int hpBonus, int armor, int hitModifier, DiceType damageDie) {
+    public Fortune(String name, int hpBonus, int armor, int accuracy, DiceType damageDie) {
         this.name = name.trim();
         this.hpBonus = hpBonus;
         this.armor = armor;
-        this.hitModifier = hitModifier;
+        this.accuracy = accuracy;
 
         //Sh**ty Zybooks
         this.damageDie = (damageDie != null) ? damageDie : DiceType.NONE;
@@ -104,13 +104,13 @@ public class Fortune implements Attributes {
     }
 
     /**
-     * Gets the fortune's hit modifier bonus.
+     * Gets the fortune's accuracy modifier.
      *
-     * @return an into to add to the hitModifier
+     * @return an into to add to the accuracy
      */
     @Override
-    public int getHitModifier() {
-        return hitModifier;
+    public int getAccuracy() {
+        return accuracy;
     }
 
     /**
@@ -134,7 +134,7 @@ public class Fortune implements Attributes {
                 String.format("|%-22s|%n", getName()) +
                 String.format("|HP Bonus: %+12d|%n", getMaxHP())  +
                 String.format("|AC Bonus: %+12d|%n", getArmor()) +
-                String.format("|Hit Bonus: %+11d|%n", getHitModifier()) +
+                String.format("|Accuracy: %+12d|%n", getAccuracy()) +
                 String.format("|Damage Adj: %10s|%n", getDamageDie())  +
                 "+======================+";
     }
@@ -144,14 +144,14 @@ public class Fortune implements Attributes {
      * <br>
      * <p>
      *     Stored as:<br>
-     *     <code>name,bonusHP,armor,hitModifier,damageDie</code>
+     *     <code>name,bonusHP,armor,accuracy,damageDie</code>
      * </p>
      *
      * @return the fortune's stats as a CSV string
      */
     public String toCSV() {
         return String.format("%s,%d,%d,%d,%s",
-                getName(), getMaxHP(), getArmor(), getHitModifier(), getDamageDie());
+                getName(), getMaxHP(), getArmor(), getAccuracy(), getDamageDie());
     }
 
     public static void main(String[] args) {
