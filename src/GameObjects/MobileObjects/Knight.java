@@ -47,7 +47,7 @@ public class Knight extends MOB {
      */
     @Override
     public int getMaxHP() {
-        return super.getMaxHP() + getActiveFortune().getMaxHP();
+        return super.getMaxHP() + getActiveFortune().getMaxHPModifier();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Knight extends MOB {
      */
     @Override
     public int getArmor() {
-        return super.getArmor() + getActiveFortune().getArmor();
+        return super.getArmor() + getActiveFortune().getArmorModifier();
     }
 
     /**
@@ -67,7 +67,7 @@ public class Knight extends MOB {
      */
     @Override
     public int getAccuracy() {
-        return super.getAccuracy() + getActiveFortune().getAccuracy();
+        return super.getAccuracy() + getActiveFortune().getAccuracyModifier();
     }
 
     /**
@@ -154,8 +154,8 @@ public class Knight extends MOB {
 
         Knight knight1 = new Knight(1, "knight1", 10, 1, -1, DiceType.D20, 0);
 
-        Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
-        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, DiceType.NONE);
+        Fortune merlinLuck = new Fortune("Merlin Luck", 10, 5, 2, 2, DiceType.D12);
+        Fortune horusCurse = new Fortune("Curse of Horus", -5, 0, -2, 2, DiceType.NONE);
 
         System.out.println("knight1 CSV: " + knight1.toCSV());
         System.out.println();
