@@ -80,6 +80,7 @@ public class CSVGameData extends GameData {
                 line.nextInt(),
                 line.nextInt(),
                 line.nextInt(),
+                line.nextInt(),
                 DiceType.typeOf(line.next().trim())
         );
     }
