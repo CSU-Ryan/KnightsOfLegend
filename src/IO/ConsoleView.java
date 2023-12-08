@@ -380,7 +380,7 @@ public class ConsoleView implements GameView {
         out.println("*----------------->");
 
         out.println("Testing printFortunes.");
-        testKnights.get(1).setActiveFortune(new Fortune("test 2", 1, -1, 1, DiceType.D4));
+        testKnights.get(1).setActiveFortune(new Fortune("test 2", 1, -1, 1, 1, DiceType.D4));
         testKnights.get(2).setActiveFortune(new Fortune());
         view.printFortunes(testKnights);
         out.println("*----------------->");
