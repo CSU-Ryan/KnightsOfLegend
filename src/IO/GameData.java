@@ -14,12 +14,12 @@ public abstract class GameData {
     private final Random RANDOM;
 
     protected ArrayList<Fortune> fortunes;
+    protected ArrayList<MOB> monsters;
     protected ArrayList<Knight> knights;
 
     private final int MAX_ACTIVE;
     protected ArrayList<Knight> activeKnights;
 
-    protected ArrayList<MOB> monsters;
 
 
     /**
@@ -28,13 +28,12 @@ public abstract class GameData {
     public GameData() {
         RANDOM = new Random();
 
-        fortunes = new ArrayList<>();
-        knights = new ArrayList<>();
+        this.fortunes = new ArrayList<>();
+        this.monsters = new ArrayList<>();
+        this.knights = new ArrayList<>();
 
         MAX_ACTIVE = 4;
         activeKnights = new ArrayList<>();
-
-        monsters = new ArrayList<>();
     }
 
     /**
