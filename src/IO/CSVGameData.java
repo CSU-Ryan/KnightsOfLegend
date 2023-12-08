@@ -6,7 +6,7 @@ import GameObjects.MobileObjects.Knight;
 import GameObjects.MobileObjects.MOB;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Handles accessing and manipulating CSV data during gameplay.
@@ -14,15 +14,68 @@ import java.util.Scanner;
 public class CSVGameData extends GameData {
 
     /**
-     * Constructs object from CSV files for usage.
+     * Constructs a manager for data from CSV files.<br>
+     * <br>
+     * <p>
+     *     gameFolder expects two CSV files, named "fortunes" and "monsters".<br>
+     *     saveFolder expects one CSV file, named "knights".
+     * </p>
      *
-     * @param gamedata the CSV file containing fortunes and MOBS
-     * @param saveData the CSV file containing knights
+     * @param gameFolder the path to the game data folder
+     * @param saveFolder the path to the save data folder
      */
-    public CSVGameData(String gamedata, String saveData) {
+    public CSVGameData(String gameFolder, String saveFolder) {
         super();
-        loadGameData(gamedata);
-        loadSaveData(saveData);
+
+        try {
+            parseGameFolder(gameFolder);
+            parseSaveFile(saveFolder);
+        }
+        catch (FileNotFoundException e) {
+            System.err.println(e);
+        }
+    }
+
+    private void parseGameFolder(String gameFolderPath) throws FileNotFoundException {
+        Map<String, File> gameFolder = parseFolder(gameFolderPath);
+
+        try {
+            Scanner fortuneData = new Scanner(gameFolder.get("fortunes.csv"));
+            Scanner monsterData = new Scanner(gameFolder.get("monsters.csv"));
+
+            parseFortunes(fortuneData);
+            parseMOBs(monsterData);
+        }
+        catch (FileNotFoundException e) {
+            throw new FileNotFoundException("GameData folder does not contain required files.");
+        }
+    }
+
+    private void parseSaveFile(String saveFilePath) throws FileNotFoundException {
+        parseKnights(readFile(saveFilePath));
+    }
+
+    private static Map<String, File> parseFolder(String folderPath) {
+        HashMap<String, File> dataFiles = new HashMap<>();
+        File[] folder = Objects.requireNonNull(new File(folderPath).listFiles());
+
+        for (File dataFile : folder) {
+            dataFiles.put(dataFile.getName(), dataFile);
+        }
+        return dataFiles;
+    }
+
+    public void parseKnights(Scanner KnightData) {
+        ArrayList<Knight> knights = new ArrayList<>();
+        Scanner KnightLine;
+        int id = 1;
+
+        while (KnightData.hasNext()) {
+            KnightLine = new Scanner(KnightData.nextLine());
+            knights.add(parseKnight(id, KnightLine));
+            ++id;
+        }
+        this.knights = knights;
     }
 
     /**
@@ -34,7 +87,7 @@ public class CSVGameData extends GameData {
      * @param line CSV data for the knight
      * @return the knight from the CSV data
      */
-    private Knight parseKnight(int idCount, Scanner line) {
+    private static Knight parseKnight(int idCount, Scanner line) {
         line.useDelimiter(",");
 
         return new Knight(
@@ -48,40 +101,62 @@ public class CSVGameData extends GameData {
         );
     }
 
+    public void parseMOBs(Scanner MOBData) {
+        ArrayList<MOB> mobs = new ArrayList<>();
+        Scanner MOBLine;
+
+        while (MOBData.hasNext()) {
+            MOBLine = new Scanner(MOBData.nextLine());
+            mobs.add(parseMOB(MOBLine));
+        }
+        this.monsters = mobs;
+    }
+
     /**
      * Creates a MOB object from CSV line.
      *
-     * @param line CSV data for the MOB
+     * @param MOBLine CSV data for the MOB
      * @return the knight from the CSV data
      */
-    private MOB parseMOB(Scanner line) {
-        line.useDelimiter(",");
+    private static MOB parseMOB(Scanner MOBLine) {
+        MOBLine.useDelimiter(",");
 
         return new MOB(
-                line.next().trim(),
-                line.nextInt(),
-                line.nextInt(),
-                line.nextInt(),
-                DiceType.typeOf(line.next().trim())
+                MOBLine.next().trim(),
+                MOBLine.nextInt(),
+                MOBLine.nextInt(),
+                MOBLine.nextInt(),
+                DiceType.typeOf(MOBLine.next().trim())
         );
+    }
+
+    public void parseFortunes(Scanner FortuneData) {
+        ArrayList<Fortune> fortunes = new ArrayList<>();
+        Scanner FortuneLine;
+
+        while (FortuneData.hasNext()) {
+            FortuneLine = new Scanner(FortuneData.nextLine());
+            fortunes.add(parseFortune(FortuneLine));
+        }
+        this.fortunes = fortunes;
     }
 
     /**
      * Creates a Fortune object from CSV line.
      *
-     * @param line CSV data for the fortune
+     * @param fortuneLine CSV data for the fortune
      * @return the fortune from the CSV data
      */
-    private Fortune parseFortune(Scanner line) {
-        line.useDelimiter(",");
+    private static Fortune parseFortune(Scanner fortuneLine) {
+        fortuneLine.useDelimiter(",");
 
         return new Fortune(
-                line.next(),
-                line.nextInt(),
-                line.nextInt(),
-                line.nextInt(),
-                line.nextInt(),
-                DiceType.typeOf(line.next().trim())
+                fortuneLine.next().trim(),
+                fortuneLine.nextInt(),
+                fortuneLine.nextInt(),
+                fortuneLine.nextInt(),
+                fortuneLine.nextInt(),
+                DiceType.typeOf(fortuneLine.next().trim())
         );
     }
 
@@ -93,7 +168,7 @@ public class CSVGameData extends GameData {
      * @param filepath path of the file to read
      * @return a scanner from the file
      */
-    private Scanner readFile(String filepath) {
+    private static Scanner readFile(String filepath) {
         try {
             return new Scanner(new File(filepath));
         }
@@ -101,6 +176,15 @@ public class CSVGameData extends GameData {
             System.err.println(e.getMessage());
         }
         return new Scanner("");
+    }
+
+    private static Scanner readFile(File file) {
+        try {
+            return new Scanner(file);
+        }
+        catch (FileNotFoundException e) {
+            throw new Error("File not found");
+        }
     }
 
     /**
