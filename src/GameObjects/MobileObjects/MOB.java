@@ -2,11 +2,12 @@ package GameObjects.MobileObjects;
 
 import GameEngine.DiceSet;
 import GameEngine.DiceType;
+import GameObjects.CSV;
 
 /**
  * A general character which has health and can attack.
  */
-public class MOB implements Attributes {
+public class MOB implements Attributes, CSV {
 
     private final String name; // The name of the MOB.
     protected final int maxHP; // The maxHP of the MOB.

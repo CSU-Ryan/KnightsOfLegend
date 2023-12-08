@@ -2,11 +2,12 @@ package GameObjects.MobileObjects;
 
 import GameEngine.DiceType;
 import GameObjects.Effects.Fortune;
+import GameObjects.CSV;
 
 /**
  * A knight which can join the player's party and fight for them.
  */
-public class Knight extends MOB {
+public class Knight extends MOB implements CSV {
 
     private Fortune activeFortune;
     protected final int id;

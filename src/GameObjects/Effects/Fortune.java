@@ -1,6 +1,7 @@
 package GameObjects.Effects;
 
 import GameEngine.DiceType;
+import GameObjects.CSV;
 
 /**
  * A modifier for an object, changing their stats.<br>
@@ -18,7 +19,7 @@ import GameEngine.DiceType;
  * @see #Fortune(String, int, int, int, int)
  * @see #Fortune(String, int, int, int, int, DiceType)
  */
-public class Fortune implements Effect {
+public class Fortune implements Effect, CSV {
     private final String name;
 
     private final int hpModifier;
