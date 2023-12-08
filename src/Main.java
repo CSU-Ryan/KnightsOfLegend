@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 
 public class Main {
-    private static String gamedata = "GameData/gamedata.csv";
-    private static String savedata = "GameData/knights.csv";
+    private static String gameDataPath = "GameData\\NormalData";
+    private static String saveDataPath = "SaveFiles\\default.csv";
 
     public Main() {}
 
     public static void main(String[] args) {
         processArgs(args);
 
-        GameData data = new CSVGameData(gamedata, savedata);
+        GameData data = new CSVGameData(gameDataPath, saveDataPath);
         GameView view = new ConsoleView();
         CombatEngine engine = new CombatEngine(data, view);
         GameController controller = new GameController(data, view, engine);
@@ -30,10 +30,10 @@ public class Main {
             while (scanner.hasNext()) {
                 next = scanner.next();
                 if (next.equals("--data")) {
-                    gamedata = scanner.next();
+                    gameDataPath = scanner.next();
                     next = scanner.next();
                 }
-                savedata = next;
+                saveDataPath = next;
             }
         }
     }

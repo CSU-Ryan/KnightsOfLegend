@@ -280,8 +280,8 @@ public class GameController {
     }
 
     public static void main(String[] args) {
-        String gameDataPath = "GameData/test_gamedata.csv";
-        String saveDataPath = "GameData/test_savedata.csv";
+        String gameDataPath = "GameData\\NormalData";
+        String saveDataPath = "SaveFiles\\one.csv";
 
         GameData game = new CSVGameData(gameDataPath, saveDataPath);
         ConsoleView view = new ConsoleView();
